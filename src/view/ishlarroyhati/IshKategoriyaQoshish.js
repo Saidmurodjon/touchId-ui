@@ -3,7 +3,7 @@ const IshKategoriyaQoshish = () => {
 
     return (
         <>
-            <p>react snippet works!</p>
+            <h1>Ishlar royhati</h1>
         </>
     );
 }
