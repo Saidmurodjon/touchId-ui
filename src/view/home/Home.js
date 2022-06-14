@@ -8,12 +8,18 @@ function Home() {
       setToggle(!toggle)
       let menyu = document.querySelector(".menyu")
       let content = document.querySelector(".content")
+      let logotip = document.querySelector(".logotip")
+      let arrow = document.querySelector(".togl")
       if(toggle){
         menyu.style.width = '5%'
         content.style.width = '95%'
+        arrow.style.right = '30%'
+        logotip.style.display="none"
       }else{
         menyu.style.width = '17%'
         content.style.width = '83%'
+        arrow.style.right = '10%'
+        logotip.style.display="flex"
       }
     }
 
@@ -21,16 +27,18 @@ function Home() {
     <div>
       
       <div className="container-fluid">
-        <div className="menyu border-right border-1">
-          <div className="logo d-flex align-items-center overflow-hidden">
-            <i className='bi logotip bi-steam'></i>
-            <h4>TouchID</h4>
+        <div className="menyu border border-right">
+          <div className="logo border-bottom border-right d-flex align-items-center overflow-hidden">
+            <div className="logotip align-items-center">
+              <i className='bi bi-steam'></i>
+              <h4>TouchID</h4>
+            </div>
             <i className={toggle ? "bi bi-chevron-double-left togl" : "togl bi bi-chevron-double-right"} onClick={toggleMenyu}></i>
             
           </div>
         </div>
         <div className="content">
-          <Navbar />
+          {/* <Navbar /> */}
           <h1>Salom</h1>
         </div>
       </div>
