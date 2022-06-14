@@ -1,0 +1,30 @@
+*{
+    padding: 0!important;
+}
+.container-fluid{
+    display: flex;
+}
+.menyu{
+    width: 17%;
+    min-height: 100vh;
+    border-right: 2px solid gray;
+    position: relative;
+    transition: all 0.5s ease;
+}
+.content{
+    width: 83%;
+    transition: all 0.5s ease;
+}
+.logotip{
+    margin-left: 10px;
+    font-size: 30px;
+}
+.logo h4{
+    text-indent: 30px;
+}
+.togl{
+    position: absolute;
+    right: 15%;
+    font-size: 15px;
+    color: #787486;
+}
