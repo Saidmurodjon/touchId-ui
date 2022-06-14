@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function Navbar() {
   return (
     <>
@@ -15,7 +14,10 @@ export default function Navbar() {
             </form>
           </div>
           <div className="col-md-4">
-          <i class="bi bi-bell"></i>
+            <i className="bi bi-bell"></i>
+          </div>
+          <div className="col-md-3">
+            <h4>Profil</h4>
           </div>
         </div>
       </div>
