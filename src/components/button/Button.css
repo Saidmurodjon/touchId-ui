@@ -1,5 +1,12 @@
-.button-bg {
+.oq-button {
+    background: #ECF0FF !important;
     width: 166px;
     height: 40px;
-    background: red !important;
+}
+
+.yashil-button {
+    background: #5030E5 !important;
+    border-radius: 6px;
+    width: 100px;
+    height: 40px;
 }

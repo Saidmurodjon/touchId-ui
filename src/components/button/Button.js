@@ -1,16 +1,14 @@
 import "./Button.css";
 const Button = (props) => {
-  const { name = "", ButtonFunction } = props;
+  const { name = "", ButtonFunction, ButtonStile} = props;
   return (
     <>
-      <div className="my-3 text-secondary position-relative d-flex justify-content-end">
         <button
           onClick={() => ButtonFunction()}
-          className="btn button-bg shadow-sm mb-5 bg-body rounded"
+          className={`btn button-bg shadow-sm  ${ButtonStile}`}
         >
           {name}
         </button>
-      </div>
     </>
   );
 };
