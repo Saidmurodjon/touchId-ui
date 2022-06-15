@@ -21,13 +21,14 @@ import TashkilotQoshish from '../view/tashkilotlar/TashkilotQoshish'
 import Xona from '../view/xonalar/Xonalar'
 import XonaQoshish from '../view/xonalar/Xonalar'
 import XonaUpdate from '../view/xonalar/Xonalar'
+import BoshSahifa from '../view/boshsahifa/BoshSahifa'
 
 
 function Router() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<BoshSahifa />} />
         <Route path="/bajaruvchi" element={<Bajaruvchi />} />
         <Route path="/bajaruvchiqoshish" element={<BajaruvchiQoshish />} />
         <Route path="/bolim" element={<Bolim />} />

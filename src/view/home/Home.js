@@ -1,6 +1,6 @@
 import './Home.css'
 import {useState} from 'react'
-import Navbar from "../../components/navbar/Navbar"
+import Router from '../../router/Router'
 function Home() {
 
   const [toggle, setToggle] = useState(false)
@@ -38,7 +38,8 @@ function Home() {
           </div>
         </div>
         <div className="content">
-          {/* <Navbar /> */}
+
+          <Router />
           <h1>Salom</h1>
         </div>
       </div>

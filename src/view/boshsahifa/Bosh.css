@@ -1,0 +1,51 @@
+.bajarilgan .vid button{
+    padding: 5px;
+    background: none;
+    border: 0.3px solid #787486;
+    border-radius: 6px;
+    color: #8A8A8A;
+}
+.bajarilgan .vid .viewActive{
+    background-color: #5030E5 ;
+    color: #FFFFFF !important;
+}
+.bajarilgan .xodim{
+    display: flex;
+    justify-content: space-around;
+    margin: 3.5% 15%;
+}
+.bajarilgan .xodim h1{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #0D062D;
+}
+.bajarilgan .workCount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 2px solid  #034AFF;
+    font-size: 24px;
+    color: #FF8A00;
+    font-weight: 500;
+    margin: auto;
+}
+
+.bajJadval{
+    width: 95%;
+    margin: 5px auto;
+    min-height: 50vh;
+    border-radius: 30px;
+}
+
+.card{
+    border-radius: 16px!important;
+}
+
+.get, .set{
+    width: 40%;
+}

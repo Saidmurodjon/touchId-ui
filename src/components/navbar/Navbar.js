@@ -2,7 +2,7 @@ import React from "react";
 export default function Navbar() {
   return (
     <>
-      <div className="container">
+      <div className="">
         <div className="row">
           <div className="col-md-5">
             <form action="">
