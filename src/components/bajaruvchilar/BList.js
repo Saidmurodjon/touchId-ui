@@ -11,10 +11,9 @@ function BList(props) {
       {/*{filP.reverse().map((item) => (*/}
       {/*  <PatientCardItem key={item._id} {...item} Update={Update} />*/}
       {/*))}*/}
-        {bajaruvchilar.reverse().map((item, index) => (
-          <BItem key={item._id} {...item} index={index + 1} />
-        ))}
-      
+      {bajaruvchilar.reverse().map((item, index) => (
+        <BItem key={item._id} {...item} index={index + 1} />
+      ))}
     </div>
   );
 }
