@@ -19,7 +19,7 @@ function Home() {
         logotip.style.display="none"
       }else{
         menyu.style.width = '17%'
-        content.style.width = '83%'
+        content.style.width = '83%' 
         arrow.style.right = '10%'
         logotip.style.display="flex"
       }
