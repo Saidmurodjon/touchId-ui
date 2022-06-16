@@ -1,0 +1,29 @@
+.dalolatnoma-modal-list-style{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    overflow: hidden;
+    z-index: 5;
+}
+.dalolatnoma-modeal-list{
+    position: fixed;
+    top :1%;
+    left: 50%;
+    transform: translate(-50%,50%);
+    background: #fff;
+    width: 50rem;
+    max-width: 95%;
+    box-shadow: 0 6px 15px 0 rgba(0,0,0,.5);
+    animation: show .5s ease-in-out;
+
+}
+.dalolatnoma-modal-icon{
+    cursor: pointer;
+    position: absolute;
+    top:.5rem;
+    right: .5rem;
+    color: rgb(24, 23, 23);
+}

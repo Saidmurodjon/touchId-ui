@@ -1,13 +1,29 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Dalolatnoma from "../../components/dalolatnoma/Dalolatnoma";
 import { useReactToPrint } from "react-to-print";
-
+import axios from "axios";
+import config from "../../config.json";
 import "./Hisobot.css";
+import ChandeDalolatnoma from "../../components/change-dalolatnoma/ChangeDalolatnoma";
 export default function Hisobot() {
+  const [showModal, setShowModal] = useState(false);
   const componentRef = useRef();
+  const [text, setText] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${config.SERVER_URL}xisobot`)
+      .then((res) => {
+        res.data && setText(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, [showModal]);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+  const ShowModal = () => {
+    setShowModal(false);
+  };
   return (
     <>
       <div className="">
@@ -26,8 +42,11 @@ export default function Hisobot() {
                     >
                       Print
                     </button>
-                    <button className="btn btn-light p-2 float-end ">
-                      Filter
+                    <button
+                      onClick={() => setShowModal(true)}
+                      className="btn btn-light p-2 float-end "
+                    >
+                      <i className="bi bi-pencil-square"></i>
                     </button>
                   </div>
                 </div>
@@ -36,7 +55,12 @@ export default function Hisobot() {
           </div>
 
           <div className="col-md-12 d-flex justify-content-center">
-            <Dalolatnoma ref={componentRef} />
+            <Dalolatnoma ref={componentRef} text={text[0]} />
+            {showModal ? (
+              <ChandeDalolatnoma text={text[0]} Show={ShowModal} />
+            ) : (
+              false
+            )}
           </div>
         </div>
       </div>
