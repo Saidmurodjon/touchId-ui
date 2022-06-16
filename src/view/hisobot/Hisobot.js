@@ -7,7 +7,7 @@ export default function Hisobot() {
       <div className="">
         <div className="row justify-content-center">
           <div className="col-md-12  d-flex justify-content-center align-items-center">
-            <div className="filter">
+            <div className="hisobot-filter">
               <div className="row">
                 <div className="col-md-6">
                   <h3>Xisobot</h3>
