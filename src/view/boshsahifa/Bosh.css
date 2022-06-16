@@ -1,3 +1,4 @@
+
 .bajarilgan .vid button{
     padding: 5px;
     background: none;
@@ -13,6 +14,9 @@
     display: flex;
     justify-content: space-around;
     margin: 3.5% 15%;
+}
+.filter{
+    margin-right: 25px;
 }
 .bajarilgan .xodim h1{
     text-align: center;

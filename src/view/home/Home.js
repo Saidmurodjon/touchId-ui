@@ -1,6 +1,8 @@
 import './Home.css'
 import {useState} from 'react'
+import Navbar from "../../components/navbar/Navbar"
 import Router from '../../router/Router'
+import Menyu from '../../components/navbar/Menyu'
 function Home() {
 
   const [toggle, setToggle] = useState(false)
@@ -34,13 +36,13 @@ function Home() {
               <h4>TouchID</h4>
             </div>
             <i className={toggle ? "bi bi-chevron-double-left togl" : "togl bi bi-chevron-double-right"} onClick={toggleMenyu}></i>
-            
           </div>
+          {/* menyu qismi */}
+          <Menyu />
         </div>
         <div className="content">
-
+          {/* <Navbar /> */}
           <Router />
-          <h1>Salom</h1>
         </div>
       </div>
     </div>

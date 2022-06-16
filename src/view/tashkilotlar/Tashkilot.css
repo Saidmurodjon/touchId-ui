@@ -1,0 +1,34 @@
+
+.tashkilot  .vid{
+    padding: 5px;
+    background: none;
+    border: 0.3px solid #787486;
+    border-radius: 6px;
+    color: #8A8A8A;
+    margin-left: 15px;
+}
+.tashkilot .viewActive{
+    background-color: #5030E5 ;
+    color: #FFFFFF !important;
+}
+
+.tashAsosiy{
+    width: 95%;
+    margin: auto;
+    min-height: 50vh;
+    border-radius: 30px;
+}
+
+.more{
+    border-radius: 30px;
+}
+.more .info{
+    margin-left: -120px!important;
+}
+.more .info h5{
+    line-height: 10px;
+    margin-bottom: 15px;
+}
+.info p{
+    line-height: 5px;
+}
