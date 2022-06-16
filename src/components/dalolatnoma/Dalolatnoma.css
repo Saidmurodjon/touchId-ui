@@ -1,5 +1,5 @@
 .dalolatnoma {
-  width: 956px;
+  width: 1100px;
 }
 .img {
   width: 100px;
@@ -13,4 +13,7 @@
   height: 90px;
   background-image: url("../../assets/line.png");
   background-repeat: repeat-x;
+}
+.dalolatnoma-print{
+  width: 956px;
 }

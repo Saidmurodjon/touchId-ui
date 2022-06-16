@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import gerb from "../../assets/gerb.jpg";
 import axios from "axios";
 import config from "../../config.json";
-import line from "../../assets/line.png"
 import "./Dalolatnoma.css";
-const Dalolatnoma = () => {
+const Dalolatnoma = React.forwardRef((props,ref) => {
   const [text, setText] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -19,7 +18,7 @@ const Dalolatnoma = () => {
   console.log(text);
   return (
     <>
-      <div className="dalolatnoma">
+      <div ref={ref} className="dalolatnoma d-flex justify-content-center align-items-center pt-5">
         {loading ? (
           <>
             <div className="spinner-border" role="status">
@@ -28,7 +27,8 @@ const Dalolatnoma = () => {
           </>
         ) : (
           <>
-            <div className="row justify-content-center">
+           <div className="dalolatnoma-print">
+           <div className="row justify-content-center">
               <div className="col-md-5 justify-content-center">
                 <h4 className="text-center">
                   O'ZBEKISTON RESPUBLIKASI {text[0].t1.toUpperCase()} "ELEKTRON
@@ -42,7 +42,7 @@ const Dalolatnoma = () => {
                 <h4 className="text-center">{text[0].t2}</h4>
               </div>
               <div className="col-md-12">
-                <p className="location mb-0">{text[0].t3}</p>
+                <h6 className="location mb-0">{text[0].t3}</h6>
                 {/* <img className="line" src={line} alt="" /> */}
                 <div className="line"></div>
               </div>
@@ -66,11 +66,12 @@ const Dalolatnoma = () => {
               </div>
               <div className="col-md-5"></div>
             </div>
+           </div>
           </>
         )}
       </div>
     </>
   );
-};
+});
 
 export default Dalolatnoma;
