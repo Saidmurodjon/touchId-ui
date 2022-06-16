@@ -1,6 +1,7 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
+import config from "./../../config.json";
 const BuyurtmaQoshish = () => {
   const [xona, setXona] = useState([]);
   const [lavozim, setLavozim] = useState([]);
@@ -12,23 +13,22 @@ const BuyurtmaQoshish = () => {
     lavozim: "",
     tel: "",
   });
-  console.log(buyrtmachi);
 
   useEffect(() => {
     axios
-      .get("https://government-backend.herokuapp.com/xona")
+      .get(`${config.SERVER_URL}xona`)
       .then((res) => {
         setXona(res.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://government-backend.herokuapp.com/lavozim")
+      .get(`${config.SERVER_URL}lavozim`)
       .then((res) => {
         setLavozim(res.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://government-backend.herokuapp.com/bolim")
+      .get(`${config.SERVER_URL}bolim`)
       .then((res) => {
         setBolim(res.data);
       })
@@ -39,7 +39,7 @@ const BuyurtmaQoshish = () => {
   };
   const Send = async () => {
     await axios
-      .post("https://government-backend.herokuapp.com/user", buyrtmachi)
+      .post(`${config.SERVER_URL}user`, buyrtmachi)
       .then((res) => {
         alert("buyrtmachi malumotlari qo'shildi.");
       })
