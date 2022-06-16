@@ -32,3 +32,13 @@
 .info p{
     line-height: 5px;
 }
+
+.addTash{
+    border-radius: 16px;
+}
+.bi-x{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    font-size: 30px;
+}

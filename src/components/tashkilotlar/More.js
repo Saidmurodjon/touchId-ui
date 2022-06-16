@@ -5,16 +5,16 @@ const More = (props) => {
         <>
             <div className="col-12">
                 <div className="bg-white align-items-center more m-2 p-4 d-flex justify-content-between">
-                    <h1 className="text-secondary">№1</h1>
+                    <h1 className="text-secondary">№{props.index}</h1>
                     <div className="info">
                         <p className="text-secondary">Ташкилот номи:</p>
-                        <h5>Фарғона вилояти ҳокимлиги</h5>
+                        <h5>{props.tashNom}</h5>
                         <p className="text-secondary">Администратор:</p>
-                        <h5>Абдурахмонов Солижон Боҳодиржон ўғли</h5>
+                        <h5>{props.admin}</h5>
                     </div>
                     <div className="logparol">
-                        <p className="text-secondary">Логин: +998972159889</p>
-                        <p className="text-secondary">Пароль: 458745</p>
+                        <p className="text-secondary">Логин: {props.login}</p>
+                        <p className="text-secondary">Пароль: {props.parol}</p>
                     </div>
                     <div className="btn align-self-start">
                         <i className="bi bi-pencil-square p-2"></i>
