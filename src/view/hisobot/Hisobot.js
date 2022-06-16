@@ -1,4 +1,4 @@
-import React ,{useRef}from "react";
+import React, { useRef } from "react";
 import Dalolatnoma from "../../components/dalolatnoma/Dalolatnoma";
 import { useReactToPrint } from "react-to-print";
 
@@ -20,11 +20,15 @@ export default function Hisobot() {
                 </div>
                 <div className="col-md-6">
                   <div className="col-md-6 float-end">
+                    <button
+                      className="btn btn-light p-2 float-end"
+                      onClick={handlePrint}
+                    >
+                      Print
+                    </button>
                     <button className="btn btn-light p-2 float-end ">
                       Filter
                     </button>
-                    <button onClick={handlePrint}>Print</button>
-
                   </div>
                 </div>
               </div>
@@ -32,7 +36,7 @@ export default function Hisobot() {
           </div>
 
           <div className="col-md-12 d-flex justify-content-center">
-            <Dalolatnoma ref={componentRef}/>
+            <Dalolatnoma ref={componentRef} />
           </div>
         </div>
       </div>
