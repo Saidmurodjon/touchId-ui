@@ -15,8 +15,8 @@ const Dalolatnoma = React.forwardRef((props,ref) => {
       })
       .catch((error) => console.log(error));
   }, []);
-  const Text1=()=>{
-    alert("text1")
+  const Change=()=>{
+    alert("Change")
   }
   return (
     <>
@@ -29,11 +29,11 @@ const Dalolatnoma = React.forwardRef((props,ref) => {
           </>
         ) : (
           <>
-           <div className="dalolatnoma-print">
+           <div onDoubleClick={()=>Change()} className="dalolatnoma-print">
            <div className="row justify-content-center">
               <div className="col-md-5 justify-content-center">
                 <h4 className="text-center">
-                  O'ZBEKISTON RESPUBLIKASI <h4 onDoubleClick={()=>Text1()} >{text[0].t1.toUpperCase()}</h4> "ELEKTRON
+                  O'ZBEKISTON RESPUBLIKASI {text[0].t1.toUpperCase()} "ELEKTRON
                   XOKIMYATNI ROVOJLANTIRISH MARKAZI"
                 </h4>
               </div>
