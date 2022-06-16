@@ -40,7 +40,7 @@ function Home() {
         <div className="content">
 
           <Router />
-          <h1>Salom</h1>
+          
         </div>
       </div>
     </div>

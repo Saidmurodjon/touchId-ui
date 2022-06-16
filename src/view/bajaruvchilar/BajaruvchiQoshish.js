@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
+import config from "./../../config.json";
 const BajaruvchiQoshish = () => {
   const [bajaruvchi, setBajaruvchi] = useState({
     ismi: "",
@@ -16,7 +17,7 @@ const BajaruvchiQoshish = () => {
 
   const Send = async () => {
     await axios
-      .post("https://government-backend.herokuapp.com/user", bajaruvchi)
+      .post(`${config.SERVER_URL}user`, bajaruvchi)
       .then((res) => {
         alert("Bajaruvchi malumotlari qo'shildi.");
       })
