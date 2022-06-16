@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import gerb from "../../assets/gerb.jpg";
 import axios from "axios";
 import config from "../../config.json";
+import "./Dalolatnoma.css";
 const Dalolatnoma = () => {
   const [text, setText] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const Dalolatnoma = () => {
   console.log(text);
   return (
     <>
-      <div className="">
+      <div className="dalolatnoma">
         {loading ? (
           <>
             <div className="spinner-border" role="status">
@@ -33,14 +34,14 @@ const Dalolatnoma = () => {
                   ROVOJLANTIRISH MARKAZI"
                 </h4>
               </div>
-              <div className="col-md-2">
-                <img className="w-50" src={gerb} alt="gerb" />
+              <div className="col-md-2 d-flex justify-content-center align-items-center">
+                <img className="img" src={gerb} alt="gerb" />
               </div>
               <div className="col-md-5">
                 <h4 className="text-center">{text[0].t2}</h4>
               </div>
               <div className="col-md-12 border-bottom">
-                <h6 className="text-center">{text[0].t3}</h6>
+                <p className="">{text[0].t3}</p>
               </div>
               <div className="col-md-12">
                 <h3 className="text-center">Далолатнома</h3>
@@ -49,17 +50,15 @@ const Dalolatnoma = () => {
               <div className="col-md-6">
                 <h3 className="d-inline float-end">{121}</h3>
               </div>
-              <div className="col-md-8">
+              <div className="col-md-12">
                 <h4>
-                  Биз куйида имзо чекувчилар:Бажарувчи {text[0].t1} Электрон хокимятни
-                  ривожлантириш маркази номидан директори{" "}
-                  <b>
-                    {text[0].t4}
-                  </b>
-                  бир томондан. Бажарувчи Фаргона вилоят хокимлиги
-                    иккинчи томинидан ушбу далолатномани {text[0].t1} Электрон хокимятни ривожлантириш
-                    маркази томонидан ку'рсатилган хизматларни тасдиқлаш учун
-                    туздик.
+                  Биз куйида имзо чекувчилар:Бажарувчи {text[0].t1} Электрон
+                  хокимятни ривожлантириш маркази номидан директори{" "}
+                  <b>{text[0].t4}</b>
+                  бир томондан. Бажарувчи Фаргона вилоят хокимлиги иккинчи
+                  томинидан ушбу далолатномани {text[0].t1} Электрон хокимятни
+                  ривожлантириш маркази томонидан ку'рсатилган хизматларни
+                  тасдиқлаш учун туздик.
                 </h4>
               </div>
               <div className="col-md-5"></div>
