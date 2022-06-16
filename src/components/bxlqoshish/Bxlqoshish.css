@@ -1,0 +1,9 @@
+.bxl-radius{
+    border-radius: 16px !important;
+}
+.bxl-radius:hover{
+    background: #ECF0FF;
+}
+.trash-bg{
+    color:#F24E1E;
+}

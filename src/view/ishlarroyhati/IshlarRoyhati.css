@@ -1,9 +1,18 @@
-.ishalr-royhati-border-radius{
-    border-radius: 16px !important;
+.bg-katagoriya {
+    min-height: 70vh;
+    background: #F5F5F5 !important;
+    border-radius: 16px 16px 0px 0px;
 }
-.ishalr-royhati-border-radius:hover{
-    background: #ECF0FF;
+
+.bg-form-katagoroya {
+    background: #FFFFFF;
+    border-radius: 16px;
 }
-.trash-bg{
-    color:#F24E1E;
+
+.form-input-ish-katagoriya {
+    width: 770px !important;
+    height: 44px !important;
+    background: #F5F5F5 !important;
+    border: 1px solid #DBDBDB !important;
+    border-radius: 6px !important;
 }

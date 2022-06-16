@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
+import config from "./../../config.json";
 const BajaruvchiQoshish = () => {
   const [bajaruvchi, setBajaruvchi] = useState({
     ismi: "",
@@ -13,9 +14,10 @@ const BajaruvchiQoshish = () => {
   const changeHandler = (e) => {
     setBajaruvchi({ ...bajaruvchi, [e.target.name]: e.target.value });
   };
+
   const Send = async () => {
     await axios
-      .post("https://government-backend.herokuapp.com/user", bajaruvchi)
+      .post(`${config.SERVER_URL}user`, bajaruvchi)
       .then((res) => {
         alert("Bajaruvchi malumotlari qo'shildi.");
       })
@@ -89,7 +91,11 @@ const BajaruvchiQoshish = () => {
                 onChange={changeHandler}
               />
             </form>
-            <Button name="Қўшиш" ButtonFunction={Send} ButtonStyle="oq-button" />
+            <Button
+              name="Қўшиш"
+              ButtonFunction={Send}
+              ButtonStyle="oq-button"
+            />
           </div>
         </div>
       </div>

@@ -43,6 +43,7 @@ function Home() {
         <div className="content">
           {/* <Navbar /> */}
           <Router />
+          
         </div>
       </div>
     </div>
