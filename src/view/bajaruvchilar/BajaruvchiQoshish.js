@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState} from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
 const BajaruvchiQoshish = () => {
+
   const [bajaruvchi, setBajaruvchi] = useState({
     ismi: "",
     fish: "",
@@ -13,6 +14,7 @@ const BajaruvchiQoshish = () => {
   const changeHandler = (e) => {
     setBajaruvchi({ ...bajaruvchi, [e.target.name]: e.target.value });
   };
+
   const Send = async () => {
     await axios
       .post("https://government-backend.herokuapp.com/user", bajaruvchi)
@@ -89,7 +91,11 @@ const BajaruvchiQoshish = () => {
                 onChange={changeHandler}
               />
             </form>
-            <Button name="Қўшиш" ButtonFunction={Send} ButtonStyle="oq-button" />
+            <Button
+              name="Қўшиш"
+              ButtonFunction={Send}
+              ButtonStyle="oq-button"
+            />
           </div>
         </div>
       </div>
