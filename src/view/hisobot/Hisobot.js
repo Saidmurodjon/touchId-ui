@@ -13,7 +13,7 @@ export default function Hisobot() {
             <button className="btn btn-light p-2 float-end ">Filter</button>
           </div>
 
-          <div className="col-md-10 justify-content-center">
+          <div className="col-md-10 d-flex justify-content-center">
             <Dalolatnoma />
           </div>
         </div>

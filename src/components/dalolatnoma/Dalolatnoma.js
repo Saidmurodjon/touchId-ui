@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import gerb from "../../assets/gerb.jpg";
 import axios from "axios";
 import config from "../../config.json";
+import line from "../../assets/line.png"
 import "./Dalolatnoma.css";
 const Dalolatnoma = () => {
   const [text, setText] = useState([]);
@@ -30,8 +31,8 @@ const Dalolatnoma = () => {
             <div className="row justify-content-center">
               <div className="col-md-5 justify-content-center">
                 <h4 className="text-center">
-                  O'ZBEKISTON RESPUBLIKASI {text[0].t1}"ELEKTRON XOKIMYATNI
-                  ROVOJLANTIRISH MARKAZI"
+                  O'ZBEKISTON RESPUBLIKASI {text[0].t1.toUpperCase()} "ELEKTRON
+                  XOKIMYATNI ROVOJLANTIRISH MARKAZI"
                 </h4>
               </div>
               <div className="col-md-2 d-flex justify-content-center align-items-center">
@@ -40,8 +41,10 @@ const Dalolatnoma = () => {
               <div className="col-md-5">
                 <h4 className="text-center">{text[0].t2}</h4>
               </div>
-              <div className="col-md-12 border-bottom">
-                <p className="">{text[0].t3}</p>
+              <div className="col-md-12">
+                <p className="location mb-0">{text[0].t3}</p>
+                {/* <img className="line" src={line} alt="" /> */}
+                <div className="line"></div>
               </div>
               <div className="col-md-12">
                 <h3 className="text-center">Далолатнома</h3>
@@ -52,7 +55,7 @@ const Dalolatnoma = () => {
               </div>
               <div className="col-md-12">
                 <h4>
-                  Биз куйида имзо чекувчилар:Бажарувчи {text[0].t1} Электрон
+                  Биз куйида имзо чекувчилар: Бажарувчи {text[0].t1} Электрон
                   хокимятни ривожлантириш маркази номидан директори{" "}
                   <b>{text[0].t4}</b>
                   бир томондан. Бажарувчи Фаргона вилоят хокимлиги иккинчи
