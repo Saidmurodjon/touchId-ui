@@ -3,19 +3,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BList from "../../components//buyritma/BList";
 import Button from "../../components/button/Button";
-
+import config from "../../config.json"
 export default function Buyurtmalar() {
   const [buyritmachi, setBuyritmachi] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("https://government-backend.herokuapp.com/cilient")
-      .then((res) => {
-        res.data && setBuyritmachi(res.data);
-        // setLoading(false);
-      })
-      .catch((error) => console.log(error));
+    .get(`${config.SERVER_URL}cilient`)
+    .then((res) => {
+      setBuyritmachi(res.data);
+    })
+    .catch((error) => console.log(error));
   }, []);
+
   async function Bqoshish(params) {
     navigate("/buyurtmaqoshish");
   }

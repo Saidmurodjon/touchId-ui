@@ -3,15 +3,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
+import config from "../../config.json";
 function Bajaruvchilar() {
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("https://government-backend.herokuapp.com/user")
+      .get(`${config.SERVER_URL}user`)
       .then((res) => {
-        res.data && setBajaruvchilar(res.data);
-        // setLoading(false);
+        setBajaruvchilar(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -22,7 +22,11 @@ function Bajaruvchilar() {
     <>
       <div className="container">
         <h4>bajaruvchi</h4>
-        <Button name={"Бажарувчи қўшиш"} ButtonFunction={Bqoshish} ButtonStyle="oq-button"/>
+        <Button
+          name={"Бажарувчи қўшиш"}
+          ButtonFunction={Bqoshish}
+          ButtonStyle="oq-button"
+        />
         <BList bajaruvchilar={bajaruvchilar} />
       </div>
     </>
