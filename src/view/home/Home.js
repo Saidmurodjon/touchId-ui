@@ -1,8 +1,7 @@
 import './Home.css'
 import {useState} from 'react'
-import Navbar from "../../components/navbar/Navbar"
 import Router from '../../router/Router'
-import Menyu from '../../components/navbar/Menyu'
+import Menyu from '../../components/menu/Menyu'
 function Home() {
 
   const [toggle, setToggle] = useState(false)
