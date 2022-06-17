@@ -46,6 +46,12 @@
     border-radius: 30px;
 }
 
+.bajJadval table h6{
+    margin-top: -5px;
+}
+.bajJadval .buyur{
+    margin-top: 0.2rem;
+}
 .card{
     border-radius: 16px!important;
 }

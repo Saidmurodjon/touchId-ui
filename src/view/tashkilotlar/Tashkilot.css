@@ -33,6 +33,11 @@
     line-height: 5px;
 }
 
+.tashAsosiy .jadval h6{
+    margin-bottom: 0.9rem;
+    margin-left: 0.5rem;
+}
+
 .addTash{
     border-radius: 16px;
 }
@@ -41,4 +46,16 @@
     top: 2%;
     right: 2%;
     font-size: 30px;
+}
+
+
+.madal{
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 99vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    
 }

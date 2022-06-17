@@ -11,13 +11,13 @@ const Item = (props) => {
                     <table>
                         <tbody>
                             <tr>
-                                <td valign="top"><p className="text-secondary">Бажарувчи:</p></td>
+                                <td><p className="text-secondary">Бажарувчи:</p></td>
                                 <td><h6>{props.bajaruvchi}</h6></td>
                             </tr>
                             <tr>
                                 <td  valign="top"><p className="text-secondary">Буюртмачи:</p></td>
                                 <td>
-                                    <h6 className="pb-0">{props.buyurtmachi}</h6>
+                                    <h6 className="pb-0 buyur">{props.buyurtmachi}</h6>
                                     <p className="text-secondary"><span>{props.xona}</span> хона {props.lavozim}</p>
                                 </td>
                             </tr>
