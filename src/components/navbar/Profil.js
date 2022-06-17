@@ -1,10 +1,10 @@
 import React from "react";
 import pic from "./../../assets/gerb.jpg";
-import "./ProfilStyle.css";
+import "./Navbar.css";
 export default function Profil() {
   return (
     <>
-      <div className="float-end profil-style d-flex justify-content-center align-items-center">
+      <div className="float-end d-flex justify-content-center align-items-center">
         <div className="row justify-content-center ">
           <div className="col-md-3 d-flex justify-content-center align-items-center">
             <i className="bi bi-bell me-4"></i>
