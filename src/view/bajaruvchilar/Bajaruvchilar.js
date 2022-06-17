@@ -14,7 +14,7 @@ function Bajaruvchilar(search) {
     const newService = bajaruvchilar.filter((elem) =>
       elem.fish.toLowerCase().includes(search.toLowerCase())
     );
-    setSearchPage(newService);
+    // setSearchPage(newService);
   }, [search]);
   console.log(searchPage);
   useEffect(() => {

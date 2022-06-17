@@ -1,7 +1,7 @@
 import React from "react";
 
 function BItem(props) {
-  const { _id, tash, lavoz, fish, ismi, tel, parol } = props;
+  const { _id, tash, lavozimi, fish, tel, parol } = props;
 
   return (
     <>
@@ -9,9 +9,9 @@ function BItem(props) {
         <div className="card m-2 p-2 raunded-4">
           <h6>{tash}</h6>
           <h4>
-            {fish} {ismi}
+            {fish}
           </h4>
-          <p>Лавозими: {lavoz}</p>
+          <p>Лавозими: {lavozimi}</p>
           <p className="d-inline">Телефон: {tel}</p>
           <p className="d-inline float-end">Парол: {parol}</p>
         </div>
