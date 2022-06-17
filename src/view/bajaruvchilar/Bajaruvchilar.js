@@ -5,11 +5,18 @@ import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-function Bajaruvchilar(searchPage) {
-  // const {data=[]}=props
-  console.log(searchPage);
-  const [bajaruvchilar, setBajaruvchilar] = useState([]);
+function Bajaruvchilar(search) {
   const navigate = useNavigate();
+  const [searchPage, setSearchPage] = useState([]);
+  const [bajaruvchilar, setBajaruvchilar] = useState([]);
+
+  useEffect(() => {
+    const newService = bajaruvchilar.filter((elem) =>
+      elem.fish.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchPage(newService);
+  }, [search]);
+  console.log(searchPage);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}user`)
@@ -18,12 +25,12 @@ function Bajaruvchilar(searchPage) {
       })
       .catch((error) => console.log(error));
   }, []);
-  async function Bqoshish(params) {
+  async function Bqoshish() {
     navigate("/bajaruvchiqoshish");
   }
   return (
     <>
-      <Navbar search={true} searchValue={bajaruvchilar} type1={"val.fish"} type2={"val.ismi"} />
+      <Navbar search={true} searchValue={bajaruvchilar} />
 
       <div className="d-flex justify-content-center">
         <div className="page-width">
@@ -32,7 +39,6 @@ function Bajaruvchilar(searchPage) {
               <h4>bajaruvchi</h4>
             </div>
             <div className="col-md-6 d-flex justify-content-end align-items-center">
-              {" "}
               <Button
                 name={"Бажарувчи қўшиш"}
                 ButtonFunction={Bqoshish}
@@ -40,7 +46,11 @@ function Bajaruvchilar(searchPage) {
               />
             </div>
 
-            <BList bajaruvchilar={searchPage} />
+            <BList
+              bajaruvchilar={
+                searchPage.length <= 0 ? bajaruvchilar : searchPage
+              }
+            />
           </div>
         </div>
       </div>

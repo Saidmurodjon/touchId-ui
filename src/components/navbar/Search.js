@@ -2,24 +2,11 @@ import React, { useState, useEffect } from "react";
 import Bajaruvchilar from "../../view/bajaruvchilar/Bajaruvchilar";
 
 export default function Search(props) {
-  const { page = "", data = [], type1 = "", type2 = "" } = props;
-  console.log(data);
+  // const { page = "", searchValue = [] } = props;
   const [input, setInput] = useState("");
-  const [searchPage, setSearchPage] = useState([]);
-  Bajaruvchilar(searchPage);
-  console.log(input);
-  useEffect(() => {
-    setSearchPage([]);
-    // if (input) {
-    //   setLook("pupils");
-    // }
+  // const [searchPage, setSearchPage] = useState([]);
+  Bajaruvchilar(input);
 
-    data.filter((val) => {
-      if (val.ismi.toLowerCase().includes(input.toLowerCase())) {
-        setSearchPage((searchPage) => [...searchPage, val]);
-      }
-    });
-  }, []);
   return (
     <div className=" w-75">
       <form action="">

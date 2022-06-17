@@ -6,6 +6,7 @@ import config from "../../config.json";
 import "./Hisobot.css";
 import ChandeDalolatnoma from "../../components/change-dalolatnoma/ChangeDalolatnoma";
 import Profil from "../../components/navbar/Profil";
+import Filter from "../../components/filter/Filter";
 export default function Hisobot() {
   const [showModal, setShowModal] = useState(false);
   const componentRef = useRef();
@@ -42,6 +43,7 @@ export default function Hisobot() {
                 </div>
                 <div className="col-md-6">
                   <div className="col-md-6 float-end">
+                    <Filter/>
                     <button
                       className="btn btn-light p-2 float-end"
                       onClick={handlePrint}
