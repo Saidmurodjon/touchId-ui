@@ -1,5 +1,30 @@
 *{
+    list-style: none;
+    text-decoration: none!important;
     padding: 0!important;
+}
+.asosiyMenyu{
+    overflow: hidden;
+}
+.asosiyMenyu ul li{
+    width: 200px!important;
+    /* border: 2px solid green; */
+}
+.asosiyMenyu ul{
+    width: 200px!important;
+    /* border: 2px solid red; */
+}
+.asosiyMenyu ul li .link{
+    /* border: 2px solid yellow; */
+    width: 200px!important;
+    border-radius: 10px;
+}
+.asosiyMenyu span i{
+    font-size: 20px;
+}
+.asosiyMenyu span{
+    font-size: 15px;
+    margin-right: 15px;
 }
 .container-fluid{
     display: flex;

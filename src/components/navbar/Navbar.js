@@ -1,23 +1,29 @@
 import React from "react";
-export default function Navbar() {
+import Profil from "./Profil";
+import Search from "./Search";
+import "./Navbar.css";
+export default function Navbar(props) {
+  const { search = false, text = "", searchValue = [] ,page=""} = props;
+  const data = [1, 2, 3, 4];
+  // console.log(searchValue);
+  // Bajaruvchilar(searchValue);
   return (
     <>
-      <div className="">
-        <div className="row">
-          <div className="col-md-5">
-            <form action="">
-              <input
-                className="form-control"
-                type="search"
-                placeholder="Қидириш"
-              />
-            </form>
-          </div>
-          <div className="col-md-4">
-            <i className="bi bi-bell"></i>
-          </div>
-          <div className="col-md-3">
-            <h4>Profil</h4>
+      <div className="d-flex justify-content-center border-bottom navbar-style">
+        <div className="page-width">
+          <div className="row justify-content-center">
+            <div className="col-md-6 d-flex justify-content-start align-items-center">
+              {search ? (
+                <Search searchValue={searchValue} page={page}/>
+              ) : (
+                <>
+                  <h3>{text}</h3>
+                </>
+              )}
+            </div>
+            <div className="col-md-6">
+              <Profil />
+            </div>
           </div>
         </div>
       </div>

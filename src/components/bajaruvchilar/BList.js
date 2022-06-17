@@ -4,7 +4,7 @@ import BItem from "./BItem";
 function BList(props) {
   const { bajaruvchilar = [] } = props;
   if (!bajaruvchilar.length) {
-    return <h3>Bemor ma'lumotlari mavjud emas!</h3>;
+    return <h3>ma'lumotlar mavjud emas!</h3>;
   }
   return (
     <div className={"row"}>

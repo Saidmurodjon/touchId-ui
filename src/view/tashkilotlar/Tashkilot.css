@@ -1,0 +1,61 @@
+
+.tashkilot  .vid{
+    padding: 5px;
+    background: none;
+    border: 0.3px solid #787486;
+    border-radius: 6px;
+    color: #8A8A8A;
+    margin-left: 15px;
+}
+.tashkilot .viewActive{
+    background-color: #5030E5 ;
+    color: #FFFFFF !important;
+}
+
+.tashAsosiy{
+    width: 95%;
+    margin: auto;
+    min-height: 50vh;
+    border-radius: 30px;
+}
+
+.more{
+    border-radius: 30px;
+}
+.more .info{
+    margin-left: -120px!important;
+}
+.more .info h5{
+    line-height: 10px;
+    margin-bottom: 15px;
+}
+.info p{
+    line-height: 5px;
+}
+
+.tashAsosiy .jadval h6{
+    margin-bottom: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.addTash{
+    border-radius: 16px;
+}
+.bi-x{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    font-size: 30px;
+}
+
+
+.madal{
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 99vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}

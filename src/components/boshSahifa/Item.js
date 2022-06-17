@@ -1,32 +1,31 @@
 const Item = (props) => {
-    console.log ( `react snippet works!` );
 
     return (
         <>
             <div className="col-6">
-                <div className="card m-2 p-4">
+                <div className="card m-2 px-4 pt-3 pb-2">
                     <div className="up d-flex justify-content-between">
                         <span className="alert alert-warning px-1">{props.date}</span>
-                        <h5>№ {props.aktRaqam}</h5>
+                        <h5 className="text-secondary">№ {props.aktRaqam}</h5>
                     </div>
                     <table>
                         <tbody>
                             <tr>
-                                <td valign="top">Бажарувчи:</td>
-                                <td><h5>{props.bajaruvchi}</h5></td>
+                                <td><p className="text-secondary">Бажарувчи:</p></td>
+                                <td><h6>{props.bajaruvchi}</h6></td>
                             </tr>
                             <tr>
-                                <td valign="top">Буюртмачи:</td>
+                                <td  valign="top"><p className="text-secondary">Буюртмачи:</p></td>
                                 <td>
-                                    <h5 className="pb-0">{props.buyurtmachi}</h5>
-                                    <p><span>{props.xona}</span> хона {props.lavozim}</p>
+                                    <h6 className="pb-0 buyur">{props.buyurtmachi}</h6>
+                                    <p className="text-secondary"><span>{props.xona}</span> хона {props.lavozim}</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div className="ikonka mt-2 d-flex justify-content-end">
-                        <span><i className="bi bi-card-checklist"></i> {props.ishlar} ишлар</span>
-                        <span className="ms-2"><i className="bi bi-images"></i> {props.rasmlar} расм</span>
+                    <div className="ikonka d-flex justify-content-end">
+                        <span className="text-secondary"><i className="bi bi-card-checklist"></i> {props.ishlar} ишлар</span>
+                        <span className="ms-2 text-secondary"><i className="bi bi-images"></i> {props.rasmlar} расм</span>
                     </div>
                 </div>
             </div>
