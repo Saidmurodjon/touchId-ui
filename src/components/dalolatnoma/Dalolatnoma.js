@@ -39,13 +39,16 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                   <div className="line"></div>
                 </div>
                 <div className="col-md-12">
-                  <h3 className="text-center">Далолатнома</h3>
+                  <h3 className="text-center">
+                    <b>Далолатнома</b>
+                  </h3>
                 </div>
                 <div className="col-md-6">{new Date().toDateString()}</div>
-                <div className="col-md-6">
+                <div className="col-md-5">
                   <h3 className="d-inline float-end">{121}</h3>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-11">
+                  
                   <h4>
                     Биз куйида имзо чекувчилар: Бажарувчи {text.t1} Электрон
                     хокимятни ривожлантириш маркази номидан директори{" "}
