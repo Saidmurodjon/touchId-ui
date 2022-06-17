@@ -58,7 +58,9 @@ const Bolimlar = () => {
                     bolim.map((e) => {
                         return (
                             <>
-                                <div key={e._id}> <Bxlqoshish elem={e} BxlEdit={BolimlarUpdate} BxlDelet={onClick} /></div>
+                                <div key={e._id}>
+                                    <Bxlqoshish elem={e} BxlEdit={BolimlarUpdate} BxlDelet={onClick} />
+                                </div>
                             </>
                         );
                     })

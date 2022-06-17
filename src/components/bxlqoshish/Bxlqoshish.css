@@ -1,9 +1,21 @@
-.bxl-radius{
+.bxl-radius {
+    cursor: pointer;
+    transition: .5s all !important;
     border-radius: 16px !important;
 }
-.bxl-radius:hover{
+
+.bxl-radius:hover {
     background: #ECF0FF;
 }
-.trash-bg{
-    color:#F24E1E;
+
+.trash-bg {
+    color: #F24E1E;
+}
+
+.trash-bg:hover {
+    color: #111 !important;
+}
+
+.edit-pencil:hover {
+    color: #F24E1E !important;
 }
