@@ -25,7 +25,7 @@ const Bolimlar = () => {
         navigate("/bolimqoshish");
     }
     async function BolimlarUpdate(elem) {
-        navigate("/bolimlarEdit");
+        navigate(`/bolim/${elem._id}`);
         BolimlarEdit(elem)
         // console.log(elem);
     }

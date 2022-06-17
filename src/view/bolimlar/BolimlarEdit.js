@@ -1,8 +1,8 @@
 import Button from "../../components/button/Button";
-import { useEffect, useState } from "react"
-import axios from 'axios';
+// import { useEffect, useState } from "react"
+// import axios from 'axios';
 const BolimlarEdit = (elem) => {
-    console.log(elem);
+    // console.log(elem);
     return (
         <>
             <div className="w-100 px-4 py-2 position-relative pe-5">
