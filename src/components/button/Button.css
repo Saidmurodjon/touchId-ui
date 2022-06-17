@@ -2,6 +2,7 @@
     background: #ECF0FF !important;
     width: 166px;
     height: 40px;
+    transition: .5s all !important;
 }
 
 .yashil-button {
@@ -10,4 +11,8 @@
     width: 100px;
     height: 40px;
     color: white!important;
+    transition: .5s all !important;
+}
+.button-bg:hover{
+    box-shadow: 1px 2px 2px #111 !important;    
 }

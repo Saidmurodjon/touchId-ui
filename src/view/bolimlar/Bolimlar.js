@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import config from "../../config.json"
 import axios from "axios"
-import { confirm } from "react-confirm-box";
 import "./Bo'limlar.css";
 import BolimlarEdit from "./BolimlarEdit"
 const Bolimlar = () => {

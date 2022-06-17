@@ -15,6 +15,7 @@ const BolimlarQoshish = () => {
         name: "",
         date: new Date()
     })
+    console.log(bolimQoshish);
     const changeHandler = (e) => {
         setBolimQoshish({ ...bolimQoshish, [e.target.name]: e.target.value });
     };
