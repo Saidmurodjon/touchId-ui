@@ -43,7 +43,9 @@ export default function Hisobot() {
                 </div>
                 <div className="col-md-6">
                   <div className="col-md-6 float-end">
-                    <Filter/>
+                   
+                      <Filter />
+                  
                     <button
                       className="btn btn-light p-2 float-end"
                       onClick={handlePrint}
