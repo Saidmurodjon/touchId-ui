@@ -5,9 +5,9 @@ import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-function Bajaruvchilar(data) {
+function Bajaruvchilar(searchPage) {
   // const {data=[]}=props
-  console.log(data);
+  console.log(searchPage);
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -23,7 +23,7 @@ function Bajaruvchilar(data) {
   }
   return (
     <>
-      <Navbar search={true} />
+      <Navbar search={true} searchValue={bajaruvchilar} type1={"val.fish"} type2={"val.ismi"} />
 
       <div className="d-flex justify-content-center">
         <div className="page-width">
@@ -40,7 +40,7 @@ function Bajaruvchilar(data) {
               />
             </div>
 
-            <BList bajaruvchilar={bajaruvchilar} />
+            <BList bajaruvchilar={searchPage} />
           </div>
         </div>
       </div>
