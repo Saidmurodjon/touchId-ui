@@ -11,7 +11,6 @@ export default function Hisobot() {
   const [showModal, setShowModal] = useState(false);
   const componentRef = useRef();
   const [text, setText] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}xisobot`)
@@ -25,6 +24,11 @@ export default function Hisobot() {
   });
   const ShowModal = () => {
     setShowModal(false);
+  };
+  const Filters = () => {
+    const time = JSON.parse(localStorage.getItem("time"));
+
+    console.log(time);
   };
   return (
     <>
@@ -43,9 +47,8 @@ export default function Hisobot() {
                 </div>
                 <div className="col-md-6">
                   <div className="col-md-6 float-end">
-                   
-                      <Filter />
-                  
+                    <Filter FilterFunction={Filters} />
+
                     <button
                       className="btn btn-light p-2 float-end"
                       onClick={handlePrint}

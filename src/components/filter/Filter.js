@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-
-
+import  Button from "../button/Button";
+import React, { useEffect, useState } from "react";
 const month = [
   {
     name: "Январь",
@@ -60,21 +59,23 @@ const year = [
 ];
 
 
-function Filter() {
+function Filter(props) {
+  const{FilterFunction}=props
   const [time, setTime] = useState({
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
   });
-  console.log(time);
+ useEffect(()=>{
+  localStorage.setItem("time", JSON.stringify(time));
+ },[time])
 
   const changeHandler = (e) => {
     setTime({ ...time, [e.target.name]: e.target.value });
   };
-  // const filterla = () => {
-  //   console.log(oy + "+" + yil);
-  // };
   return (
     <>
+      <div className="">
+        <Button ButtonStyle="oq-button" name="Filter" ButtonFunction={FilterFunction}/>
       <form action="">
         <div className="d-inline">
           <select
@@ -105,6 +106,7 @@ function Filter() {
           </select>
         </div>
       </form>
+      </div>
     </>
   );
 }
