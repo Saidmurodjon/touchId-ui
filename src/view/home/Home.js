@@ -1,10 +1,12 @@
 import './Home.css'
 import {useState} from 'react'
+import Navbar from "../../components/navbar/Navbar"
 import Router from '../../router/Router'
 import Menyu from '../../components/menu/Menyu'
+import Aloqa from './Aloqa'
 function Home() {
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
     const toggleMenyu=()=>{
       setToggle(!toggle)
       let menyu = document.querySelector(".menyu")
@@ -12,13 +14,13 @@ function Home() {
       let logotip = document.querySelector(".logotip")
       let arrow = document.querySelector(".togl")
       if(toggle){
-        menyu.style.width = '5%'
-        content.style.width = '95%'
+        menyu.style.width = '4.5%'
+        content.style.width = '95.5%'
         arrow.style.right = '30%'
         logotip.style.display="none"
       }else{
         menyu.style.width = '17%'
-        content.style.width = '83%' 
+        content.style.width = '83%'
         arrow.style.right = '10%'
         logotip.style.display="flex"
       }
@@ -38,11 +40,11 @@ function Home() {
           </div>
           {/* menyu qismi */}
           <Menyu />
+          <div className='mt-5'><Aloqa /></div>
         </div>
         <div className="content">
           {/* <Navbar /> */}
           <Router />
-          
         </div>
       </div>
     </div>

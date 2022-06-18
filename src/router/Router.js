@@ -23,6 +23,8 @@ import XonaQoshish from "../view/xonalar/Xonalar";
 import XonaUpdate from "../view/xonalar/Xonalar";
 import BoshSahifa from "../view/boshsahifa/BoshSahifa";
 import BolimlarEdit from "../view/bolimlar/BolimlarEdit";
+import TashkilotUpdate from '../view/tashkilotlar/TashkilotUpdate'
+
 
 function Router() {
   return (
@@ -51,6 +53,7 @@ function Router() {
         <Route path="/kabinet" element={<Xona />} />
         <Route path="/kabinetqoshish" element={<XonaQoshish />} />
         <Route path="/kabinetyangilash" element={<XonaUpdate />} />
+        <Route path="/tashkilot/:id" element={<TashkilotUpdate />} />
       </Routes>
     </>
   );

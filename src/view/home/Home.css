@@ -5,26 +5,52 @@
 }
 .asosiyMenyu{
     overflow: hidden;
-}
-.asosiyMenyu ul li{
-    width: 200px!important;
-    /* border: 2px solid green; */
+    /* position: fixed; */
 }
 .asosiyMenyu ul{
-    width: 200px!important;
-    /* border: 2px solid red; */
+    overflow: hidden;
+    width: 200px;
 }
-.asosiyMenyu ul li .link{
-    /* border: 2px solid yellow; */
+.asosiyMenyu ul li span{
+    color: #787486!important;
+}
+.asosiyMenyu ul .li{
     width: 200px!important;
+    background-color: #F8F9FA;
+    color: #787486;
     border-radius: 10px;
+    margin-top: 2px;
+    padding: 12px 20px 12px 10px!important;
+
 }
+
 .asosiyMenyu span i{
     font-size: 20px;
 }
 .asosiyMenyu span{
     font-size: 15px;
     margin-right: 15px;
+}
+
+.aloqa{
+    width: 80%;
+    text-align: center;
+    border-radius: 16px;
+    margin: auto;
+}
+.aloqa p{
+    line-height: 10px;
+    color: #787486;
+}
+.oq-button {
+    width: 166px;
+    height: 40px;
+    padding: 10px 15px!important;
+    border-radius: 4px;
+}
+.oq-button i{
+    font-size: 30px;
+    margin-bottom: -15px!important;
 }
 .container-fluid{
     display: flex;

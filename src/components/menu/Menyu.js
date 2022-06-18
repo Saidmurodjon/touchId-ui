@@ -6,60 +6,60 @@ export default function Menyu() {
     return (
         <>
             <div className="menu">
-                <nav className='asosiyMenyu ps-4'>
-                    <ul>
-                        <li>
-                            <NavLink to='/' className='bg-light py-1 ps-1 link'>
+                <nav className='asosiyMenyu ps-4 py-3'>
+                    <ul className="py-1">
+                        <li className="py-1 link">
+                            <NavLink className={({isActive})=> isActive ? 'li':''} to='/'>
                                 <span><i className='bi bi-house-door'></i></span>
-                                <span>Бош сахифа</span>
+                                <span className="ms-2">Бош сахифа</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/bajaruvchi' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink  to='/bajaruvchi' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-person-fill'></i></span>
-                                <span>Бажарувчи</span>
+                                <span className="ms-2">Бажарувчи</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/buyurtma' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/buyurtma' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-person-workspace'></i></span>
-                                <span>Буюртмачи</span>
+                                <span className="ms-2">Буюртмачи</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/hisobot' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/hisobot' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-card-checklist'></i></span>
-                                <span>Хисоботлар</span>
+                                <span className="ms-2">Хисоботлар</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/ishlar' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/ishlar' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-list-ul'></i></span>
-                                <span>Ишлар рўйхати</span>
+                                <span className="ms-2">Ишлар рўйхати</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/bolim' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/bolim' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-grid-fill'></i></span>
-                                <span>Бўлимлар</span>
+                                <span className="ms-2">Бўлимлар</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/kabinet' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/kabinet' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-terminal-split'></i></span>
-                                <span>Хоналар</span>
+                                <span className="ms-2">Хоналар</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/lavozim' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/lavozim' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-briefcase'></i></span>
-                                <span>Лавозимлар</span>
+                                <span className="ms-2">Лавозимлар</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/tashkilot' className='bg-light py-1 ps-1 link'>
+                        <li className=" py-1 link">
+                            <NavLink to='/tashkilot' className={({isActive})=> isActive ? 'li':''}>
                                 <span><i className='bi bi-building'></i></span>
-                                <span>Ташкилотлар</span>
+                                <span className="ms-2">Ташкилотлар</span>
                             </NavLink>
                         </li>
                     </ul>

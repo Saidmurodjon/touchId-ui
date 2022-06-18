@@ -5,7 +5,6 @@ import More from '../../components/tashkilotlar/More'
 import {useNavigate} from 'react-router-dom'
 import tash from './tash.json'
 import axios from 'axios'
-import TashModal from '../../components/tashkilotlar/tashModal'
 import config from '../../config.json'
 import './Tashkilot.css'
 
@@ -22,13 +21,28 @@ const Tashkilotlar = () => {
 
     useEffect(() => {
         axios
-            .get(`${config.SERVER_URL}xisobot`)
+            .get(`${config.SERVER_URL}tashkilot`)
             .then((res) => {
             res.data && setText(res.data);
             // setLoading(false);
         })
             .catch((error) => console.log(error));
     }, []);
+    console.log(text);
+
+    const getTashkilot=(work)=>{
+        localStorage.setItem("tash", JSON.stringify(work));
+    }
+
+    const Delete=(item)=>{
+        console.log(item);
+        axios
+        .delete(`${config.SERVER_URL}tashkilot/${item._id}`)
+        .then((res) => {
+            res.data && alert("O'chirildi");
+        })
+        .catch((error) => console.log(error));
+    }
 
     return (
         <div className="tashkilot bg-white">
@@ -53,25 +67,21 @@ const Tashkilotlar = () => {
             <div className="tashAsosiy bg-light p-4 mt-5">
                 <div className="row">
                     {
-                        tash.map((work, index)=>(
+                        text.map((work, index)=>(
                             view ? (
                                 <More
-                                    index={index+1}
-                                    tashNom={work.tashNom}
-                                    admin={work.admin}
-                                    login={work.login}
-                                    parol={work.parol}
+                                    elem={work}
+                                    localga={getTashkilot}
+                                    functionDelete={Delete}
                                 /> 
                             ) : 
                             (
                                 <Item 
-                                    index={index+1}
-                                    tashNom={work.tashNom}
-                                    admin={work.admin}
-                                    login={work.login}
-                                    parol={work.parol}
+                                    elem={work}
+                                    localga={getTashkilot}
+                                    functionDelete={Delete}
                                 />
-                            )        
+                            )
                         ))
                     }
                 </div>

@@ -1,5 +1,7 @@
+import React from 'react'
+import { Link } from 'react-router-dom';
 const More = (props) => {
-    console.log ( `react snippet works!` );
+    const { elem={} } = props
 
     return (
         <>
@@ -8,17 +10,21 @@ const More = (props) => {
                     <h1 className="text-secondary">№{props.index}</h1>
                     <div className="info">
                         <p className="text-secondary">Ташкилот номи:</p>
-                        <h5>{props.tashNom}</h5>
+                        <h5>{elem.name}</h5>
                         <p className="text-secondary">Администратор:</p>
-                        <h5>{props.admin}</h5>
+                        <h5>{elem.admin}</h5>
                     </div>
                     <div className="logparol">
-                        <p className="text-secondary">Логин: {props.login}</p>
-                        <p className="text-secondary">Пароль: {props.parol}</p>
+                        <p className="text-secondary">Логин: {elem.login}</p>
+                        <p className="text-secondary">Пароль: {elem.parol}</p>
                     </div>
                     <div className="btn align-self-start">
-                        <i className="bi bi-pencil-square p-2"></i>
-                        <i className="bi bi-trash3 trash-bg"></i>
+                        <button className='border-0 bg-white' onClick={()=>props.localga(elem)}>
+                            <Link to={"/tashkilot/" + elem._id}>
+                                <i className="text-secondary bi bi-pencil-square p-2" ></i>
+                            </Link>
+                        </button>
+                        <i className="bi bi-trash3 trash-bg" onClick={()=>props.functionDelete(elem)}></i>
                     </div>
                 </div>
             </div>
