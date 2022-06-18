@@ -1,4 +1,4 @@
-import  Button from "../button/Button";
+import Button from "../button/Button";
 import React, { useEffect, useState } from "react";
 const month = [
   {
@@ -58,16 +58,15 @@ const year = [
   new Date().getFullYear() - 4,
 ];
 
-
 function Filter(props) {
-  const{FilterFunction}=props
+  const { FilterFunction } = props;
   const [time, setTime] = useState({
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
   });
- useEffect(()=>{
-  localStorage.setItem("time", JSON.stringify(time));
- },[time])
+  useEffect(() => {
+    localStorage.setItem("time", JSON.stringify(time));
+  }, [time]);
 
   const changeHandler = (e) => {
     setTime({ ...time, [e.target.name]: e.target.value });
@@ -75,37 +74,44 @@ function Filter(props) {
   return (
     <>
       <div className="">
-        <Button ButtonStyle="oq-button" name="Filter" ButtonFunction={FilterFunction}/>
-      <form action="">
         <div className="d-inline">
-          <select
-            className="form-select d-inline w-50 "
-            onChange={changeHandler}
-            value={time.month}
-            name="month"
-          >
-            {month.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.name}
-              </option>
-            ))}
-          </select>
+          <Button
+            ButtonStyle="oq-button"
+            name="Filter"
+            ButtonFunction={FilterFunction}
+          />
         </div>
-        <div className="d-inline">
-          <select
-            className="form-select d-inline w-50"
-            onChange={changeHandler}
-            value={time.year}
-            name="year"
-          >
-            {year.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-      </form>
+        <br />
+        <form action="">
+          <div className="d-inline">
+            <select
+              className="form-select d-inline w-50 "
+              onChange={changeHandler}
+              value={time.month}
+              name="month"
+            >
+              {month.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="d-inline">
+            <select
+              className="form-select d-inline w-50"
+              onChange={changeHandler}
+              value={time.year}
+              name="year"
+            >
+              {year.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
       </div>
     </>
   );

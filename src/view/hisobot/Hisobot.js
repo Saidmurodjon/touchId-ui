@@ -11,6 +11,7 @@ export default function Hisobot() {
   const [showModal, setShowModal] = useState(false);
   const componentRef = useRef();
   const [text, setText] = useState([]);
+  const [report, setReport] = useState([]);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}xisobot`)
@@ -28,8 +29,14 @@ export default function Hisobot() {
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
 
-    console.log(time);
+    axios
+    .post(`${config.SERVER_URL}report/filter`, time)
+    .then((res) => {
+      res.data && setReport(res.data);
+    })
+    .catch((error) => console.log(error));
   };
+  console.log(report);
   return (
     <>
       <div className="">
