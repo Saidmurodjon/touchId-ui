@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
+import config from "../../config.json"
 import gerb from "../../assets/gerb.jpg";
 
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
-  const { text = [] } = props;
-
+  const { text = [], reports = [] } = props;
+  const [service, setService] = useState([]);
+  useEffect(() => {
+    axios
+    .get(`${config.SERVER_URL}service`)
+    .then((res) => {
+      setService(res.data);
+    })
+    .catch((error) => console.log(error));
+  }, []);
+  console.log(service);
   return (
     <>
       <div
@@ -48,7 +59,6 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                   <h3 className="d-inline float-end">{121}</h3>
                 </div>
                 <div className="col-md-11">
-                  
                   <h4>
                     Биз куйида имзо чекувчилар: Бажарувчи {text.t1} Электрон
                     хокимятни ривожлантириш маркази номидан директори{" "}

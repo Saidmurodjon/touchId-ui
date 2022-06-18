@@ -16,7 +16,7 @@ function Bajaruvchilar(search) {
     );
     // setSearchPage(newService);
   }, [search]);
-  console.log(searchPage);
+  // console.log(searchPage);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}user`)

@@ -28,15 +28,14 @@ export default function Hisobot() {
   };
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
-
     axios
-    .post(`${config.SERVER_URL}report/filter`, time)
-    .then((res) => {
-      res.data && setReport(res.data);
-    })
-    .catch((error) => console.log(error));
+      .post(`${config.SERVER_URL}report/filter`, time)
+      .then((res) => {
+        res.data && setReport(res.data);
+      })
+      .catch((error) => console.log(error));
   };
-  console.log(report);
+  // console.log(report);
   return (
     <>
       <div className="">
@@ -75,7 +74,7 @@ export default function Hisobot() {
           </div>
 
           <div className="col-md-12 d-flex justify-content-center">
-            <Dalolatnoma ref={componentRef} text={text[0]} />
+            <Dalolatnoma ref={componentRef} text={text[0]} reports={report}/>
             {showModal ? (
               <ChandeDalolatnoma text={text[0]} Show={ShowModal} />
             ) : (
