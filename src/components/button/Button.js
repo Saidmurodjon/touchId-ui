@@ -1,14 +1,12 @@
 import "./Button.css";
 const Button = (props) => {
-  const { name = "", ButtonFunction, ButtonStyle} = props;
+  const { name = "", ButtonFunction, ButtonStyle } = props;
   return (
     <>
-        <button
-          onClick={() => ButtonFunction()}
-          className={`btn button-bg shadow-sm  ${ButtonStyle}`}
-        >
-          {name}
-        </button>
+      <button
+        onClick={() => ButtonFunction()}
+        className={`btn button-bg shadow-sm  ${ButtonStyle}`}
+      >{name}</button>
     </>
   );
 };

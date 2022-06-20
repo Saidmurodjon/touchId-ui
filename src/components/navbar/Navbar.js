@@ -3,7 +3,7 @@ import Profil from "./Profil";
 import Search from "./Search";
 import "./Navbar.css";
 export default function Navbar(props) {
-  const { search = false, text = "", searchValue = [] ,page=""} = props;
+  const { search = false, text = "", searchValue = [], Searchs} = props;
   const data = [1, 2, 3, 4];
   // console.log(searchValue);
   // Bajaruvchilar(searchValue);
@@ -14,7 +14,7 @@ export default function Navbar(props) {
           <div className="row justify-content-center">
             <div className="col-md-6 d-flex justify-content-start align-items-center">
               {search ? (
-                <Search searchValue={searchValue} page={page}/>
+                <Search searchValue={searchValue} Searchs={Searchs} />
               ) : (
                 <>
                   <h3>{text}</h3>

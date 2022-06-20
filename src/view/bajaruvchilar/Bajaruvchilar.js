@@ -5,18 +5,26 @@ import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-function Bajaruvchilar(search) {
+function Bajaruvchilar() {
   const navigate = useNavigate();
   const [searchPage, setSearchPage] = useState([]);
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
-
-  useEffect(() => {
+  const Search = () => {
+    const search = JSON.parse(localStorage.getItem("search"));
     const newService = bajaruvchilar.filter((elem) =>
       elem.fish.toLowerCase().includes(search.toLowerCase())
     );
-    // setSearchPage(newService);
-  }, [search]);
-  // console.log(searchPage);
+    setSearchPage(newService);
+    console.log(newService);
+  };
+
+  // useEffect(() => {
+  //   const newService = bajaruvchilar.filter((elem) =>
+  //     elem.fish.toLowerCase().includes(search.toLowerCase())
+  //   );
+  //   setSearchPage(newService);
+  // }, []);
+  console.log(searchPage);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}user`)
@@ -30,8 +38,7 @@ function Bajaruvchilar(search) {
   }
   return (
     <>
-      <Navbar search={true} searchValue={bajaruvchilar} />
-
+      <Navbar search={true} searchValue={bajaruvchilar} Searchs={Search} />
       <div className="d-flex justify-content-center">
         <div className="page-width">
           <div className="row justify-content-center">
@@ -46,11 +53,7 @@ function Bajaruvchilar(search) {
               />
             </div>
 
-            <BList
-              bajaruvchilar={
-                searchPage.length <= 0 ? bajaruvchilar : searchPage
-              }
-            />
+            <BList bajaruvchilar={searchPage.length >0? searchPage : bajaruvchilar} />
           </div>
         </div>
       </div>

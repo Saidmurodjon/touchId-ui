@@ -1,21 +1,53 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import config from "../../config.json"
+import config from "../../config.json";
 import gerb from "../../assets/gerb.jpg";
 
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
   const { text = [], reports = [] } = props;
+  const [order, setOrder] = useState([]);
   const [service, setService] = useState([]);
+  const [total, setTotal] = useState([]);
+  // const services=[]
+  useEffect(()=>{
+    // const  rep = reports.find(e=>
+      
+    //   )
+  })
+  // useEffect(() => {
+  //   const itemIndex = order.findIndex(
+  //     (orderItem) => orderItem._id === item._id
+  //   );
+  //   if (itemIndex < 0) {
+  //     const newItem = {
+  //       ...item,
+  //       quantity: 1,
+  //     };
+  //     setOrder([...order, newItem]);
+  //   } else {
+  //     const newOrder = order.map((orderItem, index) => {
+  //       if (index === itemIndex) {
+  //         return {
+  //           ...orderItem,
+  //           quantity: orderItem.quantity + 1,
+  //         };
+  //       } else {
+  //         return orderItem;
+  //       }
+  //     });
+  //     setOrder(newOrder);
+  //   }
+  // }, [reports]);
   useEffect(() => {
     axios
-    .get(`${config.SERVER_URL}service`)
-    .then((res) => {
-      setService(res.data);
-    })
-    .catch((error) => console.log(error));
+      .get(`${config.SERVER_URL}service`)
+      .then((res) => {
+        setService(res.data);
+      })
+      .catch((error) => console.log(error));
   }, []);
-  console.log(service);
+  console.log(reports);
   return (
     <>
       <div
