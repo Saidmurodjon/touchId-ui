@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../view/home/Home";
 import Bajaruvchi from "../view/bajaruvchilar/Bajaruvchilar";
 import BajaruvchiQoshish from "../view/bajaruvchilar/BajaruvchiQoshish";
+import BajaruvchiYangilash from "../components/bajaruvchilar/BajaruvchiYangilash";
 import Bolim from "../view/bolimlar/Bolimlar";
 import BolimQoshish from "../view/bolimlar/BolimlarQoshish";
 import Buyurtmalar from "../view/buyurtmalar/Buyurtmalar";
@@ -23,8 +24,7 @@ import XonaQoshish from "../view/xonalar/Xonalar";
 import XonaUpdate from "../view/xonalar/Xonalar";
 import BoshSahifa from "../view/boshsahifa/BoshSahifa";
 import BolimlarEdit from "../view/bolimlar/BolimlarEdit";
-import TashkilotUpdate from '../view/tashkilotlar/TashkilotUpdate'
-
+import TashkilotUpdate from "../view/tashkilotlar/TashkilotUpdate";
 
 function Router() {
   return (
@@ -33,6 +33,7 @@ function Router() {
         <Route path="/" element={<BoshSahifa />} />
         <Route path="/bajaruvchi" element={<Bajaruvchi />} />
         <Route path="/bajaruvchiqoshish" element={<BajaruvchiQoshish />} />
+        <Route path="/bajaruvchi/:id" element={<BajaruvchiYangilash />} />
         <Route path="/bolim" element={<Bolim />} />
         <Route path="/bolim/:id" element={<BolimlarEdit />} />
         <Route path="/bolimqoshish" element={<BolimQoshish />} />

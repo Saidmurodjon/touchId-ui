@@ -85,7 +85,7 @@ function Filter(props) {
         <form action="">
           <div className="d-inline">
             <select
-              className="form-select d-inline w-50 "
+              className="form-select d-inline w-25"
               onChange={changeHandler}
               value={time.month}
               name="month"
@@ -99,7 +99,7 @@ function Filter(props) {
           </div>
           <div className="d-inline">
             <select
-              className="form-select d-inline w-50"
+              className="form-select d-inline w-25"
               onChange={changeHandler}
               value={time.year}
               name="year"

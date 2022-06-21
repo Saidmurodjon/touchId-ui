@@ -16,14 +16,6 @@ function Bajaruvchilar() {
     );
     setSearchPage(newService);
   };
-
-  // useEffect(() => {
-  //   const newService = bajaruvchilar.filter((elem) =>
-  //     elem.fish.toLowerCase().includes(search.toLowerCase())
-  //   );
-  //   setSearchPage(newService);
-  // }, []);
-  console.log(searchPage);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}user`)
@@ -35,11 +27,15 @@ function Bajaruvchilar() {
   async function Bqoshish() {
     navigate("/bajaruvchiqoshish");
   }
+  async function Update(elem) {
+    navigate(`/bajaruvchi/${elem._id}`);
+    localStorage.setItem("bajaruvchi", JSON.stringify(elem));
+  }
   return (
     <>
       <Navbar search={true} searchValue={bajaruvchilar} Searchs={Search} />
       <div className="d-flex justify-content-center">
-        <div className="page-width">
+        <div className="page-width mt-2">
           <div className="row justify-content-center">
             <div className="col-md-6 d-flex justify-content-start align-items-center">
               <h4>bajaruvchi</h4>
@@ -51,8 +47,10 @@ function Bajaruvchilar() {
                 ButtonStyle="oq-button"
               />
             </div>
-
-            <BList bajaruvchilar={searchPage.length >0? searchPage : bajaruvchilar} />
+            <BList
+              bajaruvchilar={searchPage.length > 0 ? searchPage : bajaruvchilar}
+              BFunction={Update}
+            />
           </div>
         </div>
       </div>
