@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../view/home/Home";
 import Bajaruvchi from "../view/bajaruvchilar/Bajaruvchilar";
 import BajaruvchiQoshish from "../view/bajaruvchilar/BajaruvchiQoshish";
-import BajaruvchiYangilash from "../components/bajaruvchilar/BajaruvchiYangilash";
+import BajaruvchiYangilash from "../view/bajaruvchilar/BajaruvchiYangilash";
 import Bolim from "../view/bolimlar/Bolimlar";
 import BolimQoshish from "../view/bolimlar/BolimlarQoshish";
 import Buyurtmalar from "../view/buyurtmalar/Buyurtmalar";
