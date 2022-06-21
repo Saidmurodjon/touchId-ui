@@ -29,25 +29,7 @@ const TashkilotQoshish = () => {
       .catch((error) => console.log(error));
     navigate("/bajaruvchi");
   }
-  const Check = async (elem) => {
-    const result = await window.confirm(
-      "Bajaruvchi malumotlari o'chirilsinmi ? "
-    );
-    if (result) {
-      Delete(elem);
-      return;
-    }
-    alert("O'chirilmadi");
-  };
-  async function Delete(elem) {
-    await axios
-      .delete(`${config.SERVER_URL}user/${elem._id}`)
-      .then((res) => {
-        alert(`Bajaruvchi malumotlari O'chirildi`);
-      })
-      .catch((error) => console.log(error));
-    navigate("/bajaruvchi");
-  }
+
   const Submit = (e) => {
     e.preventDefault();
   };
@@ -148,8 +130,8 @@ const TashkilotQoshish = () => {
             <input
               type="text"
               className="form-control form-control-lg bg-light ps-2"
-              name="tash"
-              value={bajaruvchi.tash}
+              name="parol"
+              value={bajaruvchi.parol}
               onChange={changeHandler}
             />
           </div>
@@ -159,12 +141,6 @@ const TashkilotQoshish = () => {
             ButtonStyle={"oq-button"}
             name="Yangilash"
             ButtonFunction={Update}
-            elem={baj}
-          />
-          <Button
-            ButtonStyle={"oq-button bg-danger"}
-            name="O'chirish"
-            ButtonFunction={Check}
             elem={baj}
           />
         </div>
