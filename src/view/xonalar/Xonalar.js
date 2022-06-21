@@ -1,15 +1,51 @@
 import Button from "../../components/button/Button";
 import Bxlqoshish from "../../components/bxlqoshish/Bxlqoshish";
 import { useNavigate } from "react-router-dom";
+import config from "../../config.json"
 import './Xonalar.css'
+import { useState, useEffect } from "react";
+import axios from "axios";
 const Xonalar = () => {
+    const [xona, setXona] = useState([]);
+
+    const [post, setPost] = useState(false);
+
+    useEffect(() => {
+        axios
+            .get(`${config.SERVER_URL}xona`)
+            .then((res) => {
+                setXona(res.data);
+            })
+            .catch((error) => console.log(error));
+    }, [post]);
+
+    const onClick = async (elem) => {
+        const result = await window.confirm("O'chirilsinmi?");
+        if (result) {
+            xonaDelete(elem);
+            return;
+        }
+        alert("O'chirilmadi");
+    };
+
+    async function xonaDelete(elem) {
+        await axios
+            .delete(`${config.SERVER_URL}xona/${elem._id}`)
+            .then((res) => {
+                res.data && alert("O'chirildi");
+                setPost(!post)
+            })
+            .catch((error) => console.log(error));
+    }
 
     const navigate = useNavigate();
+
     async function XonalarQoshish(params) {
         navigate("/kabinetqoshish");
     }
-    async function XonalarEdit(params) {
-        navigate("/kabinetyangilash");
+    async function XonalarEdit(elem) {
+        localStorage.setItem("xona", JSON.stringify(elem));
+        navigate(`/xona/${elem._id}`);
     }
     return (
         <div className="w-100 px-4 py-2 position-relative">
@@ -18,7 +54,13 @@ const Xonalar = () => {
                 <Button name={"Хона қўшиш"} ButtonStyle="oq-button" ButtonFunction={XonalarQoshish} />
             </div>
             <div className="w-100 py-3">
-                <Bxlqoshish name={"77 хона"} BxlEdit={XonalarEdit} />
+                {
+                    xona.map((elem) => (
+                        <div key={elem._id}>
+                            <Bxlqoshish elem={elem} BxlEdit={XonalarEdit} BxlDelet={onClick} />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );
