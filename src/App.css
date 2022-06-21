@@ -39,3 +39,10 @@
 .page-width {
   width: 95%;
 }
+.bg-main {
+  width: 95%;
+  margin: 5px auto;
+  min-height: 50vh;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+}
