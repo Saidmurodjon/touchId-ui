@@ -5,10 +5,11 @@ import React, { useState, useEffect } from 'react';
 import config from "../../config.json"
 import axios from "axios"
 import "./Bo'limlar.css";
-import BolimlarEdit from "./BolimlarEdit"
 const Bolimlar = () => {
     const [bolim, setBolim] = useState([]);
+
     const [s, setS] = useState(false)
+
     useEffect(() => {
         axios
             .get(`${config.SERVER_URL}bolim`)
@@ -17,17 +18,15 @@ const Bolimlar = () => {
             })
             .catch((error) => console.log(error));
     }, [s]);
-    console.log(bolim);
-
+    
     const navigate = useNavigate();
 
     async function BolimlarQoshish(params) {
         navigate("/bolimqoshish");
     }
     async function BolimlarUpdate(elem) {
+        localStorage.setItem("bolim", JSON.stringify(elem));
         navigate(`/bolim/${elem._id}`);
-        BolimlarEdit(elem)
-        // console.log(elem);
     }
 
     const onClick = async (elem) => {
@@ -57,11 +56,9 @@ const Bolimlar = () => {
                 {
                     bolim.map((e) => {
                         return (
-                            <>
-                                <div key={e._id}>
-                                    <Bxlqoshish elem={e} BxlEdit={BolimlarUpdate} BxlDelet={onClick} />
-                                </div>
-                            </>
+                            <div key={e._id}>
+                                <Bxlqoshish elem={e} BxlEdit={BolimlarUpdate} BxlDelet={onClick} />
+                            </div>
                         );
                     })
                 }

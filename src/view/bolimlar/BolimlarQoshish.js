@@ -14,8 +14,8 @@ const BolimlarQoshish = () => {
     const [bolimQoshish, setBolimQoshish] = useState({
         name: "",
         date: new Date()
-    })
-    console.log(bolimQoshish);
+    });
+
     const changeHandler = (e) => {
         setBolimQoshish({ ...bolimQoshish, [e.target.name]: e.target.value });
     };
@@ -27,7 +27,7 @@ const BolimlarQoshish = () => {
                     alert("malumot qo'shildi")
                 })
                 .catch((error) => console.log(error));
-        }else{
+        } else {
             alert("malumot kiriting")
 
         }
