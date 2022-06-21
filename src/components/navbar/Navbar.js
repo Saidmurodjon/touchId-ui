@@ -4,7 +4,7 @@ import Search from "./Search";
 import "./Navbar.css";
 export default function Navbar(props) {
   const { search = false, text = "", searchValue = [], Searchs} = props;
-  const data = [1, 2, 3, 4];
+  // const data = [1, 2, 3, 4];
   // console.log(searchValue);
   // Bajaruvchilar(searchValue);
   return (

@@ -26,12 +26,13 @@ export default function Hisobot() {
   const ShowModal = () => {
     setShowModal(false);
   };
+  // Dalolatnoma uchun fiter qilingan hisobotlar
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
     axios
       .post(`${config.SERVER_URL}report/filter`, time)
       .then((res) => {
-        res.data && setReport(res.data);
+        setReport(res.data);
       })
       .catch((error) => console.log(error));
   };
@@ -74,7 +75,7 @@ export default function Hisobot() {
           </div>
 
           <div className="col-md-12 d-flex justify-content-center">
-            <Dalolatnoma ref={componentRef} text={text[0]} reports={report}/>
+            <Dalolatnoma ref={componentRef} text={text[0]} reports={report} />
             {showModal ? (
               <ChandeDalolatnoma text={text[0]} Show={ShowModal} />
             ) : (

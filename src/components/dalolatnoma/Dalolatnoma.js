@@ -6,39 +6,25 @@ import gerb from "../../assets/gerb.jpg";
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
   const { text = [], reports = [] } = props;
-  const [order, setOrder] = useState([]);
   const [service, setService] = useState([]);
-  const [total, setTotal] = useState([]);
-  // const services=[]
-  useEffect(()=>{
-    // const  rep = reports.find(e=>
-      
-    //   )
-  })
-  // useEffect(() => {
-  //   const itemIndex = order.findIndex(
-  //     (orderItem) => orderItem._id === item._id
-  //   );
-  //   if (itemIndex < 0) {
-  //     const newItem = {
-  //       ...item,
-  //       quantity: 1,
-  //     };
-  //     setOrder([...order, newItem]);
-  //   } else {
-  //     const newOrder = order.map((orderItem, index) => {
-  //       if (index === itemIndex) {
-  //         return {
-  //           ...orderItem,
-  //           quantity: orderItem.quantity + 1,
-  //         };
-  //       } else {
-  //         return orderItem;
-  //       }
-  //     });
-  //     setOrder(newOrder);
-  //   }
-  // }, [reports]);
+  const [quantity, setQuantity] = useState([]);
+   useEffect(() => {
+    const newArr = [...quantity];
+    for (let i = 0; i < service.length; i++) {
+      const newService = reports.filter((elem) =>
+        elem.category.toLowerCase().includes(service[i].category.toLowerCase())
+      );
+      if (newService) {
+        newArr.push({
+          name: newService[0].category,
+          quantity: newService.length,
+        });
+      }
+    }
+    setQuantity([]);
+    setQuantity(newArr);
+  }, [reports]);
+  console.log(quantity);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}service`)
@@ -47,7 +33,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       })
       .catch((error) => console.log(error));
   }, []);
-  console.log(reports);
+  // console.log(reports);
   return (
     <>
       <div

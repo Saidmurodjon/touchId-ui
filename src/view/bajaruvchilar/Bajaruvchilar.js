@@ -15,7 +15,6 @@ function Bajaruvchilar() {
       elem.fish.toLowerCase().includes(search.toLowerCase())
     );
     setSearchPage(newService);
-    console.log(newService);
   };
 
   // useEffect(() => {
