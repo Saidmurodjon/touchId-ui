@@ -9,7 +9,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const [service, setService] = useState([]);
   const [quantity, setQuantity] = useState([]);
   const [total, setTotal] = useState();
-
+  console.log(reports);
   useEffect(() => {
     if (reports.length > 0) {
       setQuantity([]);
@@ -19,7 +19,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
         const newService = reports.filter((elem) =>
           elem.category.toLowerCase().includes(service[i].name.toLowerCase())
         );
-        if (newService) {
+        if (newService.length > 0) {
           newArr.push({
             name: newService[0].category,
             quantity: newService.length,
@@ -31,7 +31,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       setQuantity(newArr);
     }
   }, [reports]);
-  console.log(total);
+  // console.log(total);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}ish`)
