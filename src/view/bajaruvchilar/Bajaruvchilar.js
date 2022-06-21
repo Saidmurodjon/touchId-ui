@@ -35,7 +35,7 @@ function Bajaruvchilar() {
     <>
       <Navbar search={true} searchValue={bajaruvchilar} Searchs={Search} />
       <div className="d-flex justify-content-center">
-        <div className="page-width mt-2">
+        <div className="page-width">
           <div className="row justify-content-center">
             <div className="col-md-6 d-flex justify-content-start align-items-center">
               <h4>bajaruvchi</h4>
@@ -44,13 +44,17 @@ function Bajaruvchilar() {
               <Button
                 name={"Бажарувчи қўшиш"}
                 ButtonFunction={Bqoshish}
-                ButtonStyle="oq-button"
+                ButtonStyle="oq-button float-end"
               />
             </div>
-            <BList
-              bajaruvchilar={searchPage.length > 0 ? searchPage : bajaruvchilar}
-              BFunction={Update}
-            />
+            <div className="bg-main p-4 m-2">
+              <BList
+                bajaruvchilar={
+                  searchPage.length > 0 ? searchPage : bajaruvchilar
+                }
+                BFunction={Update}
+              />
+            </div>
           </div>
         </div>
       </div>
