@@ -11,30 +11,30 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const [total, setTotal] = useState();
 
   useEffect(() => {
-   if(reports.length>0){
-    setQuantity([]);
-    let t = 0;
-    const newArr = [];
-    for (let i = 0; i < service.length; i++) {
-      const newService = reports.filter((elem) =>
-        elem.category.toLowerCase().includes(service[i].category.toLowerCase())
-      );
-      if (newService) {
-        newArr.push({
-          name: newService[0].category,
-          quantity: newService.length,
-        });
-        t += newService.length;
+    if (reports.length > 0) {
+      setQuantity([]);
+      let t = 0;
+      const newArr = [];
+      for (let i = 0; i < service.length; i++) {
+        const newService = reports.filter((elem) =>
+          elem.category.toLowerCase().includes(service[i].name.toLowerCase())
+        );
+        if (newService) {
+          newArr.push({
+            name: newService[0].category,
+            quantity: newService.length,
+          });
+          t += newService.length;
+        }
       }
+      setTotal(t);
+      setQuantity(newArr);
     }
-    setTotal(t);
-    setQuantity(newArr);
-   }
   }, [reports]);
   console.log(total);
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}service`)
+      .get(`${config.SERVER_URL}ish`)
       .then((res) => {
         setService(res.data);
       })

@@ -4,13 +4,8 @@ const Button = (props) => {
   return (
     <>
       <button
-
-        onClick={() => ButtonFunction()}
-        className={`btn button-bg shadow-sm d-flex align-items-center justify-content-center ${ButtonStyle}`}
-
         onClick={() => ButtonFunction(elem)}
-        className={`btn button-bg shadow-sm  ${ButtonStyle}`}
-
+        className={`btn button-bg shadow-sm  d-flex justify-content-center align-items-center ${ButtonStyle}`}
       >{name}</button>
     </>
   );
