@@ -12,6 +12,7 @@ import Ishlar from "../view/ishlarroyhati/IshlarRoyhati";
 import IshlarKategoriya from "../view/ishlarroyhati/IshKategoriyaQoshish";
 import IshlarKategoriyaUpdate from "../view/ishlarroyhati/IshKategoriyaUpdate";
 import Lavozim from "../view/lavozimlar/Lavozimlar";
+import LavozimUpdate from "../view/lavozimlar/LavozimUpdate";
 import LavozimQoshish from "../view/lavozimlar/LavozimQoshish";
 import QurilmaToifa from "../view/qurilmalar/QurilmaToifa";
 import QurilmaQoshish from "../view/qurilmalar/QurilmaQoshish";
@@ -44,6 +45,7 @@ function Router() {
         <Route path="/ishkategoriya" element={<IshlarKategoriya />} />
         <Route path="/ishyangilash/:id" element={<IshlarKategoriyaUpdate />} />
         <Route path="/lavozim" element={<Lavozim />} />
+        <Route path="/lavozim/:id" element={<LavozimUpdate />} />
         <Route path="/lavozimqoshish" element={<LavozimQoshish />} />
         <Route path="/qurilmatoifa" element={<QurilmaToifa />} />
         <Route path="/qurilmakategoriya" element={<QurilmaKategoriya />} />
