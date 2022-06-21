@@ -8,8 +8,13 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const { text = [], reports = [] } = props;
   const [service, setService] = useState([]);
   const [quantity, setQuantity] = useState([]);
-   useEffect(() => {
-    const newArr = [...quantity];
+  const [total, setTotal] = useState();
+
+  useEffect(() => {
+   if(reports.length>0){
+    setQuantity([]);
+    let t = 0;
+    const newArr = [];
     for (let i = 0; i < service.length; i++) {
       const newService = reports.filter((elem) =>
         elem.category.toLowerCase().includes(service[i].category.toLowerCase())
@@ -19,12 +24,14 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
           name: newService[0].category,
           quantity: newService.length,
         });
+        t += newService.length;
       }
     }
-    setQuantity([]);
+    setTotal(t);
     setQuantity(newArr);
+   }
   }, [reports]);
-  console.log(quantity);
+  console.log(total);
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}service`)
@@ -82,9 +89,32 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                     хокимятни ривожлантириш маркази номидан директори{" "}
                     <b>{text.t4}</b>
                     бир томондан. Бажарувчи Фаргона вилоят хокимлиги иккинчи
-                    томинидан ушбу далолатномани {text.t1} Электрон хокимятни
-                    ривожлантириш маркази томонидан ку'рсатилган хизматларни
-                    тасдиқлаш учун туздик.
+                    томинидан ушбу далолатномани {""}
+                    {text.t1} Электрон хокимятни ривожлантириш маркази томонидан
+                    ку'рсатилган хизматларни тасдиқлаш учун туздик.
+                  </h4>
+                  <h4>
+                    <span className="">
+                      Жорий ойда марказ томонидан жами{""}
+                      {reports.length > 0 ? total : "qiymat mavjud emas"}
+                      <span className=""> марта </span>
+                      хизматлар ку'рсатилди. <br />
+                      <p className="">Жумладан :</p>
+                      {reports.length > 0
+                        ? quantity.map((item, index) => {
+                            return (
+                              <p key={index}>
+                                {item.name}{" "}
+                                <span className="">
+                                  {item.quantity} марта ,{" "}
+                                </span>
+                              </p>
+                            );
+                          })
+                        : "qiymat mavjud emas"}
+                      текшириб камчиликлари бартараф етилди ва профилактика
+                      ишлари олиб борилди
+                    </span>
                   </h4>
                 </div>
                 <div className="col-md-5"></div>

@@ -5,7 +5,7 @@ import axios from "axios";
 import config from "../../config.json";
 import "./Hisobot.css";
 import ChandeDalolatnoma from "../../components/change-dalolatnoma/ChangeDalolatnoma";
-import Profil from "../../components/navbar/Profil";
+import Navbar from "../../components/navbar/Navbar";
 import Filter from "../../components/filter/Filter";
 export default function Hisobot() {
   const [showModal, setShowModal] = useState(false);
@@ -39,16 +39,13 @@ export default function Hisobot() {
   // console.log(report);
   return (
     <>
+      <Navbar />
       <div className="">
         <div className="row justify-content-center">
           <div className="col-md-12  d-flex justify-content-center align-items-center">
             <div className="hisobot-filter">
               <div className="row">
-                <div className="col-12 border-bottom">
-                  <div className="float-end">
-                    <Profil />
-                  </div>
-                </div>
+                <div className="col-12 "></div>
                 <div className="col-md-6">
                   <h3>Xisobot</h3>
                 </div>
