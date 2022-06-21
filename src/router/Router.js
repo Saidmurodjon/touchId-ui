@@ -43,7 +43,7 @@ function Router() {
         <Route path="/hisobot" element={<Hisobot />} />
         <Route path="/ishlar" element={<Ishlar />} />
         <Route path="/ishkategoriya" element={<IshlarKategoriya />} />
-        <Route path="/ishyangilash/:id" element={<IshlarKategoriyaUpdate />} />
+        <Route path="/ishlar/:id" element={<IshlarKategoriyaUpdate />} />
         <Route path="/lavozim" element={<Lavozim />} />
         <Route path="/lavozim/:id" element={<LavozimUpdate />} />
         <Route path="/lavozimqoshish" element={<LavozimQoshish />} />
