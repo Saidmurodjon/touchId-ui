@@ -136,7 +136,7 @@ const TashkilotQoshish = () => {
             />
           </div>
         </div>
-        <div className="mt-5 text-center">
+        <div className="mt-5 text-center d-flex justify-content-center">
           <Button
             ButtonStyle={"oq-button"}
             name="Yangilash"

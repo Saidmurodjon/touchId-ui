@@ -15,10 +15,31 @@ export default function Buyurtmalar() {
         setBuyritmachi(res.data);
       })
       .catch((error) => console.log(error));
-  }, []);
-
+  }, [Delete]);
   async function Bqoshish(params) {
     navigate("/buyurtmaqoshish");
+  }
+  async function Update(item) {
+    navigate(`/buyurtma/${item._id}`);
+    localStorage.setItem("buyurtmachi", JSON.stringify(item));
+  }
+  const Check = async (item) => {
+    const result = await window.confirm(
+      "Buyurtmachi malumotlari o'chirilsinmi ? "
+    );
+    if (result) {
+      Delete(item);
+      return;
+    }
+    alert("O'chirilmadi");
+  };
+  async function Delete(item) {
+    await axios
+      .delete(`${config.SERVER_URL}cilient/${item._id}`)
+      .then((res) => {
+        alert(`Buyurtmachi malumotlari O'chirildi`);
+      })
+      .catch((error) => console.log(error));
   }
   return (
     <>
@@ -26,10 +47,10 @@ export default function Buyurtmalar() {
       <div className="d-flex justify-content-center">
         <div className="page-width">
           <div className="row justify-content-center">
-            <div className="col-md-6 d-flex justify-content-start align-items-center">
+            <div className="col-md-6 d-flex justify-content-start align-items-center mt-2">
               <h4>Буюртмачилар</h4>
             </div>
-            <div className="col-md-6 d-flex justify-content-end align-items-center">
+            <div className="col-md-6 d-flex justify-content-end align-items-center mt-2">
               <Button
                 name={"Буюртмачи қўшиш"}
                 ButtonFunction={Bqoshish}
@@ -38,7 +59,7 @@ export default function Buyurtmalar() {
             </div>
           </div>
           <div className="bg-main p-4 m-2">
-            <BList buyritmachi={buyritmachi} />
+            <BList buyritmachi={buyritmachi} Up={Update} Del={Check} />
           </div>
         </div>
       </div>

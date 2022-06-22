@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../view/home/Home";
+// import Home from "../view/home/Home";
 import Bajaruvchi from "../view/bajaruvchilar/Bajaruvchilar";
 import BajaruvchiQoshish from "../view/bajaruvchilar/BajaruvchiQoshish";
 import BajaruvchiYangilash from "../view/bajaruvchilar/BajaruvchiYangilash";
 import Bolim from "../view/bolimlar/Bolimlar";
 import BolimQoshish from "../view/bolimlar/BolimlarQoshish";
 import Buyurtmalar from "../view/buyurtmalar/Buyurtmalar";
+import BuyurtmalarYangilash from "../view/buyurtmalar/BuyrtmachiYangilash";
 import BuyurtmalarQoshish from "../view/buyurtmalar/BuyurtmaQoshish";
 import Hisobot from "../view/hisobot/Hisobot";
 import Ishlar from "../view/ishlarroyhati/IshlarRoyhati";
@@ -39,6 +40,7 @@ function Router() {
         <Route path="/bolim/:id" element={<BolimlarEdit />} />
         <Route path="/bolimqoshish" element={<BolimQoshish />} />
         <Route path="/buyurtma" element={<Buyurtmalar />} />
+        <Route path="/buyurtma/:id" element={<BuyurtmalarYangilash/>} />
         <Route path="/buyurtmaqoshish" element={<BuyurtmalarQoshish />} />
         <Route path="/hisobot" element={<Hisobot />} />
         <Route path="/ishlar" element={<Ishlar />} />

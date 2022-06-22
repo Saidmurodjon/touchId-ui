@@ -1,18 +1,40 @@
 import React from "react";
 
 function BItem(props) {
-  const { _id, kabinet, lavozim, fish, bolim } = props;
+  const { item = {}, Del, Up } = props;
 
   return (
     <>
-      <div key={_id} className="col-md-6">
-        <div className="card m-2 p-2 raunded-4">
-          <h4>
-            {fish}
-          </h4>
-          <p>Бўлим: {bolim}</p>
-          <p className="d-inline">Кабинет: {kabinet}</p>
-          <p className="d-inline float-end">Лавозими: {lavozim}</p>
+      <div key={item._id} className="col-md-6">
+        <div className="card m-2 p-0">
+          <div className="p-1 m-2">
+            <div className="row fustify-content-center">
+              <div className="col-md-8 ps-3">
+                <h4>{item.fish}</h4>
+              </div>
+              <div className="col-md-4 pe-3 d-flex justify-content-end">
+                <h5>
+                  <i
+                    className="bi bi-pencil-square  text-secondary "
+                    onClick={() => Up(item)}
+                  ></i>
+                  <i
+                    className="bi bi-trash3 text-danger"
+                    onClick={() => Del(item)}
+                  ></i>
+                </h5>
+              </div>
+              <div className="col-md-12 ps-3">
+                <p className="d-inline">Бўлим: {item.bolim}</p>
+              </div>
+              <div className="col-md-12 ps-3">
+                <p className="d-inline">Кабинет: {item.kabinet}</p>
+              </div>
+              <div className="col-md-12 ps-3">
+                <p>Лавозими: {item.lavozim}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

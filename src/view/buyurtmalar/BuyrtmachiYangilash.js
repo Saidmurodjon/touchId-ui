@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
 import config from "./../../config.json";
-const BuyurtmaQoshish = () => {
+import Navbar from "../../components/navbar/Navbar";
+const BuyurtmaYangilash = () => {
   const [xona, setXona] = useState([]);
   const [lavozim, setLavozim] = useState([]);
   const [bolim, setBolim] = useState([]);
@@ -37,7 +38,6 @@ const BuyurtmaQoshish = () => {
   const changeHandler = (e) => {
     setBuyrtmachi({ ...buyrtmachi, [e.target.name]: e.target.value });
   };
-  console.log(buyrtmachi);
   const Send = async () => {
     await axios
       .post(`${config.SERVER_URL}cilient`)
@@ -59,10 +59,10 @@ const BuyurtmaQoshish = () => {
   };
   return (
     <>
+      <Navbar />
       <div className="d-flex justify-content-center">
-        <div className="page-width">
-          <h3>Буюртмачи қўшиш</h3>
-          <div className="bg-light h-100 pt-2">
+        <div className="w-100">
+          <div className="bg-light h-100 p-3">
             <div className="bg-white m-3">
               <form
                 onSubmit={Submit}
@@ -77,7 +77,7 @@ const BuyurtmaQoshish = () => {
                   </div>
                   <div className="col-9">
                     <input
-                    id="fish"
+                      id="fish"
                       className="form-control form-control-lg bg-light ps-2"
                       type="text"
                       placeholder="fish"
@@ -165,7 +165,7 @@ const BuyurtmaQoshish = () => {
                   </div>
                   <div className="col-9">
                     <input
-                    id="tel"
+                      id="tel"
                       className="form-control form-control-lg bg-light ps-2"
                       type="text"
                       placeholder="+998"
@@ -177,7 +177,7 @@ const BuyurtmaQoshish = () => {
                 </div>
                 <div className="mt-5 text-center d-flex justify-content-center">
                   <Button
-                    name="Қўшиш"
+                    name="Yangilash"
                     ButtonFunction={Send}
                     ButtonStyle="oq-button"
                   />
@@ -191,4 +191,4 @@ const BuyurtmaQoshish = () => {
   );
 };
 
-export default BuyurtmaQoshish;
+export default BuyurtmaYangilash;
