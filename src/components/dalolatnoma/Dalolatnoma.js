@@ -56,17 +56,18 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
         ) : (
           <>
             <div className="dalolatnoma-print">
+            <div className="w-100">
               <div className="row justify-content-center">
-                <div className="col-md-5 justify-content-center">
+                <div className="col-5 justify-content-center">
                   <h4 className="text-center">
                     O'ZBEKISTON RESPUBLIKASI {text.t1.toUpperCase()} "ELEKTRON
                     XOKIMYATNI ROVOJLANTIRISH MARKAZI"
                   </h4>
                 </div>
-                <div className="col-md-2 d-flex justify-content-center align-items-center">
+                <div className="col-2 d-flex justify-content-center align-items-center">
                   <img className="img" src={gerb} alt="gerb" />
                 </div>
-                <div className="col-md-5">
+                <div className="col-5">
                   <h4 className="text-center">{text.t2}</h4>
                 </div>
                 <div className="col-md-12">
@@ -85,33 +86,52 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                 </div>
                 <div className="col-md-11">
                   <h4>
-                    Биз куйида имзо чекувчилар: Бажарувчи {text.t1} Электрон
+                  &nbsp;&nbsp;&nbsp;Биз куйида имзо чекувчилар: Бажарувчи {text.t1} Электрон
                     хокимятни ривожлантириш маркази номидан директори{" "}
-                    <b>{text.t4}</b>
+                    <b>{text.t4}</b>&nbsp;
                     бир томондан. Бажарувчи Фаргона вилоят хокимлиги иккинчи
                     томинидан ушбу далолатномани {""}
                     {text.t1} Электрон хокимятни ривожлантириш маркази томонидан
                     ку'рсатилган хизматларни тасдиқлаш учун туздик.
                   </h4>
                   <h4>
+                    &nbsp; &nbsp; &nbsp;
                     <span className="">
-                      Жорий ойда марказ томонидан жами{""}
-                      {reports.length > 0 ? total : "qiymat mavjud emas"}
-                      <span className=""> марта </span>
+                      Жорий ойда марказ томонидан жами
+                      <p className="d-inline text-primary">
+                        {" "}
+                        {reports.length > 0 ? (
+                          total + " марта "
+                        ) : (
+                          <>
+                            <p className="d-inline text-danger">
+                              {" "}
+                              qiymat mavjud emas
+                            </p>
+                          </>
+                        )}
+                      </p>
+                      <span className=""> </span>
                       хизматлар ку'рсатилди. <br />
-                      <p className="">Жумладан :</p>
-                      {reports.length > 0
-                        ? quantity.map((item, index) => {
-                            return (
-                              <p key={index}>
-                                {item.name}{" "}
-                                <span className="">
-                                  {item.quantity} марта ,{" "}
-                                </span>
-                              </p>
-                            );
-                          })
-                        : "qiymat mavjud emas"}
+                      <p className="d-inline">Жумладан :</p>
+                      {reports.length > 0 ? (
+                        quantity.map((item, index) => {
+                          return (
+                            <p key={index} className="d-inline">
+                              {item.name}{" "}
+                              <span className="d-inline text-primary">
+                                {item.quantity} марта ,{" "}
+                              </span>
+                            </p>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <p className="d-inline text-danger">
+                            qiymat mavjud emas{" "}
+                          </p>
+                        </>
+                      )}
                       текшириб камчиликлари бартараф етилди ва профилактика
                       ишлари олиб борилди
                     </span>
@@ -119,6 +139,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                 </div>
                 <div className="col-md-5"></div>
               </div>
+            </div>
             </div>
           </>
         )}
