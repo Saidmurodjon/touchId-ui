@@ -2,25 +2,8 @@ import React from "react";
 import axios from "axios";
 import config from "../../config.json";
 function BItem(props) {
-  const { item = {}, BFunction } = props;
-  const Check = async (item) => {
-    const result = await window.confirm(
-      "Bajaruvchi malumotlari o'chirilsinmi ? "
-    );
-    if (result) {
-      Delete(item);
-      return;
-    }
-    alert("O'chirilmadi");
-  };
-  async function Delete(item) {
-    await axios
-      .delete(`${config.SERVER_URL}user/${item._id}`)
-      .then((res) => {
-        alert(`Bajaruvchi malumotlari O'chirildi`);
-      })
-      .catch((error) => console.log(error));
-  }
+  const { item = {}, Del, Up } = props;
+
   return (
     <>
       <div key={item._id} className="col-md-6">
@@ -33,12 +16,12 @@ function BItem(props) {
               <div className="col-md-4 pe-3 d-flex justify-content-end">
                 <h5>
                   <i
-                    className="bi bi-pencil-square  text-secondary "
-                    onClick={() => BFunction(item)}
+                    className="bi bi-pencil-square  text-secondary pointer m-1"
+                    onClick={() => Up(item)}
                   ></i>
                   <i
-                    className="bi bi-trash3 text-danger"
-                    onClick={() => Check(item)}
+                    className="bi bi-trash3 text-danger pointer m-1"
+                    onClick={() => Del(item)}
                   ></i>
                 </h5>
               </div>

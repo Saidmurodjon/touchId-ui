@@ -3,18 +3,24 @@ import axios from "axios";
 import Button from "../../components/button/Button";
 import config from "./../../config.json";
 import Navbar from "../../components/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
+
 const BuyurtmaYangilash = () => {
+  const navigate = useNavigate();
+  const buy = JSON.parse(localStorage.getItem("buyrtmachi"));
   const [xona, setXona] = useState([]);
   const [lavozim, setLavozim] = useState([]);
   const [bolim, setBolim] = useState([]);
   const [buyrtmachi, setBuyrtmachi] = useState({
-    fish: "",
-    bolim: "",
-    kabinet: "",
-    lavozim: "",
-    tel: "",
+    fish: buy.fish,
+    bolim: buy.bolim,
+    kabinet: buy.kabinet,
+    lavozim: buy.lavozim,
+    tel: buy.tel,
   });
-
+  const Close = () => {
+    navigate("/buyrtma");
+  };
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}xona`)
@@ -40,35 +46,29 @@ const BuyurtmaYangilash = () => {
   };
   const Send = async () => {
     await axios
-      .post(`${config.SERVER_URL}cilient`)
+      .put(`${config.SERVER_URL}cilient/${buy._id}`, buyrtmachi)
       .then((res) => {
-        alert("buyrtmachi malumotlari qo'shildi.");
+        alert("buyrtmachi malumotlari yangilandi.");
       })
       .catch((error) => console.log(error));
-    await setBuyrtmachi({
-      ismi: "",
-      fish: "",
-      tash: "",
-      lavozim: "",
-      tel: "",
-      parol: "",
-    });
+    navigate("/buyrtma");
   };
   const Submit = (e) => {
     e.preventDefault();
   };
+  console.log(buyrtmachi);
   return (
     <>
       <Navbar />
       <div className="d-flex justify-content-center">
         <div className="w-100">
           <div className="bg-light h-100 p-3">
-            <div className="bg-white m-3">
+            <div className="bg-white m-2">
               <form
                 onSubmit={Submit}
-                className="m-5 py-5 pe-5 bg-white  position-relative needs-validation"
-                novalidate
+                className="m-0 py-5 pe-5 bg-white  position-relative"
               >
+                <i className="bi bi-x pointer" onClick={Close}></i>
                 <div className="row mt-4">
                   <div className="col-3 text-center fs-4 pe-3 mt-2">
                     <label htmlFor="fish" className="form-label">
@@ -100,7 +100,6 @@ const BuyurtmaYangilash = () => {
                       onChange={changeHandler}
                       value={buyrtmachi.bolim}
                       name="bolim"
-                      required
                     >
                       {bolim.map((item) => (
                         <option key={item._id} value={item.name}>
@@ -108,9 +107,6 @@ const BuyurtmaYangilash = () => {
                         </option>
                       ))}
                     </select>
-                    <div className="invalid-feedback">
-                      Please provide a valid zip.
-                    </div>
                   </div>
                 </div>
                 <div className="row mt-4">

@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/button/Button";
 import config from "./../../config.json";
+import { useNavigate } from "react-router-dom";
 const BuyurtmaQoshish = () => {
+  const navigate = useNavigate();
   const [xona, setXona] = useState([]);
   const [lavozim, setLavozim] = useState([]);
   const [bolim, setBolim] = useState([]);
@@ -37,7 +39,6 @@ const BuyurtmaQoshish = () => {
   const changeHandler = (e) => {
     setBuyrtmachi({ ...buyrtmachi, [e.target.name]: e.target.value });
   };
-  console.log(buyrtmachi);
   const Send = async () => {
     await axios
       .post(`${config.SERVER_URL}cilient`)
@@ -45,14 +46,7 @@ const BuyurtmaQoshish = () => {
         alert("buyrtmachi malumotlari qo'shildi.");
       })
       .catch((error) => console.log(error));
-    await setBuyrtmachi({
-      ismi: "",
-      fish: "",
-      tash: "",
-      lavozim: "",
-      tel: "",
-      parol: "",
-    });
+    navigate("/buyrtma");
   };
   const Submit = (e) => {
     e.preventDefault();
@@ -66,8 +60,7 @@ const BuyurtmaQoshish = () => {
             <div className="bg-white m-3">
               <form
                 onSubmit={Submit}
-                className="m-5 py-5 pe-5 bg-white  position-relative needs-validation"
-                novalidate
+                className="m-5 py-5 pe-5 bg-white  position-relative"
               >
                 <div className="row mt-4">
                   <div className="col-3 text-center fs-4 pe-3 mt-2">
@@ -77,7 +70,7 @@ const BuyurtmaQoshish = () => {
                   </div>
                   <div className="col-9">
                     <input
-                    id="fish"
+                      id="fish"
                       className="form-control form-control-lg bg-light ps-2"
                       type="text"
                       placeholder="fish"
@@ -100,7 +93,6 @@ const BuyurtmaQoshish = () => {
                       onChange={changeHandler}
                       value={buyrtmachi.bolim}
                       name="bolim"
-                      required
                     >
                       {bolim.map((item) => (
                         <option key={item._id} value={item.name}>
@@ -108,9 +100,6 @@ const BuyurtmaQoshish = () => {
                         </option>
                       ))}
                     </select>
-                    <div className="invalid-feedback">
-                      Please provide a valid zip.
-                    </div>
                   </div>
                 </div>
                 <div className="row mt-4">
@@ -165,7 +154,7 @@ const BuyurtmaQoshish = () => {
                   </div>
                   <div className="col-9">
                     <input
-                    id="tel"
+                      id="tel"
                       className="form-control form-control-lg bg-light ps-2"
                       type="text"
                       placeholder="+998"

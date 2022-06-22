@@ -59,8 +59,8 @@ const BajaruvchiQoshish = () => {
                 className="m-5 py-5 pe-5 bg-white  position-relative"
               >
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Ташкилот номи:
                     </label>
                   </div>
@@ -75,8 +75,8 @@ const BajaruvchiQoshish = () => {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Лавозими
                     </label>
                   </div>
@@ -91,8 +91,8 @@ const BajaruvchiQoshish = () => {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Ф.И.Ш
                     </label>
                   </div>
@@ -107,8 +107,8 @@ const BajaruvchiQoshish = () => {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Қисқача исми
                     </label>
                   </div>
@@ -123,8 +123,8 @@ const BajaruvchiQoshish = () => {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Телефон
                     </label>
                   </div>
@@ -139,8 +139,8 @@ const BajaruvchiQoshish = () => {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-3 text-end pe-3 mt-3">
-                    <label className="form-label" htmlFor="">
+                  <div className="col-3 text-end pe-3 mt-1">
+                    <label className="form-label fs-4" htmlFor="">
                       Парол
                     </label>
                   </div>

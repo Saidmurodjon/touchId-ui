@@ -15,11 +15,11 @@ function BItem(props) {
               <div className="col-md-4 pe-3 d-flex justify-content-end">
                 <h5>
                   <i
-                    className="bi bi-pencil-square  text-secondary "
+                    className="bi bi-pencil-square  text-secondary pointer m-1"
                     onClick={() => Up(item)}
                   ></i>
                   <i
-                    className="bi bi-trash3 text-danger"
+                    className="bi bi-trash3 text-danger pointer m-1"
                     onClick={() => Del(item)}
                   ></i>
                 </h5>

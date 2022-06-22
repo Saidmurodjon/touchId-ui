@@ -39,9 +39,9 @@ function Router() {
         <Route path="/bolim" element={<Bolim />} />
         <Route path="/bolim/:id" element={<BolimlarEdit />} />
         <Route path="/bolimqoshish" element={<BolimQoshish />} />
-        <Route path="/buyurtma" element={<Buyurtmalar />} />
-        <Route path="/buyurtma/:id" element={<BuyurtmalarYangilash/>} />
-        <Route path="/buyurtmaqoshish" element={<BuyurtmalarQoshish />} />
+        <Route path="/buyrtma" element={<Buyurtmalar />} />
+        <Route path="/buyrtma/:id" element={<BuyurtmalarYangilash/>} />
+        <Route path="/buyrtmaqoshish" element={<BuyurtmalarQoshish />} />
         <Route path="/hisobot" element={<Hisobot />} />
         <Route path="/ishlar" element={<Ishlar />} />
         <Route path="/ishkategoriya" element={<IshlarKategoriya />} />

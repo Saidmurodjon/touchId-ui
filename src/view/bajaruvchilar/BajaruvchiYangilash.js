@@ -41,8 +41,8 @@ const TashkilotQoshish = () => {
       >
         <i className="bi bi-x" onClick={Close}></i>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Ташкилот номи:
             </label>
           </div>
@@ -57,8 +57,8 @@ const TashkilotQoshish = () => {
           </div>
         </div>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Лавозими
             </label>
           </div>
@@ -73,8 +73,8 @@ const TashkilotQoshish = () => {
           </div>
         </div>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Ф.И.Ш
             </label>
           </div>
@@ -89,8 +89,8 @@ const TashkilotQoshish = () => {
           </div>
         </div>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Қисқача исми
             </label>
           </div>
@@ -105,8 +105,8 @@ const TashkilotQoshish = () => {
           </div>
         </div>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Телефон
             </label>
           </div>
@@ -114,15 +114,15 @@ const TashkilotQoshish = () => {
             <input
               type="text"
               className="form-control form-control-lg bg-light ps-2"
-              name="parol"
-              value={bajaruvchi.parol}
+              name="tel"
+              value={bajaruvchi.tel}
               onChange={changeHandler}
             />
           </div>
         </div>
         <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
+          <div className="col-3 text-end pe-3 mt-1">
+            <label className="form-label fs-4" htmlFor="">
               Парол
             </label>
           </div>

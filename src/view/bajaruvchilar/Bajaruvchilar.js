@@ -23,13 +23,31 @@ function Bajaruvchilar() {
         setBajaruvchilar(res.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [Delete]);
   async function Bqoshish() {
     navigate("/bajaruvchiqoshish");
   }
   async function Update(elem) {
     navigate(`/bajaruvchi/${elem._id}`);
     localStorage.setItem("bajaruvchi", JSON.stringify(elem));
+  }
+  const Check = async (item) => {
+    const result = await window.confirm(
+      "Bajaruvchi malumotlari o'chirilsinmi ? "
+    );
+    if (result) {
+      Delete(item);
+      return;
+    }
+    alert("O'chirilmadi");
+  };
+  async function Delete(item) {
+    await axios
+      .delete(`${config.SERVER_URL}user/${item._id}`)
+      .then((res) => {
+        alert(`Bajaruvchi malumotlari O'chirildi`);
+      })
+      .catch((error) => console.log(error));
   }
   return (
     <>
@@ -52,7 +70,8 @@ function Bajaruvchilar() {
                 bajaruvchilar={
                   searchPage.length > 0 ? searchPage : bajaruvchilar
                 }
-                BFunction={Update}
+                Up={Update}
+                Del={Check}
               />
             </div>
           </div>

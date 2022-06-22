@@ -16,12 +16,12 @@ export default function Buyurtmalar() {
       })
       .catch((error) => console.log(error));
   }, [Delete]);
-  async function Bqoshish(params) {
-    navigate("/buyurtmaqoshish");
+  async function Bqoshish() {
+    navigate("/buyrtmaqoshish");
   }
   async function Update(item) {
-    navigate(`/buyurtma/${item._id}`);
-    localStorage.setItem("buyurtmachi", JSON.stringify(item));
+    navigate(`/buyrtma/${item._id}`);
+    localStorage.setItem("buyrtmachi", JSON.stringify(item));
   }
   const Check = async (item) => {
     const result = await window.confirm(
