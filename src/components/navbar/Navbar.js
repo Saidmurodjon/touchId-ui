@@ -1,29 +1,26 @@
-import React from "react";
-import Profil from "./Profil";
 import Search from "./Search";
-import "./Navbar.css";
-export default function Navbar(props) {
-  const { search = false, text = "", searchValue = [], Searchs} = props;
-  return (
-    <>
-      <div className="d-flex justify-content-center border-bottom navbar-style">
-        <div className="page-width">
-          <div className="row justify-content-center">
-            <div className="col-md-6 d-flex justify-content-start align-items-center">
-              {search ? (
-                <Search searchValue={searchValue} Searchs={Searchs} />
-              ) : (
-                <>
-                  <h3>{text}</h3>
-                </>
-              )}
+import "./Navbar.css"
+import Profil from "./Profil";
+const Navbar = (props) => {
+    const { search = false, text = "", Searchs } = props;
+    return (
+        <>
+            <div className="navbar-widht border-bottom d-flex justify-content-between">
+                <div>
+                    {search ? (
+                        <Search Searchs={Searchs} />
+                    ) : (
+                        <>
+                            <h3>{text}</h3>
+                        </>
+                    )}
+                </div>
+                <div>
+                    <Profil />
+                </div>
             </div>
-            <div className="col-md-6">
-              <Profil />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
+
+export default Navbar;
