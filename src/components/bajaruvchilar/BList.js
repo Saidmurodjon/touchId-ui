@@ -8,7 +8,7 @@ function BList(props) {
   }
   return (
     <div className={"row"}>
-      {bajaruvchilar.reverse().map((item, index) => (
+      {bajaruvchilar.map((item, index) => (
         <BItem key={item._id} item={item} index={index + 1} Del={Del} Up={Up} />
       ))}
     </div>
