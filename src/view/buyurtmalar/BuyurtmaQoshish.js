@@ -41,7 +41,7 @@ const BuyurtmaQoshish = () => {
   };
   const Send = async () => {
     await axios
-      .post(`${config.SERVER_URL}cilient`)
+      .post(`${config.SERVER_URL}cilient`,buyrtmachi)
       .then((res) => {
         alert("buyrtmachi malumotlari qo'shildi.");
       })
