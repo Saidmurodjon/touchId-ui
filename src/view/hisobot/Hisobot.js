@@ -26,6 +26,8 @@ export default function Hisobot() {
   const ShowModal = () => {
     setShowModal(false);
   };
+  console.log(sessionStorage.getItem("jwtToken"));
+
   // Dalolatnoma uchun fiter qilingan hisobotlar
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));

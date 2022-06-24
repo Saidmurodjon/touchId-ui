@@ -84,7 +84,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                 <div className="col-md-5">
                   <h3 className="d-inline float-end">{121}</h3>
                 </div>
-                <div className="col-md-11">
+                <div className="col-md-1hisobot1">
                   <h4>
                   &nbsp;&nbsp;&nbsp;Биз куйида имзо чекувчилар: Бажарувчи {text.t1} Электрон
                     хокимятни ривожлантириш маркази номидан директори{" "}
@@ -104,14 +104,13 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                           total + " марта "
                         ) : (
                           <>
-                            <p className="d-inline text-danger">
+                            <span className="d-inline text-danger">
                               {" "}
                               qiymat mavjud emas
-                            </p>
+                            </span>
                           </>
                         )}
                       </p>
-                      <span className=""> </span>
                       хизматлар ку'рсатилди. <br />
                       <p className="d-inline">Жумладан :</p>
                       {reports.length > 0 ? (

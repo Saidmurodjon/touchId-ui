@@ -2,7 +2,7 @@ import React from "react";
 
 function BItem(props) {
   const { item = {}, Del, Up } = props;
-
+  
   return (
     <>
       <div key={item._id} className="col-md-6">

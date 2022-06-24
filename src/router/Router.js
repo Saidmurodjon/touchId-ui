@@ -27,11 +27,13 @@ import XonaUpdate from "../view/xonalar/XonaUpdate";
 import BoshSahifa from "../view/boshsahifa/BoshSahifa";
 import BolimlarEdit from "../view/bolimlar/BolimlarEdit";
 import TashkilotUpdate from "../view/tashkilotlar/TashkilotUpdate";
+import Login from "../view/login/Login";
 
 function Router() {
   return (
     <>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<BoshSahifa />} />
         <Route path="/bajaruvchi" element={<Bajaruvchi />} />
         <Route path="/bajaruvchiqoshish" element={<BajaruvchiQoshish />} />
@@ -40,7 +42,7 @@ function Router() {
         <Route path="/bolim/:id" element={<BolimlarEdit />} />
         <Route path="/bolimqoshish" element={<BolimQoshish />} />
         <Route path="/buyrtma" element={<Buyurtmalar />} />
-        <Route path="/buyrtma/:id" element={<BuyurtmalarYangilash/>} />
+        <Route path="/buyrtma/:id" element={<BuyurtmalarYangilash />} />
         <Route path="/buyrtmaqoshish" element={<BuyurtmalarQoshish />} />
         <Route path="/hisobot" element={<Hisobot />} />
         <Route path="/ishlar" element={<Ishlar />} />
