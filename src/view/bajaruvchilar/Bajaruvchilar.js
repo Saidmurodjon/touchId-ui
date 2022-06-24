@@ -7,8 +7,8 @@ import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
 function Bajaruvchilar() {
   const navigate = useNavigate();
-  const [searchPage, setSearchPage] = useState([]);
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
+  const [searchPage, setSearchPage] = useState([]);
 
     const search = JSON.parse(localStorage.getItem("search"));
 
