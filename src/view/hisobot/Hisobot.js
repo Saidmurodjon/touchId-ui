@@ -3,22 +3,38 @@ import Dalolatnoma from "../../components/dalolatnoma/Dalolatnoma";
 import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import config from "../../config.json";
-import "./Hisobot.css";
 import ChandeDalolatnoma from "../../components/change-dalolatnoma/ChangeDalolatnoma";
 import Navbar from "../../components/navbar/Navbar";
 import Filter from "../../components/filter/Filter";
+import { useNavigate } from "react-router-dom";
+import "./Hisobot.css";
+
 export default function Hisobot() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const componentRef = useRef();
   const [text, setText] = useState([]);
   const [report, setReport] = useState([]);
+
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}xisobot`)
-      .then((res) => {
-        res.data && setText(res.data);
-      })
-      .catch((error) => console.log(error));
+      .get(`${config.SERVER_URL}xisobot`, TOKEN)
+      .then(
+        (res) => {
+          setText(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/login");
+          }
+        }
+      )
+      .catch((error) => console.log(error.status));
   }, [showModal]);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -26,16 +42,23 @@ export default function Hisobot() {
   const ShowModal = () => {
     setShowModal(false);
   };
-  console.log(sessionStorage.getItem("jwtToken"));
+  // console.log(TOKEN);
 
   // Dalolatnoma uchun fiter qilingan hisobotlar
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
     axios
-      .post(`${config.SERVER_URL}report/filter`, time)
-      .then((res) => {
-        setReport(res.data);
-      })
+      .post(`${config.SERVER_URL}report/filter`, time, TOKEN)
+      .then(
+        (res) => {
+          setReport(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/login");
+          }
+        }
+      )
       .catch((error) => console.log(error));
   };
   // console.log(report);

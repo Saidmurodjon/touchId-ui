@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import config from "../../config.json";
 function Login() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     login: "",
     password: "",
@@ -17,8 +17,10 @@ function Login() {
     await axios
       .post(`http://localhost:5000/login`, login)
       .then((res) => {
-        // setService(res.data);
-        sessionStorage.setItem(`jwtToken`, res.data.jwt_token);
+        if (res.status === 200) {
+          navigate("/hisobot");
+          sessionStorage.setItem(`jwt-token`, res.data.jwt_token);
+        }
       })
       .catch((error) => console.log(error));
     // if (login.login === "admin" && login.password === "admin") {
