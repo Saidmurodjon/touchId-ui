@@ -17,7 +17,7 @@ import LavozimUpdate from "../view/lavozimlar/LavozimUpdate";
 import LavozimQoshish from "../view/lavozimlar/LavozimQoshish";
 import QurilmaToifa from "../view/qurilmalar/QurilmaToifa";
 import QurilmaQoshish from "../view/qurilmalar/QurilmaQoshish";
-import QurilmaKategoriya from "../view/qurilmalar/QurilmaKategoriya";
+import AddDevice from "../view/qurilmalar/AddDevice";
 import Statistika from "../view/statistika/Statistika";
 import Tashkilot from "../view/tashkilotlar/Tashkilotlar";
 import TashkilotQoshish from "../view/tashkilotlar/TashkilotQoshish";
@@ -29,6 +29,7 @@ import BolimlarEdit from "../view/bolimlar/BolimlarEdit";
 import TashkilotUpdate from "../view/tashkilotlar/TashkilotUpdate";
 import Login from "../view/login/Login";
 import NotFound from "../components/notFound/NotFound";
+import UpdateDevice from "../view/qurilmalar/UpdateDevice";
 
 function Router() {
   return (
@@ -53,7 +54,8 @@ function Router() {
         <Route path="/lavozim/:id" element={<LavozimUpdate />} />
         <Route path="/lavozimqoshish" element={<LavozimQoshish />} />
         <Route path="/qurilmatoifa" element={<QurilmaToifa />} />
-        <Route path="/qurilmakategoriya" element={<QurilmaKategoriya />} />
+        <Route path="/qurilmakategoriya/:id" element={<AddDevice />} />
+        <Route path="/qurilmayangilash/:id" element={<UpdateDevice />} />
         <Route path="/qurilmaqoshish" element={<QurilmaQoshish />} />
         <Route path="/statistika" element={<Statistika />} />
         <Route path="/tashkilot" element={<Tashkilot />} />
