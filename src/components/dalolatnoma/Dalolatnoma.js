@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import config from "../../config.json";
 import gerb from "../../assets/gerb.jpg";
-
+import { useNavigate } from "react-router-dom";
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
   const TOKEN = {
@@ -10,6 +10,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  const navigate = useNavigate();
   const { text = [], reports = [] } = props;
   const [service, setService] = useState([]);
   const [quantity, setQuantity] = useState([]);
@@ -40,9 +41,16 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}ish`, TOKEN)
-      .then((res) => {
-        setService(res.data);
-      })
+      .then(
+        (res) => {
+          setService(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
   }, []);
   // console.log(reports);
