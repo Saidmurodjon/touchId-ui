@@ -2,6 +2,8 @@
     height: 81px;
     align-items: center;
     padding: 0 80px !important;
+    background-color: #fff;
+    z-index: 999;
 }
 
 .navbar-search input {
