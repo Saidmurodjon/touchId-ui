@@ -8,6 +8,7 @@ import Qurilma from "../../components/qurilma/Qurilma";
 
 const QurilmaToifa = () => {
   const [text, setText] = useState([]);
+  // const device=JSON.parse(localStorage.getItem("device"));
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
@@ -21,6 +22,8 @@ const QurilmaToifa = () => {
   const UpdateDevice = (qurilma) => {
     localStorage.setItem("qurilma", JSON.stringify(qurilma));
   };
+
+
 
   useEffect(() => {
     axios
@@ -52,7 +55,7 @@ const QurilmaToifa = () => {
       </div>
       {text.map((elem) => (
         <div key={elem._id} className="qurilma mt-5">
-          <Qurilma elem={elem} up={UpdateDevice} />
+          <Qurilma elem={elem} up={UpdateDevice}  />
         </div>
       ))}
     </div>

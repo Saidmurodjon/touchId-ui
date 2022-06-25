@@ -23,6 +23,7 @@ const QurilmaQoshish = () => {
       .then(
         (res) => {
           res.data && alert("Qo'shildi");
+          navigate(`/qurilmakategoriya/${res.data._id}`)
         },
         (err) => {
           if (err.response.status === 401) {
