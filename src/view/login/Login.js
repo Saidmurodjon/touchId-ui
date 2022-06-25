@@ -18,7 +18,7 @@ function Login() {
       .post(`http://localhost:5000/login`, login)
       .then((res) => {
         if (res.status === 200) {
-          navigate("/hisobot");
+          navigate("/home");
           sessionStorage.setItem(`jwt-token`, res.data.jwt_token);
         }
       })
