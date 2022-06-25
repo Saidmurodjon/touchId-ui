@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import config from "../../config.json";
+import config from "../../config.json";
 function Login() {
   const navigate = useNavigate();
   const [login, setLogin] = useState({
@@ -15,7 +15,7 @@ function Login() {
 
   const Check = async () => {
     await axios
-      .post(`http://localhost:5000/login`, login)
+    .post(`${config.SERVER_URL}login`,login)
       .then((res) => {
         if (res.status === 200) {
           navigate("/home");

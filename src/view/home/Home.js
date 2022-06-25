@@ -26,7 +26,7 @@ function Home() {
     }
   };
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   return (
     <>
       {location.pathname == "/" ? (
