@@ -1,0 +1,39 @@
+.qurilma{
+    width: 91%;
+    margin-left: 4%;
+}
+.qurilmaNom{
+    border-radius: 16px 16px 0px 0px;
+}
+.bi-plus{
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+    border: 2px dotted gray;
+    border-radius: 10px;
+}
+
+.qurilmaIn{
+    border-radius: 0px 0px 4px 4px;
+}
+
+.AddDevice{
+    width: 95%;
+    margin: auto;
+    min-height: 75vh;
+    border-radius: 16px;
+}
+.AddDevice div{
+    border-radius: 16px;
+}
+
+.qurilmainput{
+    width: 23%!important;
+    color: #787486;
+}
+.param{
+    border-radius: 0!important;
+}
+.deviceName{
+    width: 69%!important;
+}
