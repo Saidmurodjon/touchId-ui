@@ -93,7 +93,7 @@ const Lavozimlar = () => {
         navigate(`/lavozim/${elem._id}`);
     }
     return (
-        <div className="w-100 px-4 py-2 position-relative">
+        <div className="w-100 px-5 py-2 position-relative">
             <h2 className="title">Лавозимлар рўйхати</h2>
             <div className="my-3 position-relative d-flex justify-content-end">
                 <Button name={"Лавозим қўшиш"} ButtonStyle="oq-button" ButtonFunction={lavozimlarQoshish} />
