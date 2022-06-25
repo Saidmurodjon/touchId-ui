@@ -28,13 +28,14 @@ import BoshSahifa from "../view/boshsahifa/BoshSahifa";
 import BolimlarEdit from "../view/bolimlar/BolimlarEdit";
 import TashkilotUpdate from "../view/tashkilotlar/TashkilotUpdate";
 import Login from "../view/login/Login";
+import NotFound from "../components/notFound/NotFound";
 
 function Router() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<BoshSahifa />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<BoshSahifa />} />
         <Route path="/bajaruvchi" element={<Bajaruvchi />} />
         <Route path="/bajaruvchiqoshish" element={<BajaruvchiQoshish />} />
         <Route path="/bajaruvchi/:id" element={<BajaruvchiYangilash />} />
@@ -61,6 +62,7 @@ function Router() {
         <Route path="/kabinetqoshish" element={<XonaQoshish />} />
         <Route path="/kabinetyangilash" element={<XonaUpdate />} />
         <Route path="/tashkilot/:id" element={<TashkilotUpdate />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

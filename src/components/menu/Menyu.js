@@ -10,7 +10,7 @@ export default function Menyu() {
             <li className="py-1 link">
               <NavLink
                 className={({ isActive }) => (isActive ? "li" : "")}
-                to="/"
+                to="/home"
               >
                 <span>
                   <i className="bi bi-house-door"></i>
