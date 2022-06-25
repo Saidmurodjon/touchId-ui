@@ -20,6 +20,27 @@ const Tashkilotlar = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  const Delete=(item)=>{
+    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?")
+    if(query){
+      axios
+      .delete(`${config.SERVER_URL}tashkilot/${item._id}`,TOKEN)
+      .then(
+        (res) => {
+          res.data && alert("O'chirildi");
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
+      .catch((error) => console.log(error));
+    }else{
+        alert("O'chirilmadi")
+    }
+    
+}
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}tashkilot`,TOKEN)
@@ -34,29 +55,13 @@ const Tashkilotlar = () => {
         }
       )
       .catch((error) => console.log(error));
-  }, []);
+  }, [Delete]);
   console.log(text);
 
   const getTashkilot = (work) => {
     localStorage.setItem("tash", JSON.stringify(work));
   };
 
-  const Delete = (item) => {
-    console.log(item);
-    axios
-      .delete(`${config.SERVER_URL}tashkilot/${item._id}`,TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  };
 
   return (
     <div className="tashkilot bg-white">

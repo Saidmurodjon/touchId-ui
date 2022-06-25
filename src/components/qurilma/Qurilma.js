@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
-
 const Qurilma = (props) => {
     const TOKEN = {
         headers: {
@@ -12,23 +11,44 @@ const Qurilma = (props) => {
       };
       
   const navigate = useNavigate();
-  const { elem = {}, up, del } = props;
+  const { elem = {}, up } = props;
   const [dev, setDev] = useState([]);
+  const[d,setD]=useState(false)
+  const Check=(item)=>{
+    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?")
+    if(query){
+      DeleteDevice(item)
+    }else{
+        alert("O'chirilmadi")
+    }
+    
+}
+  const DeleteDevice=(item)=>{
+        axios
+        .delete(`${config.SERVER_URL}device/elem/${item._id}`)
+        .then((res) => {
+            res.data && alert("O'chirildi");
+        })
+        .catch((error) => console.log(error));
+}
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}device/elem/${elem._id}`,TOKEN)
       .then(
         (res) => {
-          res.data && setDev(res.data);
+           setDev(res.data)
         },
         (err) => {
           if (err.response.status === 401) {
             navigate("/");
+          }else if(err.response.status === 404){
+            // localStorage.setItem("device", JSON.stringify(!d));
+            // setD(!d)
           }
         }
       )
       .catch((error) => console.log(error));
-  }, []);
+  }, [DeleteDevice]); 
   return (
     <div>
       <div className="qurilmaNom d-flex border align-items-center justify-content-between py-2 px-3">
@@ -57,7 +77,7 @@ const Qurilma = (props) => {
                     </Link>
                   </button>
                   <i
-                    onClick={() => del(item)}
+                    onClick={() => Check(item)}
                     className="bi bi-trash3 trash-bg"
                   ></i>
                 </div>
