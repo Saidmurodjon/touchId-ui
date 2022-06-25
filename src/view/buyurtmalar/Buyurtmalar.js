@@ -8,6 +8,11 @@ import Navbar from "../../components/navbar/Navbar";
 export default function Buyurtmalar() {
   const [buyritmachi, setBuyritmachi] = useState([]);
   const navigate = useNavigate();
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
   const [searchPage, setSearchPage] = useState([]);
   const search = JSON.parse(localStorage.getItem("search"));
 
@@ -19,10 +24,17 @@ export default function Buyurtmalar() {
   }, [search]);
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}cilient`)
-      .then((res) => {
-        setBuyritmachi(res.data);
-      })
+      .get(`${config.SERVER_URL}cilient`,TOKEN)
+      .then(
+        (res) => {
+          setBuyritmachi(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
   }, [Delete]);
   async function Bqoshish() {
@@ -44,10 +56,17 @@ export default function Buyurtmalar() {
   };
   async function Delete(item) {
     await axios
-      .delete(`${config.SERVER_URL}cilient/${item._id}`)
-      .then((res) => {
-        alert(`Buyurtmachi malumotlari O'chirildi`);
-      })
+      .delete(`${config.SERVER_URL}cilient/${item._id}`,TOKEN)
+      .then(
+        (res) => {
+          alert(`Buyurtmachi malumotlari O'chirildi`);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
   }
   return (
@@ -68,7 +87,11 @@ export default function Buyurtmalar() {
             </div>
           </div>
           <div className="bg-main p-4 m-2">
-            <BList buyritmachi={searchPage.length>0?searchPage:buyritmachi} Up={Update} Del={Check} />
+            <BList
+              buyritmachi={searchPage.length > 0 ? searchPage : buyritmachi}
+              Up={Update}
+              Del={Check}
+            />
           </div>
         </div>
       </div>

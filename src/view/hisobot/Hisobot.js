@@ -30,7 +30,7 @@ export default function Hisobot() {
         },
         (err) => {
           if (err.response.status === 401) {
-            navigate("/login");
+            navigate("/");
           }
         }
       )
@@ -55,7 +55,7 @@ export default function Hisobot() {
         },
         (err) => {
           if (err.response.status === 401) {
-            navigate("/login");
+            navigate("/");
           }
         }
       )

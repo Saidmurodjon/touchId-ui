@@ -1,9 +1,16 @@
 import Button from "../../components/button/Button";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ChangeDalolatnoma.css";
 import config from "../../config.json";
 export default function ChangeDalolatnoma(props) {
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
+  const navigate = useNavigate();
   const { text = [], Show } = props;
   const [Text, setText] = useState({
     t1: text.t1,
@@ -18,9 +25,16 @@ export default function ChangeDalolatnoma(props) {
   const Change = async () => {
     await axios
       .put(`${config.SERVER_URL}xisobot/${text._id}`, Text)
-      .then((res) => {
-        res.data && alert("Yangilandi");
-      })
+      .then(
+        (res) => {
+          res.data && alert("Yangilandi");
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
     await Show();
   };

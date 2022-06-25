@@ -5,6 +5,11 @@ import config from "./../../config.json";
 import { useNavigate } from "react-router-dom";
 const BuyurtmaQoshish = () => {
   const navigate = useNavigate();
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
   const [xona, setXona] = useState([]);
   const [lavozim, setLavozim] = useState([]);
   const [bolim, setBolim] = useState([]);
@@ -18,22 +23,43 @@ const BuyurtmaQoshish = () => {
 
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}xona`)
-      .then((res) => {
-        setXona(res.data);
-      })
+      .get(`${config.SERVER_URL}xona`,TOKEN)
+      .then(
+        (res) => {
+          setXona(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
     axios
-      .get(`${config.SERVER_URL}lavozim`)
-      .then((res) => {
-        setLavozim(res.data);
-      })
+      .get(`${config.SERVER_URL}lavozim`,TOKEN)
+      .then(
+        (res) => {
+          setLavozim(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
     axios
-      .get(`${config.SERVER_URL}bolim`)
-      .then((res) => {
-        setBolim(res.data);
-      })
+      .get(`${config.SERVER_URL}bolim`,TOKEN)
+      .then(
+        (res) => {
+          setBolim(res.data);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
   }, []);
   const changeHandler = (e) => {
@@ -41,10 +67,17 @@ const BuyurtmaQoshish = () => {
   };
   const Send = async () => {
     await axios
-      .post(`${config.SERVER_URL}cilient`,buyrtmachi)
-      .then((res) => {
-        alert("buyrtmachi malumotlari qo'shildi.");
-      })
+      .post(`${config.SERVER_URL}cilient`, buyrtmachi,TOKEN)
+      .then(
+        (res) => {
+          alert("buyrtmachi malumotlari qo'shildi.");
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
     navigate("/buyrtma");
   };

@@ -23,9 +23,16 @@ const TashkilotQoshish = () => {
   async function Update(elem) {
     await axios
       .put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi)
-      .then((res) => {
-        alert(`Bajaruvchi malumotlari yangilandi`);
-      })
+      .then(
+        (res) => {
+          alert(`Bajaruvchi malumotlari yangilandi`);
+        },
+        (err) => {
+          if (err.response.status === 401) {
+            navigate("/");
+          }
+        }
+      )
       .catch((error) => console.log(error));
     navigate("/bajaruvchi");
   }

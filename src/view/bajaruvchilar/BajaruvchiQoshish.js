@@ -3,7 +3,14 @@ import axios from "axios";
 import Button from "../../components/button/Button";
 import config from "./../../config.json";
 import Navbar from "../../components/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 const BajaruvchiQoshish = () => {
+  const navigate = useNavigate();
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
   const [bajaruvchi, setBajaruvchi] = useState({
     ismi: "",
     fish: "",
@@ -26,10 +33,17 @@ const BajaruvchiQoshish = () => {
       bajaruvchi.tel
     ) {
       await axios
-        .post(`${config.SERVER_URL}user`, bajaruvchi)
-        .then((res) => {
-          alert("Bajaruvchi malumotlari qo'shildi.");
-        })
+        .post(`${config.SERVER_URL}user`, bajaruvchi, TOKEN)
+        .then(
+          (res) => {
+            alert("Bajaruvchi malumotlari qo'shildi.");
+          },
+          (err) => {
+            if (err.response.status === 401) {
+              navigate("/");
+            }
+          }
+        )
         .catch((error) => console.log(error));
       await setBajaruvchi({
         ismi: "",
