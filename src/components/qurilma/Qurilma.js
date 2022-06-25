@@ -4,51 +4,50 @@ import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
 const Qurilma = (props) => {
-    const TOKEN = {
-        headers: {
-          "jwt-token": sessionStorage.getItem("jwt-token"),
-        },
-      };
-      
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
+
   const navigate = useNavigate();
-  const { elem = {}, up } = props;
+  const { elem = {}, up, ch } = props;
   const [dev, setDev] = useState([]);
-  const[d,setD]=useState(false)
-  const Check=(item)=>{
-    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?")
-    if(query){
-      DeleteDevice(item)
-    }else{
-        alert("O'chirilmadi")
+  const [d, setD] = useState(false);
+  const Check = (item) => {
+    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?");
+    if (query) {
+      DeleteDevice(item);
+    } else {
+      alert("O'chirilmadi");
     }
-    
-}
-  const DeleteDevice=(item)=>{
-        axios
-        .delete(`${config.SERVER_URL}device/elem/${item._id}`)
-        .then((res) => {
-            res.data && alert("O'chirildi");
-        })
-        .catch((error) => console.log(error));
-}
+  };
+  const DeleteDevice = (item) => {
+    axios
+      .delete(`${config.SERVER_URL}device/elem/${item._id}`)
+      .then((res) => {
+        res.data && alert("O'chirildi");
+      })
+      .catch((error) => console.log(error));
+  };
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}device/elem/${elem._id}`,TOKEN)
+      .get(`${config.SERVER_URL}device/elem/${elem._id}`, TOKEN)
       .then(
         (res) => {
-           setDev(res.data)
+          setDev(res.data);
         },
         (err) => {
           if (err.response.status === 401) {
             navigate("/");
-          }else if(err.response.status === 404){
-            // localStorage.setItem("device", JSON.stringify(!d));
-            // setD(!d)
+          }
+          if (err.response.status === 404) {
+            ch();
           }
         }
       )
       .catch((error) => console.log(error));
-  }, [DeleteDevice]); 
+  }, [DeleteDevice]);
   return (
     <div>
       <div className="qurilmaNom d-flex border align-items-center justify-content-between py-2 px-3">
