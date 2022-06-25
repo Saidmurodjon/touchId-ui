@@ -1,0 +1,11 @@
+.select-style {
+    width: 122px !important;
+    height: 40px !important;
+    border: 1px solid #787486 !important;
+    border-radius: 6px !important;
+    padding: 5px !important;
+    background: transparent;
+    cursor: pointer;
+    color: #787486;
+    outline: none;
+}

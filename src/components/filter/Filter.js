@@ -1,5 +1,6 @@
 import Button from "../button/Button";
 import React, { useEffect, useState } from "react";
+import './Filter.css'
 const month = [
   {
     name: "Январь",
@@ -73,44 +74,39 @@ function Filter(props) {
   };
   return (
     <>
-      <div className="">
-        <div className="d-inline">
-          <Button
-            ButtonStyle="oq-button"
+      <div className="d-flex">
+          <button
+            className="select-style ms-2"
             name="Filter"
-            ButtonFunction={FilterFunction}
-          />
-        </div>
-        <br />
-        <form action="">
-          <div className="d-inline">
-            <select
-              className="form-select d-inline w-25"
-              onChange={changeHandler}
-              value={time.month}
-              name="month"
-            >
-              {month.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="d-inline">
-            <select
-              className="form-select d-inline w-25"
-              onChange={changeHandler}
-              value={time.year}
-              name="year"
-            >
-              {year.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
+            onClick={() => FilterFunction()}
+          >
+            Filter
+          </button>
+        <form action="" className="d-flex" >
+          <select
+            className="select-style ms-2"
+            onChange={changeHandler}
+            value={time.year}
+            name="year"
+          >
+            {year.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <select
+            className="select-style ms-2 "
+            onChange={changeHandler}
+            value={time.month}
+            name="month"
+          >
+            {month.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </form>
       </div>
     </>

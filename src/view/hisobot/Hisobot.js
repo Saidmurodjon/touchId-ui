@@ -64,39 +64,32 @@ export default function Hisobot() {
   // console.log(report);
   return (
     <>
-      <Navbar />
-      <div className="">
-        <div className="row justify-content-center">
-          <div className="col-md-12  d-flex justify-content-center align-items-center">
-            <div className="hisobot-filter">
-              <div className="row">
-                <div className="col-12 "></div>
-                <div className="col-md-6">
-                  <h3>Xisobot</h3>
-                </div>
-                <div className="col-md-6">
-                  <div className="col-md-6 float-end">
-                    <Filter FilterFunction={Filters} />
-
-                    <button
-                      className="btn btn-light p-2 float-end"
-                      onClick={handlePrint}
-                    >
-                      Print
-                    </button>
-                    <button
-                      onClick={() => setShowModal(true)}
-                      className="btn btn-light p-2 float-end "
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="sticky-top">
+        <Navbar />
+      </div>
+      <div className="w-100">
+        <div className="d-flex justify-content-between align-items-center px-5 mt-3">
+          <h4 className="title">
+            Хисобот
+          </h4>
+          <div className="d-flex">
+            <Filter FilterFunction={Filters} />
+            <button
+              className="select-style-hisobot ms-4 filter-before"
+              onClick={handlePrint}
+            >
+              <i class="bi bi-printer h4"></i>
+            </button>
+            <button
+              onClick={() => setShowModal(true)}
+              className="select-style-hisobot ms-2"
+            >
+              <i className="bi bi-pencil-square h4"></i>
+            </button>
           </div>
-
-          <div className="col-md-12 d-flex justify-content-center">
+        </div>
+        <div className="row">
+          <div className="d-flex justify-content-center align-items-center">
             <Dalolatnoma ref={componentRef} text={text[0]} reports={report} />
             {showModal ? (
               <ChandeDalolatnoma text={text[0]} Show={ShowModal} />
@@ -104,6 +97,7 @@ export default function Hisobot() {
               false
             )}
           </div>
+
         </div>
       </div>
     </>
