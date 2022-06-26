@@ -1,78 +1,138 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './Bosh.css'
-import ish from './ish.json'
 import Item from '../../components/boshSahifa/Item'
 import More from '../../components/boshSahifa/More'
 import Xodimlar from '../../components/boshSahifa/Xodimlar'
+import Navbar from '../../components/navbar/Navbar'
+import Filter from '../../components/filter/Filter'
+import axios from "axios";
+import config from "../../config.json";
+import { useNavigate } from "react-router-dom";
 
 
 const BoshSahifa = () => {
+    const navigate = useNavigate();
+    const TOKEN = {
+        headers: {
+            "jwt-token": sessionStorage.getItem("jwt-token"),
+        },
+    };
+    const [baza, setBaza] = useState([])
+    const [mapBaza, setMapBaza] = useState([])
+    const [user, setUser] = useState([])
+    const [last, setLast] = useState([])
+    // const [searchPage, setSearchPage] = useState([]);
+    // const search = JSON.parse(localStorage.getItem("search"));
 
+    useEffect(() => {
+            axios.get(`${config.SERVER_URL}report`,TOKEN)
+            .then(res => {
+                let foo = res.data.filter((item)=>{
+                    if(item.tasdiq === true){
+                        return true
+                    }
+                })
+                setBaza(foo)
+            })
+            .catch(error => console.log(error))
+            // xodim uchun
+            axios
+                .get(`${config.SERVER_URL}user`,TOKEN)
+                .then(
+                    (res) => {
+                        setUser(res.data)
+                    },
+                    (err) => {
+                    if (err.response.status === 401) {
+                        navigate("/");
+                    }
+                    }
+                )
+                .catch((error) => console.log(error));
+        
+    }, []);
     // vid uchun
     const [view, setView] = useState(false)
-    let date = new Date()
+    
     let month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
-    let year = [date.getFullYear(),date.getFullYear()-1,date.getFullYear()-2,date.getFullYear()-3,date.getFullYear()-4]
+    
+    const Filters = () => {
+        const time = JSON.parse(localStorage.getItem("time"));
+        // console.log(time);
+        axios
+          .post(`${config.SERVER_URL}report/filter`, time, TOKEN)
+          .then(
+            (res) => {
+                setBaza(res.data)
+            },
+            (err) => {
+              if (err.response.status === 401) {
+                navigate("/");
+              }
+            }
+          )
+          .catch((error) => console.log(error));
+      };
 
-    // filter uchun funksiyalar
+    useEffect(()=>{
+        const Arr=[]
+        user.map(elem=>{
+            const news = baza.filter((item)=>
+                item.userFish===elem.fish
+            )
+            if(news.length>0){
+                Arr.push({name: elem.fish.split(' ')[1][0]+'.'+elem.fish.split(' ')[0], workCount: news.length})
+            }
+        })
+        setLast(Arr)
+    },[last])
 
-    const [oy, setOy] = useState('');
-    const [yil, setYil] = useState('');
-
-    const handleChangeOy = (event) => {
-        setOy(event.target.value);
-
-    };
-    const handleChangeYil = (event) => {
-        setYil(event.target.value);
-    };
-
-    const filterla=()=>{
-        console.log(oy+"+"+yil);
-    }
-
-    // const filterla = () => {
-    //     const filt = baza.filter(item => {
-    //         let month = item.fullFData.slice(5, 7) * 1
-    //         let year = item.fullFData.slice(0, 4) * 1
-    //         if (month === oy && year === yil) {
-    //             return true
+    // useEffect(()=>{
+    //     if(last.length===0){
+    //         var son = 0 
+    //         for(let a=0; a<user.length; a++){
+    //             for (let i = 0; i < mapBaza.length; i++) {
+    //                 if (user[a].fish === baza[i].userFish) {
+    //                     son += 1
+    //                 }
+    //             }
+                
+    //             let Array = {
+    //                 name: user[a].fish.split(' ')[1][0]+"."+user[a].fish.split(' ')[0],
+    //                 workCount: son,
+    //             }
+    //             last.push(Array)
+    //             son=0
     //         }
-    //     })
-    //     setMapBaza(filt)
-    // }
+    //     }
+    // },[last])
+
+    
+
+    // useEffect(() => {
+    //     const newService = baza.filter((elem) =>
+    //         elem.userFish.toLowerCase().includes(search.toLowerCase())
+    //     );
+    //     setSearchPage(newService);
+    //     if(searchPage.length!==0){
+    //         mapBaza(searchPage)
+    //     }
+    //   }, [search]);
+    //   console.log(searchPage);
+
 
     return (
         <div className="bajarilgan bg-white"> 
+        <Navbar search='true' />
         {/* Sarlavha */}
             <div className="topPanel d-flex justify-content-between">
-                <div className="sarlavha d-flex">
+                <div className="sarlavha d-flex align-items-center">
                     <h1>Бажарилган ишлар</h1>
-                    <h3 className="bedj ms-5 pt-1 px-3 border bg-light rounded-circle">7</h3>
+                    <h3 className="bedj ms-5 py-3 px-4 border bg-light rounded-circle">{baza.length}</h3>
                 </div>
-                <div className="filter d-flex me-5 pe-1">
-                    <div className="row me-5">
-                        <div className="col">
-                            <button onClick={filterla} className="px-3 py-2 btn btn-outline-secondary d-block">Filter</button>
-                        </div>
-                        <div className="col">
-                            <select onChange={handleChangeOy} label="Oy" className="d-block px-2 py-1 form-select form-select-lg mb-3">
-                                {
-                                    month.map(mons=>(
-                                        <option value={mons}>{mons}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div className="col">
-                            <select onChange={handleChangeYil} className="d-block px-2 py-1 ms-2 form-select form-select-lg mb-3">
-                                {
-                                    year.map(year=>(
-                                        <option value={year}>{year}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
+                <div className="filter d-flex me-5 pe-1 mt-2">
+                    <div className='me-5'>
+                        <Filter FilterFunction={Filters} />
                     </div>
                     <div className="row vid">
                         <div className="col-6">
@@ -93,10 +153,10 @@ const BoshSahifa = () => {
             <div className="xodimlar">
                 <div className="xodim">
                     {
-                        ish.map(worker=>(
-                            <>
-                                <Xodimlar fish="Махмудов С" count="9" />
-                            </>
+                        last.map(worker=>(
+                            <div key={worker._id}>
+                                <Xodimlar fish={worker.name} count={worker.workCount} />
+                            </div>
                         ))
                     }
                 </div>
@@ -105,27 +165,31 @@ const BoshSahifa = () => {
             <div className="bajJadval bg-light p-5">
                 <div className="row">
                     {
-                        ish.map(work=>(
+                        baza.map(work=>(
                             view ? (
                                 <More
+                                    yil={work.fullFData.slice(0, 4) * 1}
+                                    kun={work.fullFData.slice(8, 10) * 1}
+                                    oy={month[work.fullFData.slice(5, 7) * 1-1]}
+                                    soat={work.fullFData.slice(11, 16)}
                                     aktRaqam={work.aktRaqam}
-                                    xona={work.xona}
-                                    ishlar={work.ishlar}
+                                    xona={work.cilientKabinet}
+                                    ishlar={work.services}
                                     rasmlar={work.rasmlar}
-                                    bajaruvchi={work.bajaruvchi}
-                                    buyurtmachi={work.buyurtmachi}
-                                    lavozim={work.lavozim}
+                                    bajaruvchi={work.userFish}
+                                    buyurtmachi={work.cilientFish}
+                                    lavozim={work.cilientLavozim}
                                 />
                             ) : (
                                 <Item
-                                    date={work.date}
+                                    date={work.fullFData.slice(11, 16)}
                                     aktRaqam={work.aktRaqam}
-                                    bajaruvchi={work.bajaruvchi}
-                                    buyurtmachi={work.buyurtmachi}
-                                    xona={work.xona}
-                                    lavozim={work.lavozim}
-                                    ishlar={work.ishlar.length}
-                                    rasmlar={work.rasmlar}
+                                    bajaruvchi={work.userFish}
+                                    buyurtmachi={work.cilientFish}
+                                    xona={work.cilientKabinet}
+                                    lavozim={work.cilientLavozim}
+                                    ishlar={work.services.length}
+                                    // rasmlar={work.rasmlar.length}
                                 />
                             )
                             

@@ -9,7 +9,7 @@ const Item = (props) => {
             <div className="col-6">
                 <div className="card m-2 pt-3  px-4">
                     <div className="yuqori d-flex justify-content-between">
-                        <h5 className="text-secondary">№1</h5>
+                        <h5 className="text-secondary">№{props.index}</h5>
                         <div className="btn">
                             <button className='border-0 bg-white' onClick={()=>props.localga(elem)}>
                                 <Link to={"/tashkilot/" + elem._id}>
