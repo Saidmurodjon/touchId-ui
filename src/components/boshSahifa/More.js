@@ -9,7 +9,7 @@ const More = (props) => {
                     </h5>
                     <div className="upInfo d-flex pb-2 justify-content-between mt-3 border-bottom border-3 border-dark">
                         <span className="text-secondary">
-                            Бажарилган вақт: <p className="alert alert-warning d-inline px-1">2022 йил 5-март соат 16:03</p>
+                            Бажарилган вақт: <p className="alert alert-warning d-inline px-1">{props.yil} йил {props.kun}  {props.oy} соат {props.soat}</p>
                         </span>
                         <span>
                             <span className="text-secondary">АКТ РАҚАМИ №</span> <b>{props.aktRaqam}</b>

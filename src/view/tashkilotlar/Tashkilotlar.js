@@ -70,7 +70,7 @@ const Tashkilotlar = () => {
         <div className="sarlavha d-flex">
           <h1>Ташкилотлар</h1>
           <h3 className="bedj ms-5 pt-1 px-3 border bg-light rounded-circle">
-            7
+            {text.length}
           </h3>
         </div>
         <div className="buttons d-flex align-items-center me-4 justify-content-end w-25">
@@ -100,12 +100,14 @@ const Tashkilotlar = () => {
           {text.map((work, index) =>
             view ? (
               <More
+                index={index+1}
                 elem={work}
                 localga={getTashkilot}
                 functionDelete={Delete}
               />
             ) : (
               <Item
+                index={index+1}
                 elem={work}
                 localga={getTashkilot}
                 functionDelete={Delete}
