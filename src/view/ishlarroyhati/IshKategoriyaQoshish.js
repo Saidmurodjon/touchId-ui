@@ -4,6 +4,7 @@ import config from "../../config.json";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./IshlarRoyhati.css";
+import Navbar from "../../components/navbar/Navbar";
 const IshKategoriyaQoshish = () => {
   const navigate = useNavigate();
   const TOKEN = {
@@ -23,10 +24,14 @@ const IshKategoriyaQoshish = () => {
   const Send = async () => {
     if (ishQoshish.name) {
       await axios
-        .post(`${config.SERVER_URL}ish`, ishQoshish,TOKEN)
+        .post(`${config.SERVER_URL}ish`, ishQoshish, TOKEN)
         .then(
           (res) => {
-            alert("Ma'lumot qo'shildi");
+            alert("Ma'lumot qo'shildi")
+            setIshQoshish({
+              name: "",
+              date: new Date(),
+            })
           },
           (err) => {
             if (err.response.status === 401) {
@@ -42,15 +47,20 @@ const IshKategoriyaQoshish = () => {
   const Submit = (e) => {
     e.preventDefault();
   };
-  console.log(ishQoshish);
+  const Close = () => {
+    navigate("/ishlar");
+  };
   return (
     <>
-      <div className="ishlar-royhati w-100 px-4 py-2 position-relative">
+      <div className="sticky-top">
+        <Navbar search='true' />
+      </div>
+      <div className="ishlar-royhati w-100  px-5 py-2 position-relative">
         <h2 className="title">Иш категориясини қўшиш</h2>
-        <div className="my-3 position-relative d-flex justify-content-end me-5">
-          <Button name={"Категория қўшиш"} ButtonStyle="oq-button" />
-        </div>
-        <div className="w-100 my-3 bg-katagoriya px-3 pt-5">
+        <div className="page-wq my-3 bg-katagoriya px-3 pt-5">
+          <div className="position-relative me-0">
+            <i className="bi bi-x pointer" onClick={Close}></i>
+          </div>
           <form onSubmit={Submit} className="bg-form-katagoroya w-100 p-5">
             <div className="d-flex align-items-center">
               <h4 className="title">Категория номи:</h4>

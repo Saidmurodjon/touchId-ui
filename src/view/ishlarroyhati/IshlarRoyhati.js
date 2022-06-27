@@ -5,6 +5,7 @@ import config from "../../config.json";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./IshlarRoyhati.css";
+import Navbar from "../../components/navbar/Navbar";
 const IshlarRoyhati = () => {
   const TOKEN = {
     headers: {
@@ -17,7 +18,7 @@ const IshlarRoyhati = () => {
 
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}ish`,TOKEN)
+      .get(`${config.SERVER_URL}ish`, TOKEN)
       .then(
         (res) => {
           setIshlar(res.data);
@@ -42,7 +43,7 @@ const IshlarRoyhati = () => {
 
   async function ishlarDelete(elem) {
     await axios
-      .delete(`${config.SERVER_URL}ish/${elem._id}`,TOKEN)
+      .delete(`${config.SERVER_URL}ish/${elem._id}`, TOKEN)
       .then(
         (res) => {
           res.data && alert("O'chirildi");
@@ -68,23 +69,28 @@ const IshlarRoyhati = () => {
   }
 
   return (
-    <div className="ishlar-royhati w-100 px-4 py-2 position-relative">
-      <h2 className="title">Ишлар рўйхати</h2>
-      <div className="my-3 position-relative d-flex justify-content-end">
-        <Button
-          name={"Категория қўшиш"}
-          ButtonStyle="oq-button"
-          ButtonFunction={IshKqoshish}
-        />
+    <>
+      <div className="sticky-top">
+        <Navbar search='true' />
       </div>
-      <div className="w-100 py-3">
-        {ishlar.map((elem) => (
-          <div key={elem._id}>
-            <Bxlqoshish elem={elem} BxlEdit={IshKEdit} BxlDelet={onClick} />
-          </div>
-        ))}
+      <div className="ishlar-royhati w-100  px-5 py-2 position-relative">
+        <h2 className="title">Ишлар рўйхати</h2>
+        <div className="my-3 position-relative d-flex justify-content-end">
+          <Button
+            name={"Категория қўшиш"}
+            ButtonStyle="oq-button button-end"
+            ButtonFunction={IshKqoshish}
+          />
+        </div>
+        <div className="page-w py-3">
+          {ishlar.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish elem={elem} BxlEdit={IshKEdit} BxlDelet={onClick} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

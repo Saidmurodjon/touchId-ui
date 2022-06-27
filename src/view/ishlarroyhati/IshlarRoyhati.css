@@ -16,3 +16,24 @@
     border: 1px solid #DBDBDB !important;
     border-radius: 6px !important;
 }
+
+.ishlar-royhati .title {
+    font-weight: 500 !important;
+    font-size: 36px !important;
+}
+
+.button-end {
+    margin-right: 5rem !important;
+}
+
+.page-w {
+    width: 93% !important;
+}
+
+.bg-form-katagoroya .title {
+    font-weight: 400;
+    font-size: 20px !important;
+}
+.page-wq{
+    width: 98% !important;
+}
