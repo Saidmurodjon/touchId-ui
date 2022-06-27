@@ -15,13 +15,7 @@ const IshlarRoyhati = () => {
   const [ishlar, setIshlar] = useState([]);
 
   const [post, setPost] = useState(false);
-  const [searchPage, setSearchPage] = useState([]);
-  const Search = (input) => {
-    const newService = ishlar.filter((elem) =>
-      elem.name.toLowerCase().includes(input.toLowerCase())
-    );
-    setSearchPage(newService);
-  };
+
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}ish`, TOKEN)
@@ -77,7 +71,7 @@ const IshlarRoyhati = () => {
   return (
     <>
       <div className="sticky-top">
-        <Navbar search={true} SearchFunction={Search} />
+        <Navbar search='true' />
       </div>
       <div className="ishlar-royhati w-100  px-5 py-2 position-relative">
         <h2 className="title">Ишлар рўйхати</h2>
@@ -88,26 +82,12 @@ const IshlarRoyhati = () => {
             ButtonFunction={IshKqoshish}
           />
         </div>
-        <div className="me-5 py-3">
-          {searchPage.length > 0
-            ? searchPage.map((elem) => (
-              <div key={elem._id}>
-                <Bxlqoshish
-                  elem={elem}
-                  BxlEdit={IshKEdit}
-                  BxlDelet={onClick}
-                />
-              </div>
-            ))
-            : ishlar.map((elem) => (
-              <div key={elem._id}>
-                <Bxlqoshish
-                  elem={elem}
-                  BxlEdit={IshKEdit}
-                  BxlDelet={onClick}
-                />
-              </div>
-            ))}
+        <div className="page-w py-3">
+          {ishlar.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish elem={elem} BxlEdit={IshKEdit} BxlDelet={onClick} />
+            </div>
+          ))}
         </div>
       </div>
     </>
