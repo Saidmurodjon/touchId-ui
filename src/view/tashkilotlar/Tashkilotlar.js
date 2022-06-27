@@ -21,30 +21,36 @@ const Tashkilotlar = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  const Delete=(item)=>{
-    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?")
-    if(query){
+  const [searchPage, setSearchPage] = useState([]);
+  const Search = (input) => {
+    const newService = text.filter((elem) =>
+      elem.name.toLowerCase().includes(input.toLowerCase())
+    );
+    setSearchPage(newService);
+  };
+  const Delete = (item) => {
+    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?");
+    if (query) {
       axios
-      .delete(`${config.SERVER_URL}tashkilot/${item._id}`,TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
+        .delete(`${config.SERVER_URL}tashkilot/${item._id}`, TOKEN)
+        .then(
+          (res) => {
+            res.data && alert("O'chirildi");
+          },
+          (err) => {
+            if (err.response.status === 401) {
+              navigate("/");
+            }
           }
-        }
-      )
-      .catch((error) => console.log(error));
-    }else{
-        alert("O'chirilmadi")
+        )
+        .catch((error) => console.log(error));
+    } else {
+      alert("O'chirilmadi");
     }
-    
-}
+  };
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}tashkilot`,TOKEN)
+      .get(`${config.SERVER_URL}tashkilot`, TOKEN)
       .then(
         (res) => {
           res.data && setText(res.data);
@@ -57,16 +63,14 @@ const Tashkilotlar = () => {
       )
       .catch((error) => console.log(error));
   }, [Delete]);
-  console.log(text);
 
   const getTashkilot = (work) => {
     localStorage.setItem("tash", JSON.stringify(work));
   };
 
-
   return (
     <div className="tashkilot bg-white">
-      <Navbar search='true' />
+      <Navbar search="true" SearchFunction={Search} />
       {/* toshkilot soni, buttonlar */}
       <div className="tashTopPanel d-flex justify-content-between mt-2">
         <div className="sarlavha d-flex ms-2">
@@ -99,23 +103,45 @@ const Tashkilotlar = () => {
       {/* Asosiy qismi */}
       <div className="tashAsosiy bg-light p-4 mt-5">
         <div className="row">
-          {text.map((work, index) =>
-            view ? (
-              <More
-                index={index+1}
-                elem={work}
-                localga={getTashkilot}
-                functionDelete={Delete}
-              />
-            ) : (
-              <Item
-                index={index+1}
-                elem={work}
-                localga={getTashkilot}
-                functionDelete={Delete}
-              />
-            )
-          )}
+          {searchPage.length > 0
+            ? searchPage.map((work, index) =>
+                view ? (
+                  <More
+                    key={work._id}
+                    index={index + 1}
+                    elem={work}
+                    localga={getTashkilot}
+                    functionDelete={Delete}
+                  />
+                ) : (
+                  <Item
+                    key={work._id}
+                    index={index + 1}
+                    elem={work}
+                    localga={getTashkilot}
+                    functionDelete={Delete}
+                  />
+                )
+              )
+            : text.map((work, index) =>
+                view ? (
+                  <More
+                    key={work._id}
+                    index={index + 1}
+                    elem={work}
+                    localga={getTashkilot}
+                    functionDelete={Delete}
+                  />
+                ) : (
+                  <Item
+                    key={work._id}
+                    index={index + 1}
+                    elem={work}
+                    localga={getTashkilot}
+                    functionDelete={Delete}
+                  />
+                )
+              )}
         </div>
       </div>
     </div>
