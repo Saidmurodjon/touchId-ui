@@ -5,6 +5,7 @@ import config from "../../config.json";
 import "./Xonalar.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../../components/navbar/Navbar";
 const Xonalar = () => {
   const [xona, setXona] = useState([]);
 
@@ -14,9 +15,17 @@ const Xonalar = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
+  const [searchPage, setSearchPage] = useState([]);
+  const Search = (input) => {
+    const newService = xona.filter((elem) =>
+      elem.name.toLowerCase().includes(input.toLowerCase())
+    );
+    setSearchPage(newService);
+  };
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}xona`,TOKEN)
+      .get(`${config.SERVER_URL}xona`, TOKEN)
       .then(
         (res) => {
           setXona(res.data);
@@ -41,7 +50,7 @@ const Xonalar = () => {
 
   async function xonaDelete(elem) {
     await axios
-      .delete(`${config.SERVER_URL}xona/${elem._id}`,TOKEN)
+      .delete(`${config.SERVER_URL}xona/${elem._id}`, TOKEN)
       .then(
         (res) => {
           res.data && alert("O'chirildi");
@@ -66,23 +75,32 @@ const Xonalar = () => {
     navigate(`/xona/${elem._id}`);
   }
   return (
-    <div className="w-100 px-4 py-2 position-relative">
-      <h2 className="title">Хоналар рўйхати</h2>
-      <div className="my-3 position-relative d-flex justify-content-end">
-        <Button
-          name={"Хона қўшиш"}
-          ButtonStyle="oq-button"
-          ButtonFunction={XonalarQoshish}
-        />
+    <>
+      <div className="sticky-top">
+        <Navbar search={true} SearchFunction={Search} />
       </div>
-      <div className="w-100 py-3">
-        {xona.map((elem) => (
-          <div key={elem._id}>
-            <Bxlqoshish elem={elem} BxlEdit={XonalarEdit} BxlDelet={onClick} />
-          </div>
-        ))}
+      <div className="w-100 px-5 py-2 position-relative">
+        <h2 className="title-xona">Хоналар рўйхати</h2>
+        <div className="my-3 position-relative d-flex justify-content-end">
+          <Button
+            name={"Хона қўшиш"}
+            ButtonStyle="oq-button button-end"
+            ButtonFunction={XonalarQoshish}
+          />
+        </div>
+        <div className="me-5 py-3">
+          {searchPage.length > 0 ? searchPage.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish elem={elem} BxlEdit={XonalarEdit} BxlDelet={onClick} />
+            </div>
+          )) : xona.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish elem={elem} BxlEdit={XonalarEdit} BxlDelet={onClick} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

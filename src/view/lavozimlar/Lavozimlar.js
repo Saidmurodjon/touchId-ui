@@ -5,6 +5,7 @@ import config from "../../config.json";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lavozimlar.css";
+import Navbar from "../../components/navbar/Navbar";
 
 const Lavozimlar = () => {
   const TOKEN = {
@@ -15,6 +16,14 @@ const Lavozimlar = () => {
   const [lavozim, setLavozim] = useState([]);
 
   const [post, setPost] = useState(false);
+
+  const [searchPage, setSearchPage] = useState([]);
+  const Search = (input) => {
+    const newService = lavozim.filter((elem) =>
+      elem.name.toLowerCase().includes(input.toLowerCase())
+    );
+    setSearchPage(newService);
+  };
 
   useEffect(() => {
     axios
@@ -68,27 +77,40 @@ const Lavozimlar = () => {
     navigate(`/lavozim/${elem._id}`);
   }
   return (
-    <div className="w-100 px-5 py-2 position-relative">
-      <h2 className="title">Лавозимлар рўйхати</h2>
-      <div className="my-3 position-relative d-flex justify-content-end">
-        <Button
-          name={"Лавозим қўшиш"}
-          ButtonStyle="oq-button"
-          ButtonFunction={lavozimlarQoshish}
-        />
+    <>
+      <div className="sticky-top">
+        <Navbar search={true} SearchFunction={Search} />
       </div>
-      <div className="w-100 py-3">
-        {lavozim.map((elem) => (
-          <div key={elem._id}>
-            <Bxlqoshish
-              elem={elem}
-              BxlEdit={lavozimlarEdit}
-              BxlDelet={onClick}
-            />
-          </div>
-        ))}
+      <div className="w-100 px-5 py-2 position-relative">
+        <h2 className="title-lavozm">Лавозимлар рўйхати</h2>
+        <div className="my-3 position-relative d-flex justify-content-end">
+          <Button
+            name={"Лавозим қўшиш"}
+            ButtonStyle="oq-button button-end"
+            ButtonFunction={lavozimlarQoshish}
+          />
+        </div>
+        <div className="me-5 py-3">
+          {searchPage.length > 0 ? searchPage.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish
+                elem={elem}
+                BxlEdit={lavozimlarEdit}
+                BxlDelet={onClick}
+              />
+            </div>
+          )) : lavozim.map((elem) => (
+            <div key={elem._id}>
+              <Bxlqoshish
+                elem={elem}
+                BxlEdit={lavozimlarEdit}
+                BxlDelet={onClick}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

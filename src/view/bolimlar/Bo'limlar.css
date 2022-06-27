@@ -2,6 +2,7 @@
     min-height: 70vh;
     background: #F5F5F5 !important;
     border-radius: 16px 16px 0px 0px;
+    width: 98% !important;
 }
 
 .bg-form-bolim {
@@ -15,4 +16,17 @@
     background: #F5F5F5 !important;
     border: 1px solid #DBDBDB !important;
     border-radius: 6px !important;
+}
+
+.bolimlar-royhati .title {
+    font-size: 36px !important;
+}
+
+.bg-form-bolim .bolim-title {
+    font-weight: 400 !important;
+    font-size: 20px !important;
+}
+
+.title-bolim {
+    font-size: 36px !important;
 }

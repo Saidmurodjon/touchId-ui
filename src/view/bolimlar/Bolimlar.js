@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import config from "../../config.json";
 import axios from "axios";
 import "./Bo'limlar.css";
+import Navbar from "../../components/navbar/Navbar";
 const Bolimlar = () => {
   const TOKEN = {
     headers: {
@@ -12,11 +13,23 @@ const Bolimlar = () => {
     },
   };
   const [bolim, setBolim] = useState([]);
+
   const [s, setS] = useState(false);
+
+  const [post, setPost] = useState(false);
+
+  const [searchPage, setSearchPage] = useState([]);
+
+  const Search = (input) => {
+    const newService = bolim.filter((elem) =>
+      elem.name.toLowerCase().includes(input.toLowerCase())
+    );
+    setSearchPage(newService);
+  };
 
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}bolim`,TOKEN)
+      .get(`${config.SERVER_URL}bolim`, TOKEN)
       .then(
         (res) => {
           setBolim(res.data);
@@ -50,7 +63,7 @@ const Bolimlar = () => {
   };
   async function BolimDelete(elem) {
     await axios
-      .delete(`${config.SERVER_URL}bolim/${elem._id}`,TOKEN)
+      .delete(`${config.SERVER_URL}bolim/${elem._id}`, TOKEN)
       .then(
         (res) => {
           res.data && alert("O'chirildi");
@@ -65,29 +78,44 @@ const Bolimlar = () => {
       .catch((error) => console.log(error));
   }
   return (
-    <div className="w-100 px-4 py-2 position-relative pe-5">
-      <h2 className="title">Бўлимлар рўйхати</h2>
-      <div className="my-3 position-relative d-flex justify-content-end">
-        <Button
-          name={"Бўлим қўшиш"}
-          ButtonStyle="oq-button"
-          ButtonFunction={BolimlarQoshish}
-        />
+    <>
+      <div className="sticky-top">
+        <Navbar search={true} SearchFunction={Search} />
       </div>
-      <div className="w-100 py-3">
-        {bolim.map((e) => {
-          return (
-            <div key={e._id}>
-              <Bxlqoshish
-                elem={e}
-                BxlEdit={BolimlarUpdate}
-                BxlDelet={onClick}
-              />
-            </div>
-          );
-        })}
+      <div className="bolimlar-royhati w-100 px-5 py-2 position-relative pe-5">
+        <h2 className="title">Бўлимлар рўйхати</h2>
+        <div className="my-3 position-relative d-flex justify-content-end">
+          <Button
+            name={"Бўлим қўшиш"}
+            ButtonStyle="oq-button button-end"
+            ButtonFunction={BolimlarQoshish}
+          />
+        </div>
+        <div className="me-5 py-3">
+          {searchPage.length > 0 ? searchPage.map((e) => {
+            return (
+              <div key={e._id}>
+                <Bxlqoshish
+                  elem={e}
+                  BxlEdit={BolimlarUpdate}
+                  BxlDelet={onClick}
+                />
+              </div>
+            );
+          }) : bolim.map((e) => {
+            return (
+              <div key={e._id}>
+                <Bxlqoshish
+                  elem={e}
+                  BxlEdit={BolimlarUpdate}
+                  BxlDelet={onClick}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

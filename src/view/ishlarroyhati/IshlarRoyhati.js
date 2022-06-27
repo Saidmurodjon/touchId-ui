@@ -22,6 +22,7 @@ const IshlarRoyhati = () => {
     );
     setSearchPage(newService);
   };
+  
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}ish`, TOKEN)

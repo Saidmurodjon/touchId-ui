@@ -5,7 +5,7 @@ const Navbar = (props) => {
   const { search = false, text = "", SearchFunction } = props;
   return (
     <>
-      <div className="navbar-widht border-bottom d-flex justify-content-between ">
+      <div className="navbar-widht ps-5 border-bottom d-flex justify-content-between ">
         <div>
           {search ? (
             <Search SearchFunction={SearchFunction} />
