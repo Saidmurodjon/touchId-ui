@@ -13,16 +13,19 @@ function Home() {
     let content = document.querySelector(".content");
     let logotip = document.querySelector(".logotip");
     let arrow = document.querySelector(".togl");
+    let aloqa = document.querySelector(".aloqa");
     if (toggle) {
       menyu.style.width = "4.5%";
       content.style.width = "95.5%";
       arrow.style.right = "30%";
       logotip.style.display = "none";
+      aloqa.style.display = "none";
     } else {
       menyu.style.width = "17%";
       content.style.width = "83%";
       arrow.style.right = "10%";
       logotip.style.display = "flex";
+      aloqa.style.display = "block";
     }
   };
   const location = useLocation();
@@ -33,8 +36,9 @@ function Home() {
         <Login />
       ) : (
         <div className="container-fluid">
-          <div className="menyu border border-right">
-            <div className="logo border-bottom border-right d-flex align-items-center overflow-hidden">
+          <div className="menyu border border-right ">
+            <div className="position-sticky top-0 ps-0">
+            <div className="logo border-bottom border-right d-flex align-items-center overflow-hidden ">
               <div className="logotip align-items-center">
                 <i className="bi bi-steam"></i>
                 <h4>TouchID</h4>
@@ -50,8 +54,9 @@ function Home() {
             </div>
             {/* menyu qismi */}
             <Menyu />
-            <div className="mt-5">
+            <div className="mt-4 aloqa">
               <Aloqa />
+            </div>
             </div>
           </div>
           <div className="content">

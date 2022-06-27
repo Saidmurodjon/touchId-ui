@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
 import "./Tashkilot.css";
+import Navbar from "../../components/navbar/Navbar";
 
 const Tashkilotlar = () => {
   const navigate = useNavigate();
@@ -65,9 +66,10 @@ const Tashkilotlar = () => {
 
   return (
     <div className="tashkilot bg-white">
+      <Navbar search='true' />
       {/* toshkilot soni, buttonlar */}
-      <div className="tashTopPanel d-flex justify-content-between">
-        <div className="sarlavha d-flex">
+      <div className="tashTopPanel d-flex justify-content-between mt-2">
+        <div className="sarlavha d-flex ms-2">
           <h1>Ташкилотлар</h1>
           <h3 className="bedj ms-5 pt-1 px-3 border bg-light rounded-circle">
             {text.length}
