@@ -5,6 +5,7 @@ import BList from "../../components//buyritma/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
+import './Buyurtmachi.css'
 export default function Buyurtmalar() {
   const [buyritmachi, setBuyritmachi] = useState([]);
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function Buyurtmalar() {
   }, [search]);
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}cilient`,TOKEN)
+      .get(`${config.SERVER_URL}cilient`, TOKEN)
       .then(
         (res) => {
           setBuyritmachi(res.data);
@@ -56,7 +57,7 @@ export default function Buyurtmalar() {
   };
   async function Delete(item) {
     await axios
-      .delete(`${config.SERVER_URL}cilient/${item._id}`,TOKEN)
+      .delete(`${config.SERVER_URL}cilient/${item._id}`, TOKEN)
       .then(
         (res) => {
           alert(`Buyurtmachi malumotlari O'chirildi`);
@@ -71,29 +72,25 @@ export default function Buyurtmalar() {
   }
   return (
     <>
-      <Navbar search={true} />
-      <div className="d-flex justify-content-center">
-        <div className="page-width">
-          <div className="row justify-content-center">
-            <div className="col-md-6 d-flex justify-content-start align-items-center mt-2">
-              <h4>Буюртмачилар</h4>
-            </div>
-            <div className="col-md-6 d-flex justify-content-end align-items-center mt-2">
-              <Button
-                name={"Буюртмачи қўшиш"}
-                ButtonFunction={Bqoshish}
-                ButtonStyle="oq-button float-end"
-              />
-            </div>
-          </div>
-          <div className="bg-main p-4 m-2">
-            <BList
-              buyritmachi={searchPage.length > 0 ? searchPage : buyritmachi}
-              Up={Update}
-              Del={Check}
-            />
-          </div>
+      <div className="sticky-top">
+        <Navbar  search='true'/>
+      </div>
+      <div className="w-100  px-5 py-2 position-relative">
+        <div className="d-flex justify-content-between mt-2">
+          <h4 className="title">Буюртмачилар</h4>
+          <Button
+            name={"Буюртмачи қўшиш"}
+            ButtonFunction={Bqoshish}
+            ButtonStyle="oq-button button-end"
+          />
         </div>
+      </div>
+      <div className="bg-main mt-2 ">
+        <BList
+          buyritmachi={searchPage.length > 0 ? searchPage : buyritmachi}
+          Up={Update}
+          Del={Check}
+        />
       </div>
     </>
   );
