@@ -80,3 +80,11 @@
     font-size: 25px;
     color: #787486;
 }
+.bla{
+    width: 40px;
+    height: 40px;
+    background-image: url('../../assets/touchId.png');
+    background-size: 30px;
+    margin-left: 5%!important;
+    background-repeat: no-repeat;
+}

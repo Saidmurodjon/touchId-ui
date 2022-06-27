@@ -37,3 +37,21 @@
     width: 47px !important;
     height: 47px !important;
 }
+
+.ochish{
+    background-color: #ffffff;
+    top: 70%!important;
+    left: 95%!important;
+    font-size: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.ochish li p{
+    cursor: pointer;
+}
+.yopish{
+    top: 70%!important;
+    left: 95%!important;
+    height: 0;
+    overflow: hidden;
+}
