@@ -40,7 +40,7 @@ function Home() {
             <div className="position-sticky top-0 ps-0">
             <div className="logo border-bottom border-right d-flex align-items-center overflow-hidden ">
               <div className="logotip align-items-center">
-                <i className="bi bi-steam"></i>
+                <i className="bla"></i>
                 <h4>TouchID</h4>
               </div>
               <i
