@@ -7,7 +7,7 @@ const More = (props) => {
         <>
             <div className="col-12">
                 <div className="bg-white align-items-center more m-2 p-4 d-flex justify-content-between">
-                    <h1 className="text-secondary">№{props.index}</h1>
+                    <h1 className="text-secondary indeks">№{props.index}</h1>
                     <div className="info">
                         <p className="text-secondary">Ташкилот номи:</p>
                         <h5>{elem.name}</h5>
