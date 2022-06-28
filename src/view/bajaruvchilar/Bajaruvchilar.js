@@ -5,6 +5,7 @@ import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
+import './Bajaruvchi.css'
 function Bajaruvchilar() {
   const navigate = useNavigate();
   const TOKEN = {
@@ -66,18 +67,19 @@ function Bajaruvchilar() {
       <div className="sticky-top">
         <Navbar search={true} SearchFunction={Search} />
       </div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center pe-5 ps-4">
         <div className="page-width">
-          <div className="row justify-content-center">
-            <div className="col-md-6 d-flex justify-content-start align-items-center">
-              <h4>bajaruvchi</h4>
-            </div>
-            <div className="col-md-6 d-flex justify-content-end align-items-center">
+          <div className="row justify-content-center ">
+            <div className="w-100 d-flex justify-content-between align-items-center my-3">
+              <h4>Бажарувчилар</h4>
               <Button
                 name={"Бажарувчи қўшиш"}
                 ButtonFunction={Bqoshish}
-                ButtonStyle="oq-button float-end"
+                ButtonStyle="oq-button button-end1" 
               />
+            </div>
+            <div className="col-md-6 d-flex justify-content-end align-items-center">
+
             </div>
             <div className="bg-main p-4 m-2">
               <BList
