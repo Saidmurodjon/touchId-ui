@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config.json";
+import Navbar from '../../components/navbar/Navbar'
 const AddDevice = () => {
   const navigate = useNavigate();
   const TOKEN = {
@@ -60,6 +61,7 @@ const AddDevice = () => {
   console.log(inputFields);
   return (
     <div>
+      <Navbar />
       <h1 className="ms-5">Курилма қўшиш</h1>
       <div className="AddDevice bg-light mt-5 p-3">
         <div className=" mt-3 bg-white p-3">

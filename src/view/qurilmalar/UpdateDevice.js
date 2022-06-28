@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config.json";
+import Navbar from '../../components/navbar/Navbar'
 
 const UpdateDevice = () => {
   const qurilma = JSON.parse(localStorage.getItem("qurilma"));
@@ -49,6 +50,13 @@ const UpdateDevice = () => {
       .then(
         (res) => {
           res.data && alert("Yangilandi");
+          setInputFields([ ])
+          setDev({
+            name: '',
+            elem: '',
+            deviceId: '',
+            date: '',
+          })
         },
         (err) => {
           if (err.response.status === 401) {
@@ -65,6 +73,7 @@ const UpdateDevice = () => {
 
   return (
     <div>
+      <Navbar />
       <h1 className="ms-5">Курилма янгилаш</h1>
       <div className="AddDevice bg-light mt-5 p-3">
         <div className=" mt-3 bg-white p-3">

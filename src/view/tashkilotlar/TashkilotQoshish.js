@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 import axios from "axios";
 import config from "../../config.json";
+import Navbar from "../../components/navbar/Navbar";
 
 const TashkilotQoshish = () => {
   const navigate = useNavigate();
@@ -28,10 +29,12 @@ const TashkilotQoshish = () => {
   };
   const AddTash = async () => {
     await axios
-      .post(`${config.SERVER_URL}tashkilot`, Text,TOKEN)
+      .post(`${config.SERVER_URL}tashkilot`, Text, TOKEN)
       .then(
         (res) => {
-          res.data && alert("Qo'shildi");
+          alert("Qo'shildi")
+    navigate("/tashkilot");
+         
         },
         (err) => {
           if (err.response.status === 401) {
@@ -42,80 +45,83 @@ const TashkilotQoshish = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="addTashkilot bg-light h-100 pt-2 ">
-      <form
-        onSubmit={Submit}
-        className="m-5 py-5 pe-5 bg-white addTash position-relative"
-      >
-        <i className="bi bi-x" onClick={Close}></i>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
-              Ташкилот номи:
-            </label>
+    <div>
+      <Navbar />
+      <div className="addTashkilot bg-light mx-3 mt-3 py-2">
+        <form
+          onSubmit={Submit}
+          className="m-5 py-5 pe-5 bg-white addTash position-relative"
+        >
+          <i className="bi bi-x" onClick={Close}></i>
+          <div className="row mt-4">
+            <div className="col-3 text-end pe-3 mt-3">
+              <label className="form-label" htmlFor="">
+                Ташкилот номи:
+              </label>
+            </div>
+            <div className="col-9">
+              <input
+                type="text"
+                className="form-control form-control-lg bg-light ps-2"
+                name="name"
+                onChange={changeHandler}
+              />
+            </div>
           </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="name"
-              onChange={changeHandler}
+          <div className="row mt-4">
+            <div className="col-3 text-end pe-3 mt-3">
+              <label className="form-label" htmlFor="">
+                Администратор Ф.И.О.:
+              </label>
+            </div>
+            <div className="col-9">
+              <input
+                type="text"
+                className="form-control form-control-lg bg-light ps-2"
+                name="admin"
+                onChange={changeHandler}
+              />
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col-3 text-end pe-3 mt-3">
+              <label className="form-label" htmlFor="">
+                Логин(телефон):
+              </label>
+            </div>
+            <div className="col-9">
+              <input
+                type="text"
+                className="form-control form-control-lg bg-light ps-2"
+                name="login"
+                onChange={changeHandler}
+              />
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col-3 text-end pe-3 mt-3">
+              <label className="form-label" htmlFor="">
+                Пароль:
+              </label>
+            </div>
+            <div className="col-9">
+              <input
+                type="text"
+                className="form-control form-control-lg bg-light ps-2"
+                name="parol"
+                onChange={changeHandler}
+              />
+            </div>
+          </div>
+          <div className="mt-5">
+            <Button
+              ButtonStyle={"oq-button d-block mx-auto"}
+              name="Қўшиш"
+              ButtonFunction={AddTash}
             />
           </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
-              Администратор Ф.И.О.:
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="admin"
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
-              Логин(телефон):
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="login"
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-3">
-            <label className="form-label" htmlFor="">
-              Пароль:
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="parol"
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="mt-5 text-center">
-          <Button
-            ButtonStyle={"oq-button"}
-            name="Қўшиш"
-            ButtonFunction={AddTash}
-          />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

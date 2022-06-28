@@ -64,7 +64,7 @@ const Qurilma = (props) => {
                 key={index}
               >
                 <h5>
-                  {index + 1} {item.name}
+                  {index + 1}. {item.name}
                 </h5>
                 <div className="btn">
                   <button

@@ -3,6 +3,7 @@ import Button from "../../components/button/Button";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../../components/navbar/Navbar'
 const QurilmaQoshish = () => {
   const navigate = useNavigate();
   const TOKEN = {
@@ -35,6 +36,7 @@ const QurilmaQoshish = () => {
   };
   return (
     <div>
+      <Navbar />
       <h1 className="ms-5">Қурилмалар тоифаси</h1>
       <div className="d-flex justify-content-end me-5">
         <Button ButtonStyle={"oq-button"} name="Категория қўшиш" />

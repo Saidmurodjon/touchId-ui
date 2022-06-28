@@ -38,7 +38,7 @@
     margin-left: 0.5rem;
 }
 
-.addTash{
+.addTash, .addTashkilot{
     border-radius: 16px;
 }
 .bi-x{
@@ -58,4 +58,14 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     
+}
+.indeks{
+    width: 8%;
+}
+.info{
+    width: 45%!important;
+
+}
+.logparol{
+    width: 20%;
 }
