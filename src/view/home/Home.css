@@ -121,6 +121,9 @@
         margin-top: 2px;
         padding: 20px 10px 12px 5px!important;
     }
+    .asosiyMenyu ul{
+        width: 350px;
+    }
     .asosiyMenyu span i{
         font-size: 180%;
         margin-left: 3%;

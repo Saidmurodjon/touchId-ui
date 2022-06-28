@@ -43,7 +43,7 @@ export default function ChangeDalolatnoma(props) {
   };
   return (
     <div className="dalolatnoma-modal-list-style">
-      <div className="dalolatnoma-modeal-list p-3">
+      <div className="dalolatnoma-modeal-list px-5 py-4">
         <form onSubmit={Submit} className="border-light ">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             Example textarea

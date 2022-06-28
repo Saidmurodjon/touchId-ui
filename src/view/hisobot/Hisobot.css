@@ -1,11 +1,9 @@
+.xisobot-family{
+    font-family: 'Times New Roman';
+}
 .hisobot-filter {
     width: 90%;
 }
-
-.title {
-    font-size: 36px;
-}
-
 .select-style-hisobot {
     width: 40px !important;
     height: 40px !important;
@@ -24,4 +22,34 @@
     margin-left: -20px !important;
     margin-top: -2px;
     background: #787486;
+}
+.hisobot-content{
+    width: 100%;
+}
+.mt-50{
+    margin-top: 400px !important;
+}
+.bajaruvchi-content-title{
+    font-size: 20px !important;
+    font-weight: bold;
+}
+.bajaruvchi-content h5{
+    font-size: 18px;
+    font-weight: 400;
+}
+.bajaruvchi-content{
+    font-family: 'Times New Roman';
+    width: 290px !important;
+}
+.border-direktor{
+    content: "";
+    position: relative;
+    width:150px;
+    border-bottom: 1px solid #111;
+}
+.title-xisobot{
+    font-size: 36px !important;
+}
+.xisobor-sticky{
+    z-index: 1 !important;
 }

@@ -18,9 +18,9 @@ export default function Hisobot() {
 
   const TOKEN = {
     headers: {
-      "jwt-token": sessionStorage.getItem("jwt-token"),
+        "jwt-token": sessionStorage.getItem("jwt-token"),
     },
-  };
+};
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}xisobot`, TOKEN)
@@ -47,8 +47,15 @@ export default function Hisobot() {
   // Dalolatnoma uchun fiter qilingan hisobotlar
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
+    const stat={
+      year:time.year,
+      month:time.month,
+      stat:true,
+
+    
+    }
     axios
-      .post(`${config.SERVER_URL}report/filter`, time, TOKEN)
+      .post(`${config.SERVER_URL}report/filter`, stat, TOKEN)
       .then(
         (res) => {
           setReport(res.data);
@@ -64,12 +71,12 @@ export default function Hisobot() {
   // console.log(report);
   return (
     <>
-      <div className="sticky-top">
-        <Navbar />
+      <div className="sticky-top xisobor-sticky">
+        <Navbar search="true" />
       </div>
-      <div className="w-100">
-        <div className="d-flex justify-content-between align-items-center px-5 mt-3">
-          <h4 className="title">
+      <div className="w-100 px-5">
+        <div className="d-flex justify-content-between align-items-center pe-4 mt-3">
+          <h4 className="title-xisobot">
             Хисобот
           </h4>
           <div className="d-flex">
@@ -88,7 +95,7 @@ export default function Hisobot() {
             </button>
           </div>
         </div>
-        <div className="row">
+        <div className="row xisobot-family">
           <div className="d-flex justify-content-center align-items-center">
             <Dalolatnoma ref={componentRef} text={text[0]} reports={report} />
             {showModal ? (
@@ -97,7 +104,6 @@ export default function Hisobot() {
               false
             )}
           </div>
-
         </div>
       </div>
     </>

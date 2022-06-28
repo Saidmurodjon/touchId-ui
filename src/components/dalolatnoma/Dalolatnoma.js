@@ -83,7 +83,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                   <div className="col-5">
                     <h4 className="text-center">{text.t2}</h4>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 mt-5">
                     <h6 className="location mb-0">{text.t3}</h6>
                     {/* <img className="line" src={line} alt="" /> */}
                     <div className="line"></div>
@@ -100,7 +100,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                   <div className="col-md-1hisobot1">
                     <h4>
                       &nbsp;&nbsp;&nbsp;Биз куйида имзо чекувчилар: Бажарувчи{" "}
-                      {text.t1} Электрон хокимятни ривожлантириш маркази номидан
+                      {text.t1} хузуридаги Электрон хокимятни ривожлантириш маркази номидан
                       директори <b>{text.t4}</b>&nbsp; бир томондан. Бажарувчи
                       Фаргона вилоят хокимлиги иккинчи томинидан ушбу
                       далолатномани {""}
@@ -149,7 +149,29 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                       </span>
                     </h4>
                   </div>
-                  <div className="col-md-5"></div>
+                  <div className="mb-5 d-flex mt-50">
+                    <div className="d-flex justify-content-between hisobot-content ">
+                      <div className="bajaruvchi-content ">
+                        <h4 className="bajaruvchi-content-title">Бажарувчи:</h4>
+                        <h5>
+                          <span>{text.t1}{" "}хузуридаги</span>
+                          <span> Электрон хокимятни ривожлантириш маркази директори</span>
+                        </h5>
+                        <div className="d-flex justify-content-between">
+                          <h5 className="border-direktor">
+                          </h5>
+                          <h5><span>{text.t4}</span></h5>
+                        </div>
+                      </div>
+                      <div className="bajaruvchi-content text-end">
+                        <h4 className="bajaruvchi-content-title">Буюртмачи:</h4>
+                        <h5>
+                          <span>{text.t1}</span>
+                        </h5>
+                        <img src="" alt="" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

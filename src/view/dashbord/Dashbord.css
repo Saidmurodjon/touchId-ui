@@ -1,0 +1,58 @@
+.dashbord-content {
+    min-height: 75vh;
+    background: #F5F5F5 !important;
+    border-radius: 16px 16px 0px 0px !important;
+}
+
+.card-style {
+    box-sizing: border-box !important;
+    width: 180px !important;
+    height: 130px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #33CCCC !important;
+    border-radius: 10px !important;
+}
+
+.card-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #787486;
+}
+
+.card-body {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    color: #FF8A00;
+}
+
+.dashbord-table {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #0D062D;
+}
+
+.dashbord-table span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #FF8A00;
+}
+
+.table-bg {
+    background: #fff;
+}
+
+.table-bg th,
+td {
+    padding: 20px 5px !important;
+}
+
+.carusel-w{
+    width: 90%;
+}
+.card-w{
+    width: 90%;
+}

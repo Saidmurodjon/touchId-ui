@@ -1,19 +1,24 @@
 .dalolatnoma {
   width: 1100px;
 }
+
 .img {
   width: 100px;
 }
+
 .location {
   font-size: small;
   width: 100%;
 }
+
 .line {
   background-size: 90px;
   height: 90px;
   background-image: url("../../assets/line.png");
   background-repeat: repeat-x;
 }
-.dalolatnoma-print{
+
+.dalolatnoma-print {
   width: 956px;
 }
+

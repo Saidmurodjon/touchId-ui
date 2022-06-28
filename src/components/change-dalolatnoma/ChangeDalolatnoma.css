@@ -28,3 +28,10 @@
     right: .5rem;
     color: rgb(24, 23, 23);
 }
+.dalolatnoma-modeal-list {
+    border-radius: 16px;
+    transform: translate(-50%, 10%) !important;
+  }
+  .dalolatnoma-modeal-list textarea{
+    padding: 0 5px !important;
+  }
