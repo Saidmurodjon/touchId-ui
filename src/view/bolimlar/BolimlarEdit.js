@@ -40,7 +40,6 @@ const BolimlarEdit = () => {
         }
       )
       .catch((error) => console.log(error));
-    console.log(post);
   };
   const Close = () => {
     navigate("/bolim");

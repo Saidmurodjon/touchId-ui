@@ -3,7 +3,7 @@ const More = (props) => {
   const date = new Date(elem.fullFData);
   return (
     <>
-      <div key={elem._id} className="col-12">
+      <div className="col-12">
         <div className="card m-2 p-4">
           <h5 className="w-75 text-center mx-auto text-secondary">
             Электрон ҳокимиятни ривожлантириш маркази ҳодими томонидан Фарғона

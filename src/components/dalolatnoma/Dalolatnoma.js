@@ -74,8 +74,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                 <div className="row justify-content-center">
                   <div className="col-5 justify-content-center">
                     <h4 className="text-center">
-                      O'ZBEKISTON RESPUBLIKASI {text.t1.toUpperCase()} "ELEKTRON
-                      XOKIMYATNI ROVOJLANTIRISH MARKAZI"
+                    ЎЗБЕКИСТОН РЕСПУБЛИКАСИ {text.t1.toUpperCase()}"ЭЛЕКТРОН ХОКИМЯТНИ РОВОЖЛАНТИРИШ МАРКАЗИ"
                     </h4>
                   </div>
                   <div className="col-2 d-flex justify-content-center align-items-center">

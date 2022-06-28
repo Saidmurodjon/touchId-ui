@@ -57,8 +57,6 @@ const AddDevice = () => {
   useEffect(() => {
     setDev({ ...dev, elem: inputFields });
   }, [inputFields]);
-  console.log(dev);
-  console.log(inputFields);
   return (
     <div>
       <div className="sticky-top">

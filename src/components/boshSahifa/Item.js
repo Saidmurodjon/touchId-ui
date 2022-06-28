@@ -3,7 +3,7 @@ const Item = (props) => {
   const date = new Date(elem.fullFData);
   return (
     <>
-      <div key={elem._id} className="col-6">
+      <div className="col-6">
         <div className="card m-2 px-4 pt-3 pb-2">
           <div className="up d-flex justify-content-between">
             <span className="alert alert-warning px-1">

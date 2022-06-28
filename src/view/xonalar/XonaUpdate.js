@@ -39,7 +39,6 @@ const XonaUpdate = () => {
         }
       )
       .catch((error) => console.log(error));
-    console.log(post);
   };
   const Close = () => {
     navigate("/kabinet");
