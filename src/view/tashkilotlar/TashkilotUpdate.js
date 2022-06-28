@@ -53,7 +53,9 @@ const TashkilotQoshish = () => {
   };
   return (
     <div>
-      <Navbar />
+      <div className="sticky-top">
+        <Navbar />
+      </div>
       <div className="addTashkilot bg-light mx-3 mt-3 py-2">
         <form
           onSubmit={Submit}

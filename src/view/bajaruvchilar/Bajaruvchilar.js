@@ -63,7 +63,9 @@ function Bajaruvchilar() {
   }
   return (
     <>
-      <Navbar search={true} SearchFunction={Search} />
+      <div className="sticky-top">
+        <Navbar search={true} SearchFunction={Search} />
+      </div>
       <div className="d-flex justify-content-center">
         <div className="page-width">
           <div className="row justify-content-center">

@@ -73,7 +73,9 @@ const UpdateDevice = () => {
 
   return (
     <div>
-      <Navbar />
+      <div className="sticky-top">
+        <Navbar />
+      </div>
       <h1 className="ms-5">Курилма янгилаш</h1>
       <div className="AddDevice bg-light mt-5 p-3">
         <div className=" mt-3 bg-white p-3">

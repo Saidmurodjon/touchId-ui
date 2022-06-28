@@ -70,7 +70,9 @@ const Tashkilotlar = () => {
 
   return (
     <div className="tashkilot bg-white">
-      <Navbar search="true" SearchFunction={Search} />
+      <div className="sticky-top">
+        <Navbar search={true} SearchFunction={Search} />
+      </div>
       {/* toshkilot soni, buttonlar */}
       <div className="tashTopPanel d-flex justify-content-between mt-2">
         <div className="sarlavha d-flex ms-2">
