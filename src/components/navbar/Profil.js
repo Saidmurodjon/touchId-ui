@@ -4,6 +4,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Profil = () => {
+    const admin = JSON.parse(localStorage.getItem("admin"));
     const navigate=useNavigate()
     const [open, setOpen] = useState(false)
     const Close=()=>{
@@ -20,7 +21,7 @@ const Profil = () => {
                 <i className="bi bi-bell h4 text-secondary me-5"></i>
                 <div className="profil-content d-flex align-items-center position-relative">
                     <div className="d-flex flex-column align-items-end">
-                        <span className="span1">Толипова Феруза</span>
+                        <span className="span1">{admin.admin}</span>
                         <span className="text-secondary span2">Марказ</span>
                     </div>
                     <img src={ProfilImg} alt="" className="rounded-pill ms-3" />
