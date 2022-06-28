@@ -1,10 +1,12 @@
-.title{
+.title {
     font-size: 44px !important;
 }
+
 .bg-lavozim {
     min-height: 70vh;
     background: #F5F5F5 !important;
     border-radius: 16px 16px 0px 0px;
+    width: 98% !important;
 }
 
 .bg-form-lavozim {
@@ -12,10 +14,20 @@
     border-radius: 16px;
 }
 
-.form-input-lavozim{
+.form-input-lavozim {
     width: 770px !important;
     height: 44px !important;
     background: #F5F5F5 !important;
     border: 1px solid #DBDBDB !important;
     border-radius: 6px !important;
+}
+
+.title-lavozm {
+    font-size: 36px !important;
+    font-weight: 500;
+}
+
+.lavozm-title {
+    font-size: 20px !important;
+    font-weight: 400;
 }

@@ -2,6 +2,7 @@
     cursor: pointer;
     transition: .5s all !important;
     border-radius: 16px !important;
+    padding: 3px 0 !important;
 }
 
 .bxl-radius:hover {
@@ -18,4 +19,8 @@
 
 .edit-pencil:hover {
     color: #F24E1E !important;
+}
+.bxl-title{
+    font-weight: 400 !important;
+    font-size: 20px !important;
 }

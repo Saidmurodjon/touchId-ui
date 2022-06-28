@@ -1,37 +1,34 @@
 import { useState } from "react";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
-import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
-import "./Bo'limlar.css";
+import { useNavigate } from "react-router-dom";
+import "./IshlarRoyhati.css";
 import Navbar from "../../components/navbar/Navbar";
-const BolimlarQoshish = () => {
+const IshKategoriyaQoshish = () => {
   const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  async function Bolimlar(params) {
-    navigate("/bolim");
-  }
-  const [bolimQoshish, setBolimQoshish] = useState({
+  const [ishQoshish, setIshQoshish] = useState({
     name: "",
     date: new Date(),
   });
 
   const changeHandler = (e) => {
-    setBolimQoshish({ ...bolimQoshish, [e.target.name]: e.target.value });
+    setIshQoshish({ ...ishQoshish, [e.target.name]: e.target.value });
   };
+
   const Send = async () => {
-    if (bolimQoshish.name) {
+    if (ishQoshish.name) {
       await axios
-        .post(`${config.SERVER_URL}bolim`, bolimQoshish, TOKEN)
+        .post(`${config.SERVER_URL}ish`, ishQoshish, TOKEN)
         .then(
           (res) => {
-            alert("malumot qo'shildi");
-            setBolimQoshish  ({
+            alert("Ma'lumot qo'shildi")
+            setIshQoshish({
               name: "",
               date: new Date(),
             })
@@ -44,33 +41,33 @@ const BolimlarQoshish = () => {
         )
         .catch((error) => console.log(error));
     } else {
-      alert("malumot kiriting");
+      alert("Ma'lumo kiriting");
     }
   };
   const Submit = (e) => {
     e.preventDefault();
   };
   const Close = () => {
-    navigate("/bolim");
+    navigate("/ishlar");
   };
   return (
     <>
       <div className="sticky-top">
         <Navbar search='true' />
       </div>
-      <div className="w-100 px-5 py-2 position-relative">
-        <h2 className="title-bolim">Бўлимлар қўшиш</h2>
-        <div className="bolimlar-royhati my-3 bg-bolim px-3 pt-5">
+      <div className="ishlar-royhati w-100  px-5 py-2 position-relative">
+        <h2 className="title">Иш категориясини қўшиш</h2>
+        <div className="page-wq my-3 bg-katagoriya px-3 pt-5">
           <div className="position-relative me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>
           </div>
-          <form onSubmit={Submit} className="bg-form-bolim w-100 p-5">
+          <form onSubmit={Submit} className="bg-form-katagoroya w-100 p-5">
             <div className="d-flex align-items-center">
-              <h4 className="bolim-title">Бўлим номи:</h4>
+              <h4 className="title">Категория номи:</h4>
               <input
                 type="text"
-                className="form-input-bolim w-75 ms-1 ps-1 form-control"
-                value={bolimQoshish.name}
+                className="form-input-ish-katagoriya w-75 ms-1 ps-1 form-control"
+                value={ishQoshish.name}
                 name="name"
                 onChange={changeHandler}
               />
@@ -78,8 +75,8 @@ const BolimlarQoshish = () => {
             <div className="d-flex mt-4 justify-content-center">
               <Button
                 name={"Қўшиш"}
-                ButtonFunction={Send}
                 ButtonStyle="oq-button"
+                ButtonFunction={Send}
               />
             </div>
           </form>
@@ -89,4 +86,4 @@ const BolimlarQoshish = () => {
   );
 };
 
-export default BolimlarQoshish;
+export default IshKategoriyaQoshish;

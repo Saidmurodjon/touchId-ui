@@ -26,6 +26,10 @@
     margin-right: 5rem !important;
 }
 
+.page-w {
+    width: 93% !important;
+}
+
 .bg-form-katagoroya .title {
     font-weight: 400;
     font-size: 20px !important;
