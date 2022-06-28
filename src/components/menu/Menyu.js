@@ -15,7 +15,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-house-door"></i>
                 </span>
-                <span className="ms-2">Бош сахифа</span>
+                <span className="ms-3 linkText">Бош сахифа</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -26,7 +26,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-person-fill"></i>
                 </span>
-                <span className="ms-2">Бажарувчи</span>
+                <span className="ms-3 linkText">Бажарувчи</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -37,7 +37,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-person-workspace"></i>
                 </span>
-                <span className="ms-2">Буюртмачи</span>
+                <span className="ms-3 linkText">Буюртмачи</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -48,7 +48,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-card-checklist"></i>
                 </span>
-                <span className="ms-2">Хисоботлар</span>
+                <span className="ms-3 linkText">Хисоботлар</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -59,7 +59,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-list-ul"></i>
                 </span>
-                <span className="ms-2">Ишлар рўйхати</span>
+                <span className="ms-3 linkText">Ишлар рўйхати</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -70,7 +70,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-grid-fill"></i>
                 </span>
-                <span className="ms-2">Бўлимлар</span>
+                <span className="ms-3 linkText">Бўлимлар</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -81,7 +81,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-terminal-split"></i>
                 </span>
-                <span className="ms-2">Хоналар</span>
+                <span className="ms-3 linkText">Хоналар</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -92,7 +92,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-briefcase"></i>
                 </span>
-                <span className="ms-2">Лавозимлар</span>
+                <span className="ms-3 linkText">Лавозимлар</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -103,7 +103,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-building"></i>
                 </span>
-                <span className="ms-2">Ташкилотлар</span>
+                <span className="ms-3 linkText">Ташкилотлар</span>
               </NavLink>
             </li>
             <li className=" py-1 link">
@@ -114,7 +114,7 @@ export default function Menyu() {
                 <span>
                   <i className="bi bi-cpu"></i>
                 </span>
-                <span className="ms-2">Қурилма тоифаси</span>
+                <span className="ms-3 linkText">Қурилма тоифаси</span>
               </NavLink>
             </li>
           </ul>
