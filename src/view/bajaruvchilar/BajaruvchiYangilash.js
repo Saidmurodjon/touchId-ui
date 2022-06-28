@@ -3,8 +3,17 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 import axios from "axios";
 import config from "../../config.json";
+import Navbar from "../../components/navbar/Navbar";
+import './Bajaruvchi.css'
+
 const TashkilotQoshish = () => {
+
   const navigate = useNavigate();
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
   const Close = () => {
     navigate("/bajaruvchi");
   };
@@ -22,7 +31,7 @@ const TashkilotQoshish = () => {
   };
   async function Update(elem) {
     await axios
-      .put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi)
+      .put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi, TOKEN)
       .then(
         (res) => {
           alert(`Bajaruvchi malumotlari yangilandi`);
@@ -41,118 +50,99 @@ const TashkilotQoshish = () => {
     e.preventDefault();
   };
   return (
-    <div className="addTashkilot bg-light h-100 pt-2 ">
-      <form
-        onSubmit={Submit}
-        className="m-5 py-5 pe-5 bg-white addTash position-relative"
-      >
-        <i className="bi bi-x" onClick={Close}></i>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Ташкилот номи:
-            </label>
+    <>
+      <div className="sticky-top">
+        <Navbar search="true" />
+      </div>
+      <div className="w-100  px-5 py-2 position-relative">
+        <h4 className="title-1 mt-2">
+          Бажарувчи қўшиш
+        </h4>
+        <div className="page-bg1 mt-3">
+          <div className="position-relative w-100 me-0">
+            <i className="bi bi-x pointer" onClick={Close}></i>
           </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="tash"
-              value={bajaruvchi.tash}
-              onChange={changeHandler}
-            />
-          </div>
+          <form action="" className="bajaruvchi-form ps-5 pt-4 pb-4 pe-5 w-100"
+            onSubmit={Submit}
+          >
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Ташкилот номи:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="tash"
+                  value={bajaruvchi.tash}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Лавозими:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="lavozim"
+                  value={bajaruvchi.lavozim}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Ф.И.Ш:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="fish"
+                  value={bajaruvchi.fish}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Қисқача исми:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="ismi"
+                  value={bajaruvchi.ismi}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Телефон:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="tel"
+                  value={bajaruvchi.tel}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label for="inputPassword" className="col-sm-2 col-form-label">Парол:</label>
+              <div className="col-sm-10">
+                <input className="form-control form-input-bajaruvchi"
+                  type="text"
+                  name="parol"
+                  value={bajaruvchi.parol}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            <div className="d-flex justify-content-center">
+              <Button
+                ButtonStyle={"oq-button"}
+                name="Yangilash"
+                ButtonFunction={Update}
+                elem={baj}
+              />
+            </div>
+          </form>
         </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Лавозими
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="lavozim"
-              value={bajaruvchi.lavozim}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Ф.И.Ш
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="fish"
-              value={bajaruvchi.fish}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Қисқача исми
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="ismi"
-              value={bajaruvchi.ismi}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Телефон
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="tel"
-              value={bajaruvchi.tel}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-3 text-end pe-3 mt-1">
-            <label className="form-label fs-4" htmlFor="">
-              Парол
-            </label>
-          </div>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control form-control-lg bg-light ps-2"
-              name="parol"
-              value={bajaruvchi.parol}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="mt-5 text-center d-flex justify-content-center">
-          <Button
-            ButtonStyle={"oq-button"}
-            name="Yangilash"
-            ButtonFunction={Update}
-            elem={baj}
-          />
-        </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 
