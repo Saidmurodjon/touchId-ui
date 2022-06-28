@@ -83,7 +83,7 @@ export default function Hisobot() {
               className="select-style-hisobot ms-4 filter-before"
               onClick={handlePrint}
             >
-              <i class="bi bi-printer h4"></i>
+              <i className="bi bi-printer h4"></i>
             </button>
             <button
               onClick={() => setShowModal(true)}

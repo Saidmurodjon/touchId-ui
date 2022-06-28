@@ -164,6 +164,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                             {" "}
                             Электрон хокимятни ривожлантириш маркази директори
                           </span>
+                       
                         </h5>
                         <div className="d-flex justify-content-between">
                           <h5 className="border-direktor"></h5>
@@ -182,7 +183,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                           value={text.t1}
                           // bgColor={back}
                           // fgColor={fore}
-                          size = "120"
+                          size = {120}
                         />
                       </div>
                     </div>

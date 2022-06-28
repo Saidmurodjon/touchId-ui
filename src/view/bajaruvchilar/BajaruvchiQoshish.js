@@ -68,11 +68,11 @@ const BajaruvchiQoshish = () => {
       <div className="">
         <div className="d-flex justify-content-center">
           <div className="page-width">
-            <h3>Бажарувчи қўшиш</h3>
+            <h3 className="mt-4 mb-4">Бажарувчи қўшиш</h3>
             <div className=" bg-light h-100 pt-2 ">
               <form
                 onSubmit={Submit}
-                className="m-5 py-5 pe-5 bg-white  position-relative"
+                className="m-5 py-5 pe-5 bg-white  position-relative border-bajaruvchi"
               >
                 <div className="row mt-4">
                   <div className="col-3 text-end pe-3 mt-1">
