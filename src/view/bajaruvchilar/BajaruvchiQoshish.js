@@ -62,7 +62,9 @@ const BajaruvchiQoshish = () => {
   };
   return (
     <>
-      <Navbar search={true} />
+      <div className="sticky-top">
+        <Navbar search={true} />
+      </div>
       <div className="">
         <div className="d-flex justify-content-center">
           <div className="page-width">

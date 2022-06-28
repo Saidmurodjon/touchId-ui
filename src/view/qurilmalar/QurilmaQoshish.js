@@ -36,7 +36,9 @@ const QurilmaQoshish = () => {
   };
   return (
     <div>
-      <Navbar />
+      <div className="sticky-top">
+        <Navbar />
+      </div>
       <h1 className="ms-5">Қурилмалар тоифаси</h1>
       <div className="d-flex justify-content-end me-5">
         <Button ButtonStyle={"oq-button"} name="Категория қўшиш" />
