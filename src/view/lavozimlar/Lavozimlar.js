@@ -27,7 +27,7 @@ const Lavozimlar = () => {
 
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}lavozim`)
+      .get(`${config.SERVER_URL}lavozim`,TOKEN)
       .then(
         (res) => {
           setLavozim(res.data);
@@ -52,7 +52,7 @@ const Lavozimlar = () => {
 
   async function lavozimDelete(elem) {
     await axios
-      .delete(`${config.SERVER_URL}lavozim/${elem._id}`)
+      .delete(`${config.SERVER_URL}lavozim/${elem._id}`,TOKEN)
       .then(
         (res) => {
           res.data && alert("O'chirildi");
@@ -69,7 +69,7 @@ const Lavozimlar = () => {
 
   const navigate = useNavigate();
 
-  async function lavozimlarQoshish(params) {
+  async function lavozimlarQoshish() {
     navigate("/lavozimqoshish");
   }
   async function lavozimlarEdit(elem) {
