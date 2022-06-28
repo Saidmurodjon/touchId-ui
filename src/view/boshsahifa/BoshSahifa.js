@@ -110,9 +110,11 @@ const BoshSahifa = () => {
 
   return (
     <div className="bajarilgan bg-white">
-      <Navbar search="true" SearchFunction={Search} />
+      <div className="sticky-top">
+        <Navbar search="true" SearchFunction={Search} />
+      </div>
       {/* Sarlavha */}
-      <div className="topPanel d-flex justify-content-between">
+      <div className="topPanel d-flex justify-content-between px-5 mt-2">
         <div className="sarlavha d-flex align-items-center">
           <h1>Бажарилган ишлар</h1>
           <h3 className="bedj ms-5 py-3 px-4 border bg-light rounded-circle">
@@ -164,27 +166,27 @@ const BoshSahifa = () => {
           <div className="row">
             {searchPage.length > 0
               ? searchPage.map((work) =>
-                  view ? (
-                    <More
-                      key={work._id}
-                      oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
-                      elem={work}
-                    />
-                  ) : (
-                    <Item key={work._id} elem={work} />
-                  )
+                view ? (
+                  <More
+                    key={work._id}
+                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                    elem={work}
+                  />
+                ) : (
+                  <Item key={work._id} elem={work} />
                 )
+              )
               : baza.map((work) =>
-                  view ? (
-                    <More
-                      key={work._id}
-                      oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
-                      elem={work}
-                    />
-                  ) : (
-                    <Item key={work._id} elem={work} />
-                  )
-                )}
+                view ? (
+                  <More
+                    key={work._id}
+                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                    elem={work}
+                  />
+                ) : (
+                  <Item key={work._id} elem={work} />
+                )
+              )}
           </div>
         )}
       </div>
