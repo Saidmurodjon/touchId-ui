@@ -5,7 +5,7 @@ import BList from "../../components//buyritma/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-import './Buyurtmachi.css'
+import "./Buyurtmachi.css";
 export default function Buyurtmalar() {
   const [buyritmachi, setBuyritmachi] = useState([]);
   const navigate = useNavigate();
@@ -15,14 +15,13 @@ export default function Buyurtmalar() {
     },
   };
   const [searchPage, setSearchPage] = useState([]);
-  const search = JSON.parse(localStorage.getItem("search"));
-
-  useEffect(() => {
+  const Search = (input) => {
     const newService = buyritmachi.filter((elem) =>
-      elem.fish.toLowerCase().includes(search.toLowerCase())
+      elem.fish.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
-  }, [search]);
+  };
+
   useEffect(() => {
     axios
       .get(`${config.SERVER_URL}cilient`, TOKEN)
@@ -73,7 +72,7 @@ export default function Buyurtmalar() {
   return (
     <>
       <div className="sticky-top">
-        <Navbar  search='true'/>
+        <Navbar search="true" SearchFunction={Search} />
       </div>
       <div className="w-100  px-5 py-2 position-relative">
         <div className="d-flex justify-content-between mt-2">

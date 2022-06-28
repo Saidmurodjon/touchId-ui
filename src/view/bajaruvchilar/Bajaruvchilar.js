@@ -14,18 +14,16 @@ function Bajaruvchilar() {
   };
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
   const [searchPage, setSearchPage] = useState([]);
-  const search = JSON.parse(localStorage.getItem("search"));
-
-  useEffect(() => {
+  const Search = (input) => {
     const newService = bajaruvchilar.filter((elem) =>
-      elem.fish.toLowerCase().includes(search.toLowerCase())
+      elem.fish.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
-  }, [search]);
+  };
 
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URL}user`,TOKEN)
+      .get(`${config.SERVER_URL}user`, TOKEN)
       .then(
         (res) => {
           setBajaruvchilar(res.data);
@@ -57,7 +55,7 @@ function Bajaruvchilar() {
   };
   async function Delete(item) {
     await axios
-      .delete(`${config.SERVER_URL}user/${item._id}`,TOKEN)
+      .delete(`${config.SERVER_URL}user/${item._id}`, TOKEN)
       .then((res) => {
         alert(`Bajaruvchi malumotlari O'chirildi`);
       })
@@ -65,7 +63,7 @@ function Bajaruvchilar() {
   }
   return (
     <>
-      <Navbar search={true} />
+      <Navbar search={true} SearchFunction={Search} />
       <div className="d-flex justify-content-center">
         <div className="page-width">
           <div className="row justify-content-center">

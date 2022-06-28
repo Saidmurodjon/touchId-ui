@@ -20,7 +20,7 @@ const BoshSahifa = () => {
 
   const [user, setUser] = useState([]);
   const [last, setLast] = useState([]);
-
+  const [filter, setFilter] = useState(false);
   const [searchPage, setSearchPage] = useState([]);
   const Search = (input) => {
     const newService = baza.filter(
@@ -31,17 +31,6 @@ const BoshSahifa = () => {
     setSearchPage(newService);
   };
   useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}report`, TOKEN)
-      .then((res) => {
-        let foo = res.data.filter((item) => {
-          if (item.tasdiq === true) {
-            return true;
-          }
-        });
-        setBaza(foo);
-      })
-      .catch((error) => console.log(error));
     // xodim uchun
     axios
       .get(`${config.SERVER_URL}user`, TOKEN)
@@ -55,6 +44,17 @@ const BoshSahifa = () => {
           }
         }
       )
+      .catch((error) => console.log(error));
+    axios
+      .get(`${config.SERVER_URL}report`, TOKEN)
+      .then((res) => {
+        let foo = res.data.filter((item) => {
+          if (item.tasdiq === true) {
+            return true;
+          }
+        });
+        setBaza(foo);
+      })
       .catch((error) => console.log(error));
   }, []);
   // vid uchun
@@ -77,12 +77,13 @@ const BoshSahifa = () => {
 
   const Filters = () => {
     const time = JSON.parse(localStorage.getItem("time"));
-    // console.log(time);
+    setFilter(true);
     axios
       .post(`${config.SERVER_URL}report/filter`, time, TOKEN)
       .then(
         (res) => {
           setBaza(res.data);
+          setFilter(false);
         },
         (err) => {
           if (err.response.status === 401) {
@@ -94,32 +95,18 @@ const BoshSahifa = () => {
   };
 
   useEffect(() => {
-    if (searchPage.length > 0) {
-      const Arr = [];
-      user.map((elem) => {
-        const news = searchPage.filter((item) => item.userFish === elem.fish);
-        if (news.length > 0) {
-          Arr.push({
-            name: elem.fish.split(" ")[1][0] + "." + elem.fish.split(" ")[0],
-            workCount: news.length,
-          });
-        }
-      });
-      setLast(Arr);
-    } else {
-      const Arr = [];
-      user.map((elem) => {
-        const news = baza.filter((item) => item.userFish === elem.fish);
-        if (news.length > 0) {
-          Arr.push({
-            name: elem.fish.split(" ")[1][0] + "." + elem.fish.split(" ")[0],
-            workCount: news.length,
-          });
-        }
-      });
-      setLast(Arr);
-    }
-  }, [user]);
+    const Arr = [];
+    user.map((elem) => {
+      const news = baza.filter((item) => item.userFish === elem.fish);
+      if (news.length > 0) {
+        Arr.push({
+          name: elem.fish.split(" ")[1][0] + "." + elem.fish.split(" ")[0],
+          workCount: news.length,
+        });
+      }
+    });
+    setLast(Arr);
+  }, [baza]);
 
   return (
     <div className="bajarilgan bg-white">
@@ -134,7 +121,7 @@ const BoshSahifa = () => {
         </div>
         <div className="filter d-flex me-5 pe-1 mt-2">
           <div className="me-5">
-            <Filter FilterFunction={Filters} />
+            {filter ? "Filterlanmodqa..." : <Filter FilterFunction={Filters} />}
           </div>
           <div className="row vid">
             <div className="col-6">
@@ -171,31 +158,35 @@ const BoshSahifa = () => {
       </div>
       {/* Asosiy qism ishlar ro'yxati boshlandi */}
       <div className="bajJadval bg-light p-5">
-        <div className="row">
-          {searchPage.length > 0
-            ? searchPage.map((work) =>
-                view ? (
-                  <More
-                    key={work._id}
-                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
-                    elem={work}
-                  />
-                ) : (
-                  <Item key={work._id} elem={work} />
+        {filter ? (
+          "Filterlanmodqa..."
+        ) : (
+          <div className="row">
+            {searchPage.length > 0
+              ? searchPage.map((work) =>
+                  view ? (
+                    <More
+                      key={work._id}
+                      oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                      elem={work}
+                    />
+                  ) : (
+                    <Item key={work._id} elem={work} />
+                  )
                 )
-              )
-            : baza.map((work) =>
-                view ? (
-                  <More
-                    key={work._id}
-                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
-                    elem={work}
-                  />
-                ) : (
-                  <Item key={work._id} elem={work} />
-                )
-              )}
-        </div>
+              : baza.map((work) =>
+                  view ? (
+                    <More
+                      key={work._id}
+                      oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                      elem={work}
+                    />
+                  ) : (
+                    <Item key={work._id} elem={work} />
+                  )
+                )}
+          </div>
+        )}
       </div>
     </div>
   );
