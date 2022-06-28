@@ -51,8 +51,6 @@ export default function Hisobot() {
       year:time.year,
       month:time.month,
       stat:true,
-
-    
     }
     axios
       .post(`${config.SERVER_URL}report/filter`, stat, TOKEN)

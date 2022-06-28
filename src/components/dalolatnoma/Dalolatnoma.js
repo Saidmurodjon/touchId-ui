@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../../config.json";
 import gerb from "../../assets/gerb.jpg";
 import { useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
   const TOKEN = {
@@ -15,7 +16,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const [service, setService] = useState([]);
   const [quantity, setQuantity] = useState([]);
   const [total, setTotal] = useState();
-  console.log(reports);
+  const date = new Date();
   useEffect(() => {
     if (reports.length > 0) {
       setQuantity([]);
@@ -93,17 +94,21 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                       <b>Далолатнома</b>
                     </h3>
                   </div>
-                  <div className="col-md-6">{new Date().toDateString()}</div>
+                  <div className="col-md-6">
+                    <h4 className="d-inline">
+                      {date.toISOString().slice(0, 10)}
+                    </h4>
+                  </div>
                   <div className="col-md-5">
                     <h3 className="d-inline float-end">{121}</h3>
                   </div>
                   <div className="col-md-1hisobot1">
                     <h4>
                       &nbsp;&nbsp;&nbsp;Биз куйида имзо чекувчилар: Бажарувчи{" "}
-                      {text.t1} хузуридаги Электрон хокимятни ривожлантириш маркази номидан
-                      директори <b>{text.t4}</b>&nbsp; бир томондан. Бажарувчи
-                      Фаргона вилоят хокимлиги иккинчи томинидан ушбу
-                      далолатномани {""}
+                      {text.t1} хузуридаги Электрон хокимятни ривожлантириш
+                      маркази номидан директори <b>{text.t4}</b>&nbsp;
+                      томондан. Бажарувчи 
+                      томинидан ушбу далолатномани {""}
                       {text.t1} Электрон хокимятни ривожлантириш маркази
                       томонидан ку'рсатилган хизматларни тасдиқлаш учун туздик.
                     </h4>
@@ -154,13 +159,17 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                       <div className="bajaruvchi-content ">
                         <h4 className="bajaruvchi-content-title">Бажарувчи:</h4>
                         <h5>
-                          <span>{text.t1}{" "}хузуридаги</span>
-                          <span> Электрон хокимятни ривожлантириш маркази директори</span>
+                          <span>{text.t1} хузуридаги</span>
+                          <span>
+                            {" "}
+                            Электрон хокимятни ривожлантириш маркази директори
+                          </span>
                         </h5>
                         <div className="d-flex justify-content-between">
-                          <h5 className="border-direktor">
+                          <h5 className="border-direktor"></h5>
+                          <h5>
+                            <span>{text.t4}</span>
                           </h5>
-                          <h5><span>{text.t4}</span></h5>
                         </div>
                       </div>
                       <div className="bajaruvchi-content text-end">
@@ -168,7 +177,13 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                         <h5>
                           <span>{text.t1}</span>
                         </h5>
-                        <img src="" alt="" />
+                        <QRCode
+                          title="The Best Team"
+                          value={text.t1}
+                          // bgColor={back}
+                          // fgColor={fore}
+                          size = "120"
+                        />
                       </div>
                     </div>
                   </div>

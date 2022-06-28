@@ -24,7 +24,7 @@ export default function ChangeDalolatnoma(props) {
   };
   const Change = async () => {
     await axios
-      .put(`${config.SERVER_URL}xisobot/${text._id}`, Text)
+      .put(`${config.SERVER_URL}xisobot/${text._id}`, Text,TOKEN)
       .then(
         (res) => {
           res.data && alert("Yangilandi");
