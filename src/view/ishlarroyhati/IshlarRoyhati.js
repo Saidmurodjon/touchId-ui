@@ -1,12 +1,14 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import config from "../../config.json";
 import Button from "../../components/button/Button";
 import Bxlqoshish from "../../components/bxlqoshish/Bxlqoshish";
 import { useNavigate } from "react-router-dom";
-import config from "../../config.json";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./IshlarRoyhati.css";
 import Navbar from "../../components/navbar/Navbar";
+import "./IshlarRoyhati.css";
+
 const IshlarRoyhati = () => {
+
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
@@ -15,62 +17,68 @@ const IshlarRoyhati = () => {
   const [ishlar, setIshlar] = useState([]);
 
   const [post, setPost] = useState(false);
+
   const [searchPage, setSearchPage] = useState([]);
+
+  const navigate = useNavigate();
+
+  // Bazadan ma'lumot olish
+  useEffect(() => {
+    const IshlarRoyhati = async () => {
+      const res = await axios.get(`${config.SERVER_URL}ish`, TOKEN);
+      try {
+        if (res.status === 200) {
+          setIshlar(res.data);
+        }
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    }
+    IshlarRoyhati();
+  }, [post]);
+
+  // o'chirish funksiyasi
+  const onClick = async (elem) => {
+    const result = await window.confirm("O'chirilsinmi?");
+    if (result) {
+      DeleteIsh(elem);
+      return;
+    }
+  };
+
+  const DeleteIsh = async (elem) => {
+    const res = await axios.delete(`${config.SERVER_URL}ish/${elem._id}`, TOKEN);
+    try {
+      if (res.status === 200) {
+        setPost(!post);
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+      console.log(err);
+    }
+  }
+
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = ishlar.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
   };
-  
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}ish`, TOKEN)
-      .then(
-        (res) => {
-          setIshlar(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [post]);
 
-  const onClick = async (elem) => {
-    const result = await window.confirm("O'chirilsinmi?");
-    if (result) {
-      ishlarDelete(elem);
-      return;
-    }
-    alert("O'chirilmadi");
-  };
 
-  async function ishlarDelete(elem) {
-    await axios
-      .delete(`${config.SERVER_URL}ish/${elem._id}`, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-          setPost(!post);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }
-
-  const navigate = useNavigate();
-
-  async function IshKqoshish(params) {
+  // yonaltirish 
+  function IshKqoshish(params) {
     navigate("/ishkategoriya");
   }
-  async function IshKEdit(elem) {
+
+  // Yo'naltirish
+  function IshKEdit(elem) {
     localStorage.setItem("ish", JSON.stringify(elem));
     navigate(`/ishlar/${elem._id}`);
   }

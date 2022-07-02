@@ -1,52 +1,57 @@
 import { useState } from "react";
-import Button from "../../components/button/Button";
+import { useNavigate } from "react-router-dom";
 import config from "../../config.json";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./IshlarRoyhati.css";
+import Button from "../../components/button/Button";
 import Navbar from "../../components/navbar/Navbar";
+import "./IshlarRoyhati.css";
 const IshKategoriyaQoshish = () => {
-  const navigate = useNavigate();
+
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [ishQoshish, setIshQoshish] = useState({
     name: "",
     date: new Date(),
   });
 
+  const navigate = useNavigate();
+
   const changeHandler = (e) => {
     setIshQoshish({ ...ishQoshish, [e.target.name]: e.target.value });
   };
 
+  // Malumot kiritish funksiyasi
   const Send = async () => {
+    const res = await axios.post(`${config.SERVER_URL}ish`, ishQoshish, TOKEN);
     if (ishQoshish.name) {
-      await axios
-        .post(`${config.SERVER_URL}ish`, ishQoshish, TOKEN)
-        .then(
-          (res) => {
-            alert("Ma'lumot qo'shildi")
-            setIshQoshish({
-              name: "",
-              date: new Date(),
-            })
-          },
-          (err) => {
-            if (err.response.status === 401) {
-              navigate("/");
-            }
-          }
-        )
-        .catch((error) => console.log(error));
+      try {
+        if (res.status == 200) {
+          alert("Ma'lumot qo'shildi");
+          setIshQoshish({
+            name: "",
+            date: new Date(),
+          });
+        }
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
     } else {
       alert("Ma'lumo kiriting");
     }
   };
+
+  // jonatish funksiyasi
   const Submit = (e) => {
     e.preventDefault();
   };
+  // Birlamchi sahifaga qaytish
   const Close = () => {
     navigate("/ishlar");
   };

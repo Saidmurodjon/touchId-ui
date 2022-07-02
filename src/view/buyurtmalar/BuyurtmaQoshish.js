@@ -6,18 +6,19 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import './Buyurtmachi.css'
 const BuyurtmaQoshish = () => {
-  const navigate = useNavigate();
-  const Close = () => {
-    navigate("/buyrtma");
-  };
+
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [xona, setXona] = useState([]);
+
   const [lavozim, setLavozim] = useState([]);
+
   const [bolim, setBolim] = useState([]);
+
   const [buyrtmachi, setBuyrtmachi] = useState({
     fish: "",
     bolim: "",
@@ -26,69 +27,67 @@ const BuyurtmaQoshish = () => {
     tel: "",
   });
 
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}xona`, TOKEN)
-      .then(
-        (res) => {
-          setXona(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    axios
-      .get(`${config.SERVER_URL}lavozim`, TOKEN)
-      .then(
-        (res) => {
-          setLavozim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    axios
-      .get(`${config.SERVER_URL}bolim`, TOKEN)
-      .then(
-        (res) => {
-          setBolim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, []);
+  const navigate = useNavigate();
+
   const changeHandler = (e) => {
     setBuyrtmachi({ ...buyrtmachi, [e.target.name]: e.target.value });
   };
-  const Send = async () => {
-    await axios
-      .post(`${config.SERVER_URL}cilient`, buyrtmachi, TOKEN)
-      .then(
-        (res) => {
-          alert("buyrtmachi malumotlari qo'shildi.");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
+
+  // Bazadan bo'lim, xona va lavozimlarni olish
+  useEffect(() => {
+    const BuyurtmachiBolim = async () => {
+      const res = await axios.get(`${config.SERVER_URL}bolim`, TOKEN);
+      const res2 = await axios.get(`${config.SERVER_URL}xona`, TOKEN);
+      const res3 = await axios.get(`${config.SERVER_URL}lavozim`, TOKEN);
+      try {
+        if (res.status === 200) {
+          setBolim(res.data);
         }
-      )
-      .catch((error) => console.log(error));
+        if (res2.status === 200) {
+          setXona(res.data);
+        }
+        if (res3.status === 200) {
+          setLavozim(res.data);
+        }
+      }
+      catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    }
+    BuyurtmachiBolim();
+
+  }, []);
+
+
+
+  // Ma'lumot kiritish 
+  const Send = async () => {
+    const res = await axios.post(`${config.SERVER_URL}cilient`, buyrtmachi, TOKEN);
+    try {
+      if (res.status === 200) {
+        alert("buyrtmachi malumotlari qo'shildi.");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+      console.log(err);
+    }
     navigate("/buyrtma");
   };
+  // Jo'natish 
   const Submit = (e) => {
     e.preventDefault();
   };
+
+  // Birlamchi sahifaga qaytish 
+  const Close = () => {
+    navigate("/buyrtma");
+  };
+
   return (
     <>
       <div className="sticky-top">
@@ -106,7 +105,7 @@ const BuyurtmaQoshish = () => {
             onSubmit={Submit}
           >
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Ф.И.Ш:</label>
+              <label className="col-sm-2 col-form-label">Ф.И.Ш:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -117,7 +116,7 @@ const BuyurtmaQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Бўлим:</label>
+              <label className="col-sm-2 col-form-label">Бўлим:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="bolim"
@@ -134,7 +133,7 @@ const BuyurtmaQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Хона:</label>
+              <label className="col-sm-2 col-form-label">Хона:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="kabinet"
@@ -152,7 +151,7 @@ const BuyurtmaQoshish = () => {
             </div>
 
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Лавозими:</label>
+              <label className="col-sm-2 col-form-label">Лавозими:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="lavozim"
@@ -170,11 +169,11 @@ const BuyurtmaQoshish = () => {
             </div>
 
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Телефон:</label>
+              <label className="col-sm-2 col-form-label">Телефон:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   id="tel"
-                  type="text"
+                  type="phone"
                   placeholder="+998"
                   name="tel"
                   value={buyrtmachi.tel}

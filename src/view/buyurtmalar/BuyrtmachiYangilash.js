@@ -6,16 +6,17 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
 const BuyurtmaYangilash = () => {
-  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
   const buy = JSON.parse(localStorage.getItem("buyrtmachi"));
-  const [xona, setXona] = useState([]);
-  const [lavozim, setLavozim] = useState([]);
-  const [bolim, setBolim] = useState([]);
+
+
+  const navigate = useNavigate();
+
+
   const [buyrtmachi, setBuyrtmachi] = useState({
     fish: buy.fish,
     bolim: buy.bolim,
@@ -23,73 +24,75 @@ const BuyurtmaYangilash = () => {
     lavozim: buy.lavozim,
     tel: buy.tel,
   });
-  const Close = () => {
+
+
+  const [bolim, setBolim] = useState([]);
+
+  const [lavozim, setLavozim] = useState([]);
+  
+  const [xona, setXona] = useState([]);
+  
+useEffect(()=>{
+  
+})
+
+  // Bazadan ma'lumot olish
+  useEffect(() => {
+    const BuyurtmachiBolim = async () => {
+      const res = await axios.get(`${config.SERVER_URL}bolim`, TOKEN);
+      const res2 = await axios.get(`${config.SERVER_URL}xona`, TOKEN);
+      const res3 = await axios.get(`${config.SERVER_URL}lavozim`, TOKEN);
+
+      try {
+        if (res.status === 200) {
+          setBolim(res.data);
+        }
+        if (res2.status === 200) {
+          setXona(res2.data);
+        }
+        if (res3.status === 200) {
+          setLavozim(res3.data);
+        }
+      }
+      catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    }
+    BuyurtmachiBolim();
+  }, []);
+
+  // Bazaga ma'lumot kiritish 
+  const Send = async () => {
+    const res = await axios.put(`${config.SERVER_URL}cilient/${buy._id}`, buyrtmachi, TOKEN);
+    try {
+      if (res.status === 200) {
+        alert("buyrtmachi malumotlari yangilandi.");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+      console.log(err);
+    }
     navigate("/buyrtma");
   };
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}xona`, TOKEN)
-      .then(
-        (res) => {
-          setXona(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    axios
-      .get(`${config.SERVER_URL}lavozim`, TOKEN)
-      .then(
-        (res) => {
-          setLavozim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    axios
-      .get(`${config.SERVER_URL}bolim`, TOKEN)
-      .then(
-        (res) => {
-          setBolim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, []);
+
   const changeHandler = (e) => {
     setBuyrtmachi({ ...buyrtmachi, [e.target.name]: e.target.value });
   };
-  const Send = async () => {
-    await axios
-      .put(`${config.SERVER_URL}cilient/${buy._id}`, buyrtmachi, TOKEN)
-      .then(
-        (res) => {
-          alert("buyrtmachi malumotlari yangilandi.");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    navigate("/buyrtma");
-  };
+
+  // jo'natish
   const Submit = (e) => {
     e.preventDefault();
   };
-  console.log(buyrtmachi);
+
+  // birlamchi sahifaga qaytsh
+  const Close = () => {
+    navigate("/buyrtma");
+  };
   return (
     <>
       <div className="sticky-top">
@@ -107,7 +110,7 @@ const BuyurtmaYangilash = () => {
             onSubmit={Submit}
           >
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Ф.И.Ш:</label>
+              <label className="col-sm-2 col-form-label">Ф.И.Ш:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -118,7 +121,7 @@ const BuyurtmaYangilash = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Бўлим:</label>
+              <label className="col-sm-2 col-form-label">Бўлим:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="bolim"
@@ -135,7 +138,7 @@ const BuyurtmaYangilash = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Хона:</label>
+              <label className="col-sm-2 col-form-label">Хона:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="kabinet"
@@ -153,7 +156,7 @@ const BuyurtmaYangilash = () => {
             </div>
 
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Лавозими:</label>
+              <label className="col-sm-2 col-form-label">Лавозими:</label>
               <div className="col-sm-10">
                 <select className="form-select  slect-buyurtma"
                   id="lavozim"
@@ -171,11 +174,11 @@ const BuyurtmaYangilash = () => {
             </div>
 
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Телефон:</label>
+              <label className="col-sm-2 col-form-label">Телефон:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   id="tel"
-                  type="text"
+                  type="phone"
                   placeholder="+998"
                   name="tel"
                   value={buyrtmachi.tel}

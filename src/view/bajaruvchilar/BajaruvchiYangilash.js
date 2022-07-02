@@ -8,16 +8,14 @@ import './Bajaruvchi.css'
 
 const TashkilotQoshish = () => {
 
-  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  const Close = () => {
-    navigate("/bajaruvchi");
-  };
+
   const baj = JSON.parse(localStorage.getItem("bajaruvchi"));
+
   const [bajaruvchi, setBajaruvchi] = useState({
     ismi: baj.ismi,
     fish: baj.fish,
@@ -26,28 +24,39 @@ const TashkilotQoshish = () => {
     tel: baj.tel,
     parol: baj.parol,
   });
+
+  const navigate = useNavigate();
+
   const changeHandler = (e) => {
     setBajaruvchi({ ...bajaruvchi, [e.target.name]: e.target.value });
   };
-  async function Update(elem) {
-    await axios
-      .put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi, TOKEN)
-      .then(
-        (res) => {
+
+  // Yangilash funksiysi 
+  function Update(elem) {
+    const BajUpdate = async () => {
+      const res = await axios.put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi, TOKEN);
+      try {
+        if (res.status === 200) {
           alert(`Bajaruvchi malumotlari yangilandi`);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
         }
-      )
-      .catch((error) => console.log(error));
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    BajUpdate();
     navigate("/bajaruvchi");
   }
 
+  // Jo'natish
   const Submit = (e) => {
     e.preventDefault();
+  };
+
+  // Birlamchi sahiffaga qaytish
+  const Close = () => {
+    navigate("/bajaruvchi");
   };
   return (
     <>
@@ -66,7 +75,7 @@ const TashkilotQoshish = () => {
             onSubmit={Submit}
           >
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Ташкилот номи:</label>
+              <label className="col-sm-2 col-form-label">Ташкилот номи:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -77,7 +86,7 @@ const TashkilotQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Лавозими:</label>
+              <label className="col-sm-2 col-form-label">Лавозими:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -88,7 +97,7 @@ const TashkilotQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Ф.И.Ш:</label>
+              <label className="col-sm-2 col-form-label">Ф.И.Ш:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -99,7 +108,7 @@ const TashkilotQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Қисқача исми:</label>
+              <label className="col-sm-2 col-form-label">Қисқача исми:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"
@@ -110,10 +119,10 @@ const TashkilotQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Телефон:</label>
+              <label className="col-sm-2 col-form-label">Телефон:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
-                  type="text"
+                  type="phone"
                   name="tel"
                   value={bajaruvchi.tel}
                   onChange={changeHandler}
@@ -121,7 +130,7 @@ const TashkilotQoshish = () => {
               </div>
             </div>
             <div className="mb-3 row">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Парол:</label>
+              <label className="col-sm-2 col-form-label">Парол:</label>
               <div className="col-sm-10">
                 <input className="form-control form-input-bajaruvchi"
                   type="text"

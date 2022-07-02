@@ -7,14 +7,40 @@ import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
 import './Bajaruvchi.css'
 function Bajaruvchilar() {
-  const navigate = useNavigate();
+
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [bajaruvchilar, setBajaruvchilar] = useState([]);
+
   const [searchPage, setSearchPage] = useState([]);
+
+  const [post, setPost] = useState(false);
+
+  const navigate = useNavigate();
+
+  // Bazadan kelayotgan ma'lumot
+  useEffect(() => {
+    const Bajaruvchi = async () => {
+      try {
+        const res = await axios.get(`${config.SERVER_URL}user`, TOKEN)
+        if (res.status === 200) {
+          setBajaruvchilar(res.data);
+        }
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    }
+    Bajaruvchi();
+  }, [post]);
+
+  // Qidiruv Funksiyasi
   const Search = (input) => {
     const newService = bajaruvchilar.filter((elem) =>
       elem.fish.toLowerCase().includes(input.toLowerCase())
@@ -22,46 +48,40 @@ function Bajaruvchilar() {
     setSearchPage(newService);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}user`, TOKEN)
-      .then(
-        (res) => {
-          setBajaruvchilar(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [Delete]);
+  // yo'naltirish funksiyasi
   async function Bqoshish() {
     navigate("/bajaruvchiqoshish");
   }
+
+  // Bazadagi ma'lumotni yangialsh funksiyasi
   async function Update(elem) {
     navigate(`/bajaruvchi/${elem._id}`);
     localStorage.setItem("bajaruvchi", JSON.stringify(elem));
   }
-  const Check = async (item) => {
-    const result = await window.confirm(
-      "Bajaruvchi malumotlari o'chirilsinmi ? "
-    );
+
+  // Bazadagi malumotni o'chirish funksiyasi
+  const onClick = async (elem) => {
+    const result = await window.confirm("O'chirilsinmi?");
     if (result) {
-      Delete(item);
+      DeleteBajaruvchi(elem);
       return;
     }
-    alert("O'chirilmadi");
   };
-  async function Delete(item) {
-    await axios
-      .delete(`${config.SERVER_URL}user/${item._id}`, TOKEN)
-      .then((res) => {
-        alert(`Bajaruvchi malumotlari O'chirildi`);
-      })
-      .catch((error) => console.log(error));
+
+  const DeleteBajaruvchi = async (elem) => {
+    const res = await axios.delete(`${config.SERVER_URL}user/${elem._id}`, TOKEN)
+    try {
+      if (res.status === 200) {
+        setPost(!post);
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+      console.log(err);
+    }
   }
+
   return (
     <>
       <div className="sticky-top">
@@ -75,7 +95,7 @@ function Bajaruvchilar() {
               <Button
                 name={"Бажарувчи қўшиш"}
                 ButtonFunction={Bqoshish}
-                ButtonStyle="oq-button button-end1" 
+                ButtonStyle="oq-button button-end1"
               />
             </div>
             <div className="col-md-6 d-flex justify-content-end align-items-center">
@@ -87,7 +107,7 @@ function Bajaruvchilar() {
                   searchPage.length > 0 ? searchPage : bajaruvchilar
                 }
                 Up={Update}
-                Del={Check}
+                Del={onClick}
               />
             </div>
           </div>
