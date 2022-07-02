@@ -1,25 +1,42 @@
+import React, { useState, useEffect } from "react";
 import Button from "../../components/button/Button";
 import Bxlqoshish from "../../components/bxlqoshish/Bxlqoshish";
+import Navbar from "../../components/navbar/Navbar";
+import "./Bo'limlar.css";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import config from "../../config.json";
 import axios from "axios";
-import "./Bo'limlar.css";
-import Navbar from "../../components/navbar/Navbar";
+
 const Bolimlar = () => {
+  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  // Statelar
   const [bolim, setBolim] = useState([]);
-
   const [s, setS] = useState(false);
-
-  const [post, setPost] = useState(false);
-
   const [searchPage, setSearchPage] = useState([]);
+  // Bazadan kelyotgan ma'lumot
+  useEffect(() => {
+    const Bolim = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}bolim`, TOKEN)
+        if(res.status===200){
+          setBolim(res.data);
+        }
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    Bolim()
+  },[s]);
 
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = bolim.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
@@ -27,32 +44,7 @@ const Bolimlar = () => {
     setSearchPage(newService);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}bolim`, TOKEN)
-      .then(
-        (res) => {
-          setBolim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [s]);
-
-  const navigate = useNavigate();
-
-  async function BolimlarQoshish(params) {
-    navigate("/bolimqoshish");
-  }
-  async function BolimlarUpdate(elem) {
-    localStorage.setItem("bolim", JSON.stringify(elem));
-    navigate(`/bolim/${elem._id}`);
-  }
-
+  // O'chirish funksiyasi
   const onClick = async (elem) => {
     const result = await window.confirm("O'chirilsinmi?");
     if (result) {
@@ -62,21 +54,30 @@ const Bolimlar = () => {
     alert("O'chirilmadi");
   };
   async function BolimDelete(elem) {
-    await axios
-      .delete(`${config.SERVER_URL}bolim/${elem._id}`, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-          setS(!s);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+    try{
+      const res = await axios.delete(`${config.SERVER_URL}bolim/${elem._id}`, TOKEN)
+      if(res.status===200){
+        res.data && alert("O'chirildi");
+        setS(!s);
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   }
+  // Yo'naltiruvchi funksiytalar
+  // Qo'shish
+  async function BolimlarQoshish(params) {
+    navigate("/bolimqoshish");
+  }
+  // O'zgartirish
+  async function BolimlarUpdate(elem) {
+    localStorage.setItem("bolim", JSON.stringify(elem));
+    navigate(`/bolim/${elem._id}`);
+  }
+
   return (
     <>
       <div className="sticky-top">

@@ -6,51 +6,46 @@ import axios from "axios";
 import Navbar from '../../components/navbar/Navbar'
 
 const TashkilotQoshish = () => {
+  const navigate = useNavigate();
   const tash = JSON.parse(localStorage.getItem("tash"));
+  const TOKEN = {
+    headers: {
+      "jwt-token": sessionStorage.getItem("jwt-token"),
+    },
+  };
+
   const [Text, setText] = useState({
     name: tash.name,
     admin: tash.admin,
     login: tash.login,
     parol: tash.parol,
   });
-  const navigate = useNavigate();
-  const TOKEN = {
-    headers: {
-      "jwt-token": sessionStorage.getItem("jwt-token"),
-    },
-  };
+  
   const Submit = (e) => {
     e.preventDefault();
   };
+
   const Close = () => {
     navigate("/tashkilot");
   };
+
   const changeHandler = (e) => {
     setText({ ...Text, [e.target.name]: e.target.value });
   };
-  const Change = async () => {
-    await axios
-      .put(`${config.SERVER_URL}tashkilot/${tash._id}`, Text,TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilandi");
-          setText({ 
-            name: "",
-            admin: "",
-            login: "",
-            parol: "",
-          })
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-    // await Show();
-    console.log(Text);
-  };
+
+  const ChangeTash = async () => {
+    try{
+      const res = await axios.put(`${config.SERVER_URL}tashkilot/${tash._id}`, Text,TOKEN)
+      if(res.status===200){
+        navigate("/tashkilot");
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    };
+  }
   return (
     <div>
       <div className="sticky-top">
@@ -128,7 +123,7 @@ const TashkilotQoshish = () => {
           </div>
           <div className="mt-5">
             <Button
-              ButtonFunction={Change}
+              ButtonFunction={ChangeTash}
               ButtonStyle={"oq-button d-block mx-auto"}
               name="Янгилаш"
             />

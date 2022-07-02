@@ -7,11 +7,13 @@ import "./Xonalar.css";
 import Navbar from "../../components/navbar/Navbar";
 const XonaQoshish = () => {
   const navigate = useNavigate();
+  // Token
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [xonaQoshish, setXonaQoshish] = useState({
     name: "",
     date: new Date(),
@@ -21,35 +23,38 @@ const XonaQoshish = () => {
     setXonaQoshish({ ...xonaQoshish, [e.target.name]: e.target.value });
   };
 
-  const Send = async () => {
+  const Submit = (e) => {
+    e.preventDefault();
+  };
+
+  const Close = () => {
+    navigate("/kabinet");
+  };
+
+  // Xona qo'shish funksiyasi
+  const AddCabinet = async () => {
     if (xonaQoshish.name) {
-      await axios
-        .post(`${config.SERVER_URL}xona`, xonaQoshish, TOKEN)
-        .then(
-          (res) => {
-            alert("Xona qo'shildi");
-            setXonaQoshish({
-              name: "",
-              date: new Date(),
-            })
-          },
-          (err) => {
-            if (err.response.status === 401) {
-              navigate("/");
-            }
-          }
-        )
-        .catch((error) => console.log(error));
+      try{
+        const res = await axios.post(`${config.SERVER_URL}xona`, xonaQoshish, TOKEN)
+        if(res.status===200){
+          alert("Xona qo'shildi");
+          setXonaQoshish({
+            name: "",
+            date: new Date(),
+          })
+          navigate("/kabinet");
+        }
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
     } else {
       alert("Xona kiriting");
     }
   };
-  const Submit = (e) => {
-    e.preventDefault();
-  };
-  const Close = () => {
-    navigate("/kabinet");
-  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -76,7 +81,7 @@ const XonaQoshish = () => {
               <Button
                 name={"Қўшиш"}
                 ButtonStyle="oq-button"
-                ButtonFunction={Send}
+                ButtonFunction={AddCabinet}
               />
             </div>
           </form>

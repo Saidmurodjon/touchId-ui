@@ -1,48 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../../components/button/Button";
+import Navbar from "../../components/navbar/Navbar";
+import "./Lavozimlar.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
-import { useNavigate } from "react-router-dom";
-import "./Lavozimlar.css";
-import Navbar from "../../components/navbar/Navbar";
+
 const LavozimUpdate = () => {
-  const lavozim = JSON.parse(localStorage.getItem("lavozim"));
-  const [post, setPost] = useState({
-    name: lavozim.name,
-  });
   const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  const Submit = (e) => {
-    e.preventDefault();
-  };
-
+  const lavozim = JSON.parse(localStorage.getItem("lavozim"));
+  const [post, setPost] = useState({
+    name: lavozim.name,
+  });
+  
   const changeHandler = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const Change = async () => {
-    await axios
-      .put(`${config.SERVER_URL}lavozim/${lavozim._id}`, post, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilash");
-          navigate("/lavozim");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+  const Submit = (e) => {
+    e.preventDefault();
   };
+
   const Close = () => {
     navigate("/lavozim");
   }
+  // O'zgartirish funksiyasi
+  const ChangeLavozim = async () => {
+    try{
+      const res = await axios.put(`${config.SERVER_URL}lavozim/${lavozim._id}`, post, TOKEN)
+      if(res.status===200){
+        res.data && alert("Yangilandi");
+        navigate("/kabinet");
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
+  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -69,7 +71,7 @@ const LavozimUpdate = () => {
               <Button
                 name={"Ўзгартириш"}
                 ButtonStyle="oq-button"
-                ButtonFunction={Change}
+                ButtonFunction={ChangeLavozim}
               />
             </div>
           </form>

@@ -6,43 +6,45 @@ import { useNavigate } from "react-router-dom";
 import "./Xonalar.css";
 import Navbar from "../../components/navbar/Navbar";
 const XonaUpdate = () => {
-  const xona = JSON.parse(localStorage.getItem("xona"));
-  const [post, setPost] = useState({
-    name: xona.name,
-  });
   const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  const xona = JSON.parse(localStorage.getItem("xona"));
+  const [post, setPost] = useState({
+    name: xona.name,
+  });
+  
   const Submit = (e) => {
     e.preventDefault();
+  };
+
+  const Close = () => {
+    navigate("/kabinet");
   };
 
   const changeHandler = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const Change = async () => {
-    await axios
-      .put(`${config.SERVER_URL}xona/${xona._id}`, post, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilash");
-          navigate("/kabinet");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+  // Xonani o'zgartirish funksiyasi
+  const ChangeCabinet = async () => {
+    try{
+      const res = await axios.put(`${config.SERVER_URL}xona/${xona._id}`, post, TOKEN)
+      if(res.status===200){
+        res.data && alert("Yangilandi");
+        navigate("/kabinet");
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   };
-  const Close = () => {
-    navigate("/kabinet");
-  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -69,7 +71,7 @@ const XonaUpdate = () => {
               <Button
                 name={"Ўзгартириш"}
                 ButtonStyle="oq-button"
-                ButtonFunction={Change}
+                ButtonFunction={ChangeCabinet}
               />
             </div>
           </form>

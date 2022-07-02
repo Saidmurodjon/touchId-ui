@@ -3,67 +3,69 @@ import Button from "../../components/button/Button";
 import Item from "../../components/tashkilotlar/Item";
 import More from "../../components/tashkilotlar/More";
 import { useNavigate } from "react-router-dom";
-// import tash from "./tash.json";
-import axios from "axios";
-import config from "../../config.json";
 import "./Tashkilot.css";
 import Navbar from "../../components/navbar/Navbar";
+import axios from "axios";
+import config from "../../config.json";
 
 const Tashkilotlar = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState(false);
-  const [text, setText] = useState([]);
-  const TQoshish = () => {
-    navigate("/tashkilotqoshish");
-  };
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  // Statelar
+  const [view, setView] = useState(false);
+  const [text, setText] = useState([]);
   const [searchPage, setSearchPage] = useState([]);
+  // O'chirish funksiyasi
+  const Delete = async(item) => {
+    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?");
+    if (query) {
+      try{
+        await axios.delete(`${config.SERVER_URL}tashkilot/${item._id}`, TOKEN)
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+  };
+  // Bazadan kelyotgan ma'lumot
+  useEffect(() => {
+    const Tashkilot = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}tashkilot`, TOKEN)
+        if(res.status===200){
+          res.data && setText(res.data);
+        }
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    Tashkilot();
+    
+  }, [Delete]);
+
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = text.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
   };
-  const Delete = (item) => {
-    let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?");
-    if (query) {
-      axios
-        .delete(`${config.SERVER_URL}tashkilot/${item._id}`, TOKEN)
-        .then(
-          (res) => {
-            res.data && alert("O'chirildi");
-          },
-          (err) => {
-            if (err.response.status === 401) {
-              navigate("/");
-            }
-          }
-        )
-        .catch((error) => console.log(error));
-    } else {
-      alert("O'chirilmadi");
-    }
-  };
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}tashkilot`, TOKEN)
-      .then(
-        (res) => {
-          res.data && setText(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [Delete]);
 
+  // Yo'naltiruvchi funksiyalar
+  // Qo'shish uchun
+  const TQoshish = () => {
+    navigate("/tashkilotqoshish");
+  };
+  // Yangilash uchun
   const getTashkilot = (work) => {
     localStorage.setItem("tash", JSON.stringify(work));
   };

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Button from "../../components/button/Button";
+import Navbar from '../../components/navbar/Navbar'
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
-import Navbar from '../../components/navbar/Navbar'
+
 const QurilmaQoshish = () => {
   const navigate = useNavigate();
   const TOKEN = {
@@ -11,29 +12,39 @@ const QurilmaQoshish = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [device, setDevice] = useState({
     name: "",
     date: new Date(),
   });
+
   const changeHandler = (e) => {
     setDevice({ ...device, [e.target.name]: e.target.value });
   };
+  // Qo'shish funksiyasi
   const Add = async () => {
-    await axios
-      .post(`${config.SERVER_URL}device`, device, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Qo'shildi");
+    if (device.name) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}device`, device, TOKEN)
+        if(res.status===200){
+          alert("Kategoriya qo'shildi");
+          setDevice({
+            name: "",
+            date: new Date(),
+          })
           navigate(`/qurilmakategoriya/${res.data._id}`)
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
         }
-      )
-      .catch((error) => console.log(error));
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    } else {
+      alert("Ma'lumot kiriting");
+    }
   };
+  
   return (
     <div>
       <div className="sticky-top">

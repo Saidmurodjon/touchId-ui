@@ -6,33 +6,38 @@ import config from "../../config.json";
 import Navbar from '../../components/navbar/Navbar'
 
 const UpdateDevice = () => {
+  const navigate = useNavigate();
   const qurilma = JSON.parse(localStorage.getItem("qurilma"));
   const id = useParams().id;
-  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  // Statelar
   const [dev, setDev] = useState({
     name: qurilma.name,
     elem: qurilma.elem,
     deviceId: qurilma.deviceId,
     date: new Date(),
   });
-
   const [inputFields, setInputFields] = useState(qurilma.elem);
 
+  // Yangi maydon qo'shish
   const addFields = () => {
     let newfield = { name: "", made: "", char: "", steyt: "" };
     setInputFields([...inputFields, newfield]);
   };
-
+  // Maydonni o'chirish
   const removeFields = (index) => {
     let data = [...inputFields];
     data.splice(index, 1);
     setInputFields(data);
   };
+// Yangi maydonlarni mavjudlarining davomidan qo'shib chiqarish
+  useEffect(() => {
+    setDev({ ...dev, elem: inputFields });
+  }, [inputFields]);
 
   const changeHandler = (e) => {
     setDev({ ...dev, [e.target.name]: e.target.value });
@@ -44,33 +49,21 @@ const UpdateDevice = () => {
     setInputFields(data);
   };
 
-  const AddAll = async () => {
-    await axios
-      .put(`${config.SERVER_URL}device/elem/${id}`, dev,TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilandi");
-          setInputFields([ ])
-          setDev({
-            name: '',
-            elem: '',
-            deviceId: '',
-            date: '',
-          })
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+  const UpdateAll = async () => {
+    try{
+      const res = await axios.put(`${config.SERVER_URL}device/elem/${id}`, dev,TOKEN)
+      if(res.status===200){
+        res.data && alert("Yangilandi");
+        navigate("/qurilmatoifa");
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   };
-
-  useEffect(() => {
-    setDev({ ...dev, elem: inputFields });
-  }, [inputFields]);
-
+  
   return (
     <div>
       <div className="sticky-top">
@@ -152,7 +145,7 @@ const UpdateDevice = () => {
             <Button
               ButtonStyle={"oq-button"}
               name="Янгилаш"
-              ButtonFunction={AddAll}
+              ButtonFunction={UpdateAll}
             />
           </div>
         </div>
