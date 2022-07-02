@@ -1,8 +1,6 @@
 import Button from "../button/Button";
 import React, { useEffect, useState } from "react";
 import './Filter.css'
-import DataInput from "../dataInput/DataInput";
-import DateInput2 from "../dateInput2/DateInput2";
 const month = [
   {
     name: "Январь",
@@ -85,10 +83,7 @@ function Filter(props) {
           Filter
         </button>
         <form action="" className="d-flex" >
-          <DataInput/>
-          <DateInput2/>
-
-          {/* <select
+          <select
             className="select-style ms-2"
             onChange={changeHandler}
             value={time.year}
@@ -111,7 +106,7 @@ function Filter(props) {
                 {item.name}
               </option>
             ))}
-          </select> */}
+          </select>
         </form>
       </div>
     </>
