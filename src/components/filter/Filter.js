@@ -75,13 +75,13 @@ function Filter(props) {
   return (
     <>
       <div className="d-flex">
-          <button
-            className="select-style ms-2"
-            name="Filter"
-            onClick={() => FilterFunction()}
-          >
-            Filter
-          </button>
+        <button
+          className="select-style ms-2"
+          name="Filter"
+          onClick={() => FilterFunction()}
+        >
+          Filter
+        </button>
         <form action="" className="d-flex" >
           <select
             className="select-style ms-2"

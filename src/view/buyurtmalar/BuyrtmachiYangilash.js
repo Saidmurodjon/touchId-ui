@@ -16,7 +16,6 @@ const BuyurtmaYangilash = () => {
 
   const navigate = useNavigate();
 
-
   const [buyrtmachi, setBuyrtmachi] = useState({
     fish: buy.fish,
     bolim: buy.bolim,
@@ -25,16 +24,15 @@ const BuyurtmaYangilash = () => {
     tel: buy.tel,
   });
 
-
   const [bolim, setBolim] = useState([]);
 
   const [lavozim, setLavozim] = useState([]);
-  
+
   const [xona, setXona] = useState([]);
-  
-useEffect(()=>{
-  
-})
+
+  useEffect(() => {
+
+  })
 
   // Bazadan ma'lumot olish
   useEffect(() => {
