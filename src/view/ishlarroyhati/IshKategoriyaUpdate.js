@@ -1,46 +1,48 @@
 import React, { useState, useEffect } from "react";
-import Button from "../../components/button/Button";
 import axios from "axios";
 import config from "../../config.json";
+import Button from "../../components/button/Button";
 import { useNavigate } from "react-router-dom";
-import "./IshlarRoyhati.css";
 import Navbar from "../../components/navbar/Navbar";
+import "./IshlarRoyhati.css";
 const IshKategoriyaUpdate = () => {
-  const ish = JSON.parse(localStorage.getItem("ish"));
-  const [post, setPost] = useState({
-    name: ish.name,
-  });
+
   const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  const Submit = (e) => {
-    e.preventDefault();
-  };
+  const ish = JSON.parse(localStorage.getItem("ish"));
+  const [post, setPost] = useState({
+    name: ish.name,
+  });
 
   const changeHandler = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
+  //Bazadagi ma'lumotni yangilash funksiyasi 
   const Change = async () => {
-    await axios
-      .put(`${config.SERVER_URL}ish/${ish._id}`, post, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilash");
-          navigate("/ishlar");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+    const res = await axios.put(`${config.SERVER_URL}ish/${ish._id}`, post, TOKEN);
+    try {
+      if (res.status === 200) {
+        res.data && alert("Yangilash");
+        navigate("/ishlar");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+      console.log(err);
+    }
   };
-
+  
+  // jo'natish
+  const Submit = (e) => {
+    e.preventDefault();
+  };
+  // Birlamchi sahifaga qaytish
   const Close = () => {
     navigate("/ishlar");
   };

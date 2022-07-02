@@ -1,17 +1,19 @@
-import Button from "../../components/button/Button";
-import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Button from "../../components/button/Button";
+import Navbar from '../../components/navbar/Navbar'
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
-import Navbar from '../../components/navbar/Navbar'
+
 const AddDevice = () => {
   const navigate = useNavigate();
+  const id = useParams().id;
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  const id = useParams().id;
+  // Statelar
   const [dev, setDev] = useState({
     name: "",
     elem: [],
@@ -21,42 +23,52 @@ const AddDevice = () => {
   const [inputFields, setInputFields] = useState([
     { name: "", made: "", char: "", steyt: "" },
   ]);
+
+  // Yangi input qo'shish funksiyasi
   const addFields = () => {
     let newfield = { name: "", made: "", char: "", steyt: "" };
     setInputFields([...inputFields, newfield]);
   };
+  // Inputlarni o'chirish funksiyasi
   const removeFields = (index) => {
     let data = [...inputFields];
     data.splice(index, 1);
     setInputFields(data);
   };
+  // Yangi maydonlarni mavjudlarining davomidan qo'shib chiqarish
+  useEffect(() => {
+    setDev({ ...dev, elem: inputFields });
+  }, [inputFields]);
 
   const changeHandler = (e) => {
     setDev({ ...dev, [e.target.name]: e.target.value });
   };
+
   const handleFormChange = (index, event) => {
     let data = [...inputFields];
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
   };
+  // Qo'shish funksiyasi
   const AddAll = async () => {
-    await axios
-      .post(`${config.SERVER_URL}device/elem`, dev, TOKEN)
-      .then(
-        (res) => {
+    if (dev.name) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}device/elem`, dev, TOKEN)
+        if(res.status===200){
           res.data && alert("Qo'shildi");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
+          navigate('/qurilmatoifa')
         }
-      )
-      .catch((error) => console.log(error));
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    } else {
+      alert("Ma'lumot kiriting");
+    }
   };
-  useEffect(() => {
-    setDev({ ...dev, elem: inputFields });
-  }, [inputFields]);
+  
   return (
     <div>
       <div className="sticky-top">

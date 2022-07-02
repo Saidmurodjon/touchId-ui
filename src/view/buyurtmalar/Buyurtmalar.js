@@ -7,14 +7,45 @@ import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
 import "./Buyurtmachi.css";
 export default function Buyurtmalar() {
-  const [buyritmachi, setBuyritmachi] = useState([]);
-  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
+  const [buyritmachi, setBuyritmachi] = useState([]);
+
   const [searchPage, setSearchPage] = useState([]);
+
+  const [post, setPost] = useState(false);
+
+  const navigate = useNavigate();
+
+  // Bazadan ma'lumot olish
+  useEffect(() => {
+    const Buyurtmachi = async () => {
+      const res = await axios.get(`${config.SERVER_URL}cilient`, TOKEN)
+      try {
+        if (res.status === 200) {
+          setBuyritmachi(res.data);
+        }
+      }
+      catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    }
+    Buyurtmachi();
+  }, [post]);
+
+  // yo'naltirish
+  function Bqoshish() {
+    navigate("/buyrtmaqoshish");
+  }
+
+  // Qidirsh funksiyasi
   const Search = (input) => {
     const newService = buyritmachi.filter((elem) =>
       elem.fish.toLowerCase().includes(input.toLowerCase())
@@ -22,53 +53,35 @@ export default function Buyurtmalar() {
     setSearchPage(newService);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}cilient`, TOKEN)
-      .then(
-        (res) => {
-          setBuyritmachi(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [Delete]);
-  async function Bqoshish() {
-    navigate("/buyrtmaqoshish");
-  }
+  // yangilash sahifasiga yonaltirish
   async function Update(item) {
     navigate(`/buyrtma/${item._id}`);
     localStorage.setItem("buyrtmachi", JSON.stringify(item));
   }
-  const Check = async (item) => {
-    const result = await window.confirm(
-      "Buyurtmachi malumotlari o'chirilsinmi ? "
-    );
+
+  // Bazadagi malumotni o'chirish funksiyasi
+  const onClick = async (elem) => {
+    const result = await window.confirm("O'chirilsinmi?");
     if (result) {
-      Delete(item);
+      DeleteBuyurtmachi(elem);
       return;
     }
-    alert("O'chirilmadi");
   };
-  async function Delete(item) {
-    await axios
-      .delete(`${config.SERVER_URL}cilient/${item._id}`, TOKEN)
-      .then(
-        (res) => {
-          alert(`Buyurtmachi malumotlari O'chirildi`);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+
+  const DeleteBuyurtmachi = async (elem) => {
+    const res = await axios.delete(`${config.SERVER_URL}cilient/${elem._id}`, TOKEN);
+    try {
+      if (res.status === 200) {
+        setPost(!post);
+      }
+    } catch (err) {
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   }
+
   return (
     <>
       <div className="sticky-top">
@@ -88,7 +101,7 @@ export default function Buyurtmalar() {
         <BList
           buyritmachi={searchPage.length > 0 ? searchPage : buyritmachi}
           Up={Update}
-          Del={Check}
+          Del={onClick}
         />
       </div>
     </>

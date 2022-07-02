@@ -1,49 +1,50 @@
 import React, { useState } from "react";
 import Button from "../../components/button/Button";
+import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/navbar/Navbar";
+
 const BolimlarEdit = () => {
+  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
   const bolim = JSON.parse(localStorage.getItem("bolim"));
+
   const [post, setPost] = useState({
     name: bolim.name,
   });
-  console.log(bolim);
-  const navigate = useNavigate();
 
   const Submit = (e) => {
     e.preventDefault();
   };
 
-  const changeHandler = (e) => {
-    setPost({ ...post, [e.target.name]: e.target.value });
-  };
-
-  const Change = async () => {
-    await axios
-      .put(`${config.SERVER_URL}bolim/${bolim._id}`, post, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("Yangilash");
-          navigate("/bolim");
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  };
   const Close = () => {
     navigate("/bolim");
   };
+
+  const changeHandler = (e) => {
+    setPost({ ...post, [e.target.name]: e.target.value });
+  };
+  // O'zgartirish funksiyasi
+  const ChangeBolim = async () => {
+    try{
+      const res = await axios.put(`${config.SERVER_URL}bolim/${bolim._id}`, post, TOKEN)
+      if(res.status===200){
+        res.data && alert("Yangilandi");
+        navigate("/bolim");
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
+  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -70,7 +71,7 @@ const BolimlarEdit = () => {
               <Button
                 name={"Ўзгартириш"}
                 ButtonStyle="oq-button"
-                ButtonFunction={Change}
+                ButtonFunction={ChangeBolim}
               />
             </div>
           </form>

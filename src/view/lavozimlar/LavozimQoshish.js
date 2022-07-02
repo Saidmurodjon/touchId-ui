@@ -7,11 +7,13 @@ import "./Lavozimlar.css";
 import Navbar from "../../components/navbar/Navbar";
 const LavozimQoshish = () => {
   const navigate = useNavigate();
+  // Token
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  // Statelar
   const [lavozimQoshish, setLavozimQoshsih] = useState({
     name: "",
     date: new Date(),
@@ -21,29 +23,6 @@ const LavozimQoshish = () => {
     setLavozimQoshsih({ ...lavozimQoshish, [e.target.name]: e.target.value });
   };
 
-  const Send = async () => {
-    if (lavozimQoshish.name) {
-      await axios
-        .post(`${config.SERVER_URL}lavozim`, lavozimQoshish, TOKEN)
-        .then(
-          (res) => {
-            alert("Lavozim qo'shildi");
-            setLavozimQoshsih({
-              name: "",
-              date: new Date(),
-            })
-          },
-          (err) => {
-            if (err.response.status === 401) {
-              navigate("/");
-            }
-          }
-        )
-        .catch((error) => console.log(error));
-    } else {
-      alert("Lavozim kiriting");
-    }
-  };
   const Submit = (e) => {
     e.preventDefault();
   };
@@ -51,6 +30,30 @@ const LavozimQoshish = () => {
   const Close = () => {
     navigate("/lavozim");
   }
+
+  const AddLavozim = async () => {
+    if (lavozimQoshish.name) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}lavozim`, lavozimQoshish, TOKEN)
+        if(res.status===200){
+          alert("Lavozim qo'shildi");
+          setLavozimQoshsih({
+            name: "",
+            date: new Date(),
+          })
+          navigate("/lavozim");
+        }
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }else{
+      alert("Lavozim kiriting");
+    }
+  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -77,7 +80,7 @@ const LavozimQoshish = () => {
               <Button
                 name={"Қўшиш"}
                 ButtonStyle="oq-button"
-                ButtonFunction={Send}
+                ButtonFunction={AddLavozim}
               />
             </div>
           </form>

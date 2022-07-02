@@ -12,37 +12,44 @@ const TashkilotQoshish = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+
   const [Text, setText] = useState({
     name: "",
     admin: "",
     login: "",
     parol: "",
   });
+
   const Submit = (e) => {
     e.preventDefault();
   };
+
   const changeHandler = (e) => {
     setText({ ...Text, [e.target.name]: e.target.value });
   };
+
   const Close = () => {
     navigate("/tashkilot");
   };
+
+  // Qo'shish funksiyasi
   const AddTash = async () => {
-    await axios
-      .post(`${config.SERVER_URL}tashkilot`, Text, TOKEN)
-      .then(
-        (res) => {
-          alert("Qo'shildi")
-    navigate("/tashkilot");
-         
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
+    if (Text.name) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}tashkilot`, Text, TOKEN)
+        if(res.status===200){
+          alert("Tashkilot qo'shildi");
+          navigate("/tashkilot");
         }
-      )
-      .catch((error) => console.log(error));
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }else{
+      alert("Tashkilot kiriting");
+    }
   };
   return (
     <div>

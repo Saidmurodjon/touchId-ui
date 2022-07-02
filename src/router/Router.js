@@ -18,7 +18,6 @@ import LavozimQoshish from "../view/lavozimlar/LavozimQoshish";
 import QurilmaToifa from "../view/qurilmalar/QurilmaToifa";
 import QurilmaQoshish from "../view/qurilmalar/QurilmaQoshish";
 import AddDevice from "../view/qurilmalar/AddDevice";
-import Statistika from "../view/statistika/Statistika";
 import Tashkilot from "../view/tashkilotlar/Tashkilotlar";
 import TashkilotQoshish from "../view/tashkilotlar/TashkilotQoshish";
 import Xona from "../view/xonalar/Xonalar";
@@ -57,7 +56,6 @@ function Router() {
         <Route path="/qurilmakategoriya/:id" element={<AddDevice />} />
         <Route path="/qurilmayangilash/:id" element={<UpdateDevice />} />
         <Route path="/qurilmaqoshish" element={<QurilmaQoshish />} />
-        <Route path="/statistika" element={<Statistika />} />
         <Route path="/tashkilot" element={<Tashkilot />} />
         <Route path="/tashkilotqoshish" element={<TashkilotQoshish />} />
         <Route path="/kabinet" element={<Xona />} />

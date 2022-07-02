@@ -13,9 +13,7 @@ const BolimlarQoshish = () => {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-  async function Bolimlar(params) {
-    navigate("/bolim");
-  }
+  
   const [bolimQoshish, setBolimQoshish] = useState({
     name: "",
     date: new Date(),
@@ -24,35 +22,36 @@ const BolimlarQoshish = () => {
   const changeHandler = (e) => {
     setBolimQoshish({ ...bolimQoshish, [e.target.name]: e.target.value });
   };
-  const Send = async () => {
-    if (bolimQoshish.name) {
-      await axios
-        .post(`${config.SERVER_URL}bolim`, bolimQoshish, TOKEN)
-        .then(
-          (res) => {
-            alert("malumot qo'shildi");
-            setBolimQoshish  ({
-              name: "",
-              date: new Date(),
-            })
-          },
-          (err) => {
-            if (err.response.status === 401) {
-              navigate("/");
-            }
-          }
-        )
-        .catch((error) => console.log(error));
-    } else {
-      alert("malumot kiriting");
-    }
-  };
   const Submit = (e) => {
     e.preventDefault();
   };
   const Close = () => {
     navigate("/bolim");
   };
+  // Bo'lim qo'shish funksiyasi
+  const AddBolim = async () => {
+    if (bolimQoshish.name) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}bolim`, bolimQoshish, TOKEN)
+        if(res.status===200){
+          alert("malumot qo'shildi");
+          setBolimQoshish  ({
+            name: "",
+            date: new Date(),
+          })
+          navigate("/bolim");
+        }
+      }catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }else{
+      alert("malumot kiriting");
+    }
+  };
+  
   return (
     <>
       <div className="sticky-top">
@@ -78,7 +77,7 @@ const BolimlarQoshish = () => {
             <div className="d-flex mt-4 justify-content-center">
               <Button
                 name={"Қўшиш"}
-                ButtonFunction={Send}
+                ButtonFunction={AddBolim}
                 ButtonStyle="oq-button"
               />
             </div>

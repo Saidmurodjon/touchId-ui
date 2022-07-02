@@ -4,50 +4,55 @@ import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
 const Qurilma = (props) => {
+  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
-
-  const navigate = useNavigate();
+  // Statelar
   const { elem = {}, up, ch } = props;
   const [dev, setDev] = useState([]);
-  const [d, setD] = useState(false);
+
   const Check = (item) => {
     let query = window.confirm("Ma'lumotni o'chirishni xohlaysizmi?");
     if (query) {
       DeleteDevice(item);
-    } else {
-      alert("O'chirilmadi");
     }
   };
-  const DeleteDevice = (item) => {
-    axios
-      .delete(`${config.SERVER_URL}device/elem/${item._id}`)
-      .then((res) => {
-        res.data && alert("O'chirildi");
-      })
-      .catch((error) => console.log(error));
+  // O'chirish funksiyalari
+  const DeleteDevice = async(item) => {
+    try{
+      await axios.delete(`${config.SERVER_URL}device/elem/${item._id}`)
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   };
+
+  // Bazadan kelyotgan ma'lumot
   useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}device/elem/${elem._id}`, TOKEN)
-      .then(
-        (res) => {
+    const Device = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}device/elem/${elem._id}`, TOKEN)
+        if(res.status===200){
           setDev(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-          if (err.response.status === 404) {
-            ch();
-          }
         }
-      )
-      .catch((error) => console.log(error));
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        if (err.response.status === 404) {
+          ch();
+        }
+      }
+    }
+    Device()
   }, [DeleteDevice]);
+
   return (
     <div>
       <div className="qurilmaNom d-flex border align-items-center justify-content-between py-2 px-3">
