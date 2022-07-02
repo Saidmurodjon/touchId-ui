@@ -44,10 +44,10 @@ const BuyurtmaQoshish = () => {
           setBolim(res.data);
         }
         if (res2.status === 200) {
-          setXona(res.data);
+          setXona(res2.data);
         }
         if (res3.status === 200) {
-          setLavozim(res.data);
+          setLavozim(res3.data);
         }
       }
       catch (err) {

@@ -8,6 +8,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Filter from "../../components/filter/Filter";
 import { useNavigate } from "react-router-dom";
 import "./Hisobot.css";
+import DataInput from "../../components/dataInput/DataInput";
 
 export default function Hisobot() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export default function Hisobot() {
           </h4>
           <div className="d-flex">
             <Filter FilterFunction={Filters} />
+            
             <button
               className="select-style-hisobot ms-4 filter-before"
               onClick={handlePrint}

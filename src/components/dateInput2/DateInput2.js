@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import './DateInput.css'
+import '../dataInput/DateInput.css'
 import 'react-datepicker/dist/react-datepicker.css'
-const DataInput = (props) => {
+const DateInput2 = (props) => {
 
     const date = new Date().toISOString().slice(0, 10)
 
@@ -30,4 +30,4 @@ const DataInput = (props) => {
     );
 };
 
-export default DataInput;
+export default DateInput2;
