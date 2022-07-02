@@ -17,11 +17,17 @@ const BoshSahifa = () => {
     },
   };
   const [baza, setBaza] = useState([]);
-
   const [user, setUser] = useState([]);
   const [last, setLast] = useState([]);
   const [filter, setFilter] = useState(false);
   const [searchPage, setSearchPage] = useState([]);
+ console.log(baza);
+  const [next, setNext] = useState({
+    quantity: 1,
+    step: 10,
+    from: '2022-01-06',
+    to: '2022-01-08'
+  });
   const Search = (input) => {
     const newService = baza.filter(
       (elem) =>
@@ -45,18 +51,22 @@ const BoshSahifa = () => {
         }
       )
       .catch((error) => console.log(error));
-    axios
-      .get(`${config.SERVER_URL}report`, TOKEN)
-      .then((res) => {
-        let foo = res.data.filter((item) => {
-          if (item.tasdiq === true) {
-            return true;
-          }
-        });
-        setBaza(foo);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+        console.log(next);
+      // report uchun 
+      try{
+        const res = axios.post(`${config.SERVER_URL}report/next`, next, TOKEN)
+        console.log(res.promise);
+        if(res.status === 200){
+          setBaza([...baza, ...res.data]);
+          setNext({ ...next, quantity: next.quantity + 1 });
+        }
+      }catch(err){
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);       
+      }
+  }, [next]);
   // vid uchun
   const [view, setView] = useState(false);
 
