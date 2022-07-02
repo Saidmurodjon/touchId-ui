@@ -1,44 +1,52 @@
+import { useState, useEffect } from "react";
 import Button from "../../components/button/Button";
 import Bxlqoshish from "../../components/bxlqoshish/Bxlqoshish";
+import Navbar from "../../components/navbar/Navbar";
+import "./Xonalar.css";
 import { useNavigate } from "react-router-dom";
 import config from "../../config.json";
-import "./Xonalar.css";
-import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../components/navbar/Navbar";
-const Xonalar = () => {
-  const [xona, setXona] = useState([]);
 
-  const [post, setPost] = useState(false);
+const Xonalar = () => {
+
+  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
 
+  const [xona, setXona] = useState([]);
+  const [post, setPost] = useState(false);
   const [searchPage, setSearchPage] = useState([]);
+
+  // Bazadan ma'lumot olish
+  useEffect(() => {
+    const Xona = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}xona`, TOKEN)
+        if(res.status===200){
+          setXona(res.data);
+        }
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    Xona()
+  }, [post]);
+
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = xona.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
   };
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}xona`, TOKEN)
-      .then(
-        (res) => {
-          setXona(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [post]);
-
+  
+  // Xona o'chirish funksiyalari
   const onClick = async (elem) => {
     const result = await window.confirm("O'chirilsinmi?");
     if (result) {
@@ -49,31 +57,30 @@ const Xonalar = () => {
   };
 
   async function xonaDelete(elem) {
-    await axios
-      .delete(`${config.SERVER_URL}xona/${elem._id}`, TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-          setPost(!post);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+    try{
+      const res = await axios.delete(`${config.SERVER_URL}xona/${elem._id}`, TOKEN)
+      if(res.status===200){
+        setPost(!post);
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   }
-
-  const navigate = useNavigate();
-
-  async function XonalarQoshish(params) {
+  // Yo'naltiruvchi funksiytalar
+  // Xona qo'shish funksiyasi
+  function XonalarQoshish(params) {
     navigate("/kabinetqoshish");
   }
-  async function XonalarEdit(elem) {
+
+  // Xonani edit qilish funksiyasi
+  function XonalarEdit(elem) {
     localStorage.setItem("xona", JSON.stringify(elem));
     navigate(`/xona/${elem._id}`);
   }
+
   return (
     <>
       <div className="sticky-top">

@@ -1,23 +1,45 @@
+import { useState, useEffect } from "react";
 import Button from "../../components/button/Button";
 import Bxlqoshish from "../../components/bxlqoshish/Bxlqoshish";
+import Navbar from "../../components/navbar/Navbar";
+import "./Lavozimlar.css";
 import { useNavigate } from "react-router-dom";
 import config from "../../config.json";
-import { useState, useEffect } from "react";
 import axios from "axios";
-import "./Lavozimlar.css";
-import Navbar from "../../components/navbar/Navbar";
 
 const Lavozimlar = () => {
+  const navigate = useNavigate();
+  // Token
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  
+  // Statelar
   const [lavozim, setLavozim] = useState([]);
-
   const [post, setPost] = useState(false);
-
   const [searchPage, setSearchPage] = useState([]);
+
+  // Bazadan kelyotgan malumot 
+  useEffect(() => {
+    const Lavozim = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}lavozim`,TOKEN)
+        if(res.status===200){
+          setLavozim(res.data);
+        }
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    Lavozim();
+  }, [post]);
+
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = lavozim.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
@@ -25,22 +47,7 @@ const Lavozimlar = () => {
     setSearchPage(newService);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}lavozim`,TOKEN)
-      .then(
-        (res) => {
-          setLavozim(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [post]);
-
+  // O'chirish funksiyalari
   const onClick = async (elem) => {
     const result = await window.confirm("O'chirilsinmi?");
     if (result) {
@@ -51,31 +58,29 @@ const Lavozimlar = () => {
   };
 
   async function lavozimDelete(elem) {
-    await axios
-      .delete(`${config.SERVER_URL}lavozim/${elem._id}`,TOKEN)
-      .then(
-        (res) => {
-          res.data && alert("O'chirildi");
-          setPost(!post);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
+    try{
+      const res = await axios.delete(`${config.SERVER_URL}lavozim/${elem._id}`,TOKEN)
+      if(res.status===200){
+        setPost(!post);
+      }
+    }catch(err){
+      console.log(err);
+      if (err.response.status === 401) {
+        navigate("/");
+      }
+    }
   }
-
-  const navigate = useNavigate();
-
-  async function lavozimlarQoshish() {
+  // Yo'naltiruvchi funksiytalar
+  // Qo'shish sahifasiga
+  function lavozimlarQoshish() {
     navigate("/lavozimqoshish");
   }
-  async function lavozimlarEdit(elem) {
+  // Edit sahifasiga
+  function lavozimlarEdit(elem) {
     localStorage.setItem("lavozim", JSON.stringify(elem));
     navigate(`/lavozim/${elem._id}`);
   }
+
   return (
     <>
       <div className="sticky-top">

@@ -1,10 +1,11 @@
-import axios from "axios";
 import React, { useState } from "react";
+import "./Login.css"
 import { useNavigate } from "react-router-dom";
 import config from "../../config.json";
-import "./Login.css"
+import axios from "axios";
 function Login() {
   const navigate = useNavigate();
+  // Statelar
   const [check, setCheck] = useState(false)
   const [login, setLogin] = useState({
     login: "",
@@ -16,28 +17,28 @@ function Login() {
     setCheck(false)
   };
 
+  const Submit = (e) => {
+    e.preventDefault();
+  };
+
+  // Validatsiya funksiyasi
   const Check = async () => {
-    await axios
-    .post(`${config.SERVER_URL}login`,login)
-      .then((res) => {
-        if (res.status === 200) {
+      try{
+        const res = await axios.post(`${config.SERVER_URL}login`,login)
+        if(res.status===200){
           navigate("/home");
           sessionStorage.setItem(`jwt-token`, res.data.jwt_token)
           localStorage.setItem("admin", JSON.stringify(res.data.message));
         }
-      },
-      (err) => {
+      }catch(err){
+        console.log(err);
         if (err.response.status === 402) {
           setCheck(true)
         }
       }
-      )
-      .catch((error) => console.log(error));
-  };
+    }
 
-  const Submit = (e) => {
-    e.preventDefault();
-  };
+  
   return (
     <div className="loginCon bg-light d-flex justify-content-center align-items-center">
       <div className="container  p-5 ">

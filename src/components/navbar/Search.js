@@ -1,9 +1,11 @@
 import "./Navbar.css";
 const Search = (props) => {
   const { SearchFunction } = props;
+
   const Submit = (e) => {
     e.preventDefault();
   };
+  
   return (
     <>
       <form

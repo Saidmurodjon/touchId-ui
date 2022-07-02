@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom'
 const Profil = () => {
     const admin = JSON.parse(localStorage.getItem("admin"));
     const navigate=useNavigate()
+
     const [open, setOpen] = useState(false)
+
     const Close=()=>{
         setOpen(!open)
     }
-
     const Chiqish=()=>{
         navigate('/')
         sessionStorage.removeItem('jwt-token');

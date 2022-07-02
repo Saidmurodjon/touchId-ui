@@ -1,52 +1,58 @@
 import React, { useState, useEffect } from "react";
+import Qurilma from "../../components/qurilma/Qurilma";
+import Navbar from '../../components/navbar/Navbar'
 import Button from "../../components/button/Button.js";
 import "./Qurilma.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
-import Qurilma from "../../components/qurilma/Qurilma";
-import Navbar from '../../components/navbar/Navbar'
 
 const QurilmaToifa = () => {
-  const [text, setText] = useState([]);
+  const navigate = useNavigate();
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
     },
   };
+  // Statelar
+  const [text, setText] = useState([]);
   const [searchPage, setSearchPage] = useState([]);
+
+  const Change = () => {};
+  // Bazadan kelyotgan ma'lumot
+  useEffect(() => {
+    const Lavozim = async()=>{
+      try{
+        const res = await axios.get(`${config.SERVER_URL}device`, TOKEN)
+        if(res.status===200){
+          setText(res.data);
+        }
+      } catch(err){
+        console.log(err);
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    }
+    Lavozim();
+  }, [Change]);
+  // Qidiruv funksiyasi
   const Search = (input) => {
     const newService = text.filter((elem) =>
       elem.name.toLowerCase().includes(input.toLowerCase())
     );
     setSearchPage(newService);
   };
-  const navigate = useNavigate();
+
+// Yo'naltirgichlar
+// Qurilma qo'shishga
   const AddDevice = () => {
     navigate("/qurilmaqoshish");
   };
-
+// Qurilmani yangilashga
   const UpdateDevice = (qurilma) => {
     localStorage.setItem("qurilma", JSON.stringify(qurilma));
   };
-
-  const Change = () => {};
-  useEffect(() => {
-    axios
-      .get(`${config.SERVER_URL}device`, TOKEN)
-      .then(
-        (res) => {
-          res.data && setText(res.data);
-          // setLoading(false);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-  }, [Change]);
 
   return (
     <div>
