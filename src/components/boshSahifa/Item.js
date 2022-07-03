@@ -1,13 +1,13 @@
 const Item = (props) => {
   const { elem = {} } = props;
-  const date = new Date(elem.fullFData);
+  const date = new Date(elem.date).toISOString().slice(11,16)
   return (
     <>
       <div className="col-6">
         <div className="card m-2 px-4 pt-3 pb-2">
           <div className="up d-flex justify-content-between">
             <span className="alert alert-warning px-1">
-              {date.getHours() + ":" + date.getMinutes()}
+              {date}
             </span>
             <h5 className="text-secondary">№ {elem.countYear}</h5>
           </div>

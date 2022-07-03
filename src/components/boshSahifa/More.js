@@ -1,6 +1,6 @@
 const More = (props) => {
   const { elem = {}, oy } = props;
-  const date = new Date(elem.fullFData);
+  const date = new Date(elem.date)
   return (
     <>
       <div className="col-12">
@@ -14,8 +14,8 @@ const More = (props) => {
             <span className="text-secondary">
               Бажарилган вақт:{" "}
               <p className="alert alert-warning d-inline px-1">
-                {date.getFullYear()} йил {date.getDay()} {oy} соат{" "}
-                {date.getHours() + ":" + date.getMinutes()}
+                {date.getFullYear()} йил {date.getDay()+1} {oy} соат{" "}
+                {date.toISOString().slice(11,16)}
               </p>
             </span>
             <span>
@@ -27,7 +27,7 @@ const More = (props) => {
           {/* Ishlar */}
           <div className="works mt-4 text-secondary">
             {elem.services.map((item, index) => (
-              <h5 key={item._id}>
+              <h5 key={index}>
                 {index + 1} - {item.category}
               </h5>
             ))}
@@ -51,7 +51,7 @@ const More = (props) => {
                 Вилоят ҳокимлиги номидан буюртмачи: <br />
                 {elem.cilientLavozim}
               </p>
-              <h5>{elem.ciientFish}</h5>
+              <h5>{elem.cilientFish}</h5>
               <h5>Тасдиқлайман</h5>
             </div>
           </div>

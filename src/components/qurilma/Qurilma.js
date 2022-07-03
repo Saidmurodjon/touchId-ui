@@ -21,10 +21,11 @@ const Qurilma = (props) => {
     }
   };
   // O'chirish funksiyalari
-  const DeleteDevice = async(item) => {
-    try{
-      await axios.delete(`${config.SERVER_URL}device/elem/${item._id}`)
-    }catch(err){
+  const DeleteDevice = async (item) => {
+    try {
+      await axios.delete(`${config.SERVER_URL}device/elem/${item._id}`, TOKEN);
+      ch();
+    } catch (err) {
       console.log(err);
       if (err.response.status === 401) {
         navigate("/");
@@ -34,23 +35,23 @@ const Qurilma = (props) => {
 
   // Bazadan kelyotgan ma'lumot
   useEffect(() => {
-    const Device = async()=>{
-      try{
-        const res = await axios.get(`${config.SERVER_URL}device/elem/${elem._id}`, TOKEN)
-        if(res.status===200){
+    const Device = async () => {
+      try {
+        const res = await axios.get(
+          `${config.SERVER_URL}device/elem/${elem._id}`,
+          TOKEN
+        );
+        if (res.status === 200) {
           setDev(res.data);
         }
-      } catch(err){
+      } catch (err) {
         console.log(err);
         if (err.response.status === 401) {
           navigate("/");
         }
-        if (err.response.status === 404) {
-          ch();
-        }
       }
-    }
-    Device()
+    };
+    Device();
   }, [DeleteDevice]);
 
   return (

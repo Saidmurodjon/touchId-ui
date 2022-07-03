@@ -4,13 +4,14 @@ import Item from "../../components/boshSahifa/Item";
 import More from "../../components/boshSahifa/More";
 import Xodimlar from "../../components/boshSahifa/Xodimlar";
 import Navbar from "../../components/navbar/Navbar";
-import Filter from "../../components/filter/Filter";
+import Filter2 from "../../components/filter2/Filter2";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
 
 const BoshSahifa = () => {
   const navigate = useNavigate();
+  const date = new Date().toISOString().slice(0, 8);
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
@@ -19,58 +20,10 @@ const BoshSahifa = () => {
   const [baza, setBaza] = useState([]);
   const [user, setUser] = useState([]);
   const [last, setLast] = useState([]);
-  const [filter, setFilter] = useState(false);
+  // const [filter, setFilter] = useState(false);
   const [searchPage, setSearchPage] = useState([]);
- console.log(baza);
-  const [next, setNext] = useState({
-    quantity: 1,
-    step: 10,
-    from: '2022-01-06',
-    to: '2022-01-08'
-  });
-  const Search = (input) => {
-    const newService = baza.filter(
-      (elem) =>
-        elem.userFish.toLowerCase().includes(input.toLowerCase()) ||
-        elem.cilientFish.toLowerCase().includes(input.toLowerCase())
-    );
-    setSearchPage(newService);
-  };
-  useEffect(() => {
-    // xodim uchun
-    axios
-      .get(`${config.SERVER_URL}user`, TOKEN)
-      .then(
-        (res) => {
-          setUser(res.data);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
-        }
-      )
-      .catch((error) => console.log(error));
-        console.log(next);
-      // report uchun 
-      try{
-        const res = axios.post(`${config.SERVER_URL}report/next`, next, TOKEN)
-        console.log(res.promise);
-        if(res.status === 200){
-          setBaza([...baza, ...res.data]);
-          setNext({ ...next, quantity: next.quantity + 1 });
-        }
-      }catch(err){
-        if (err.response.status === 401) {
-          navigate("/");
-        }
-        console.log(err);       
-      }
-  }, [next]);
-  // vid uchun
-  const [view, setView] = useState(false);
 
-  let month = [
+  const month = [
     "Январь",
     "Февраль",
     "Март",
@@ -85,23 +38,66 @@ const BoshSahifa = () => {
     "Декабрь",
   ];
 
-  const Filters = () => {
-    const time = JSON.parse(localStorage.getItem("time"));
-    setFilter(true);
-    axios
-      .post(`${config.SERVER_URL}report/filter`, time, TOKEN)
-      .then(
-        (res) => {
-          setBaza(res.data);
-          setFilter(false);
-        },
-        (err) => {
-          if (err.response.status === 401) {
-            navigate("/");
-          }
+  const [next, setNext] = useState({
+    quantity: 1,
+    step: 50,
+    from: date + new Date().getDate(),
+    to: date + (new Date().getDate() + 1),
+  });
+  const Search = (input) => {
+    const newService = baza.filter(
+      (elem) =>
+        elem.userFish.toLowerCase().includes(input.toLowerCase()) ||
+        elem.cilientFish.toLowerCase().includes(input.toLowerCase())
+    );
+    setSearchPage(newService);
+  };
+  useEffect(() => {
+    const Fun = async () => {
+      try {
+        const res = await axios.post(
+          `${config.SERVER_URL}report/next`,
+          next,
+          TOKEN
+        );
+        if (res.status === 200) {
+          setBaza([...baza, ...res.data]);
+          setNext({ ...next, quantity: next.quantity + 1 });
         }
-      )
-      .catch((error) => console.log(error));
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    };
+    Fun();
+  }, [next]);
+  useEffect(() => {
+    // xodim uchun
+    const GetXodim = async () => {
+      try {
+        const res = await axios.get(`${config.SERVER_URL}user`, TOKEN);
+        if (res.status === 200) {
+          setUser(res.data);
+        }
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+        console.log(err);
+      }
+    };
+    GetXodim();
+  }, []);
+  console.log(user);
+  // vid uchun
+  const [view, setView] = useState(false);
+  //fiterdagi button bosilganda FilterFunction ishlaydi
+  const Filter = (time) => {
+    setNext({ ...next, quantity: 1, from: time.from, to: time.to });
+    setBaza([]);
+    console.log(time);
   };
 
   useEffect(() => {
@@ -128,12 +124,12 @@ const BoshSahifa = () => {
         <div className="sarlavha d-flex align-items-center">
           <h1>Бажарилган ишлар</h1>
           <h3 className="bedj ms-5 py-3 px-4 border bg-light rounded-circle">
-            {baza.length}
+            {baza ? baza.length : "0"}
           </h3>
         </div>
         <div className="filter d-flex me-5 pe-1 mt-2">
           <div className="me-5">
-            {filter ? "Filterlanmodqa..." : <Filter FilterFunction={Filters} />}
+            <Filter2 FilterFunction={Filter} />
           </div>
           <div className="row vid">
             <div className="col-6">
@@ -170,12 +166,9 @@ const BoshSahifa = () => {
       </div>
       {/* Asosiy qism ishlar ro'yxati boshlandi */}
       <div className="bajJadval bg-light p-5">
-        {filter ? (
-          "Filterlanmodqa..."
-        ) : (
-          <div className="row">
-            {searchPage.length > 0
-              ? searchPage.map((work) =>
+        <div className="row">
+          {searchPage.length > 0
+            ? searchPage.map((work) =>
                 view ? (
                   <More
                     key={work._id}
@@ -186,19 +179,20 @@ const BoshSahifa = () => {
                   <Item key={work._id} elem={work} />
                 )
               )
-              : baza.map((work) =>
+            : baza
+            ? baza.map((work) =>
                 view ? (
                   <More
                     key={work._id}
-                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                    oy={month[work.date.slice(5, 7) * 1 - 1]}
                     elem={work}
                   />
                 ) : (
                   <Item key={work._id} elem={work} />
                 )
-              )}
-          </div>
-        )}
+              )
+            : null}
+        </div>
       </div>
     </div>
   );
