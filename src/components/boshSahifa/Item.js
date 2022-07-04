@@ -28,7 +28,7 @@ const Item = (props) => {
                 <td>
                   <h6 className="pb-0 buyur">{elem.cilientFish}</h6>
                   <p className="text-secondary">
-                    <span>{elem.cilientKabinet}</span> хона{" "}
+                    <span>{elem.cilientKabinet}</span>{" "}
                     {elem.cilientLavozim}
                   </p>
                 </td>

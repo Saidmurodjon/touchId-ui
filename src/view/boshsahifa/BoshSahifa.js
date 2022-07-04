@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./Bosh.css";
 import Item from "../../components/boshSahifa/Item";
 import More from "../../components/boshSahifa/More";
 import Xodimlar from "../../components/boshSahifa/Xodimlar";
@@ -8,6 +7,7 @@ import Filter2 from "../../components/filter2/Filter2";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
+import "./Bosh.css";
 
 const BoshSahifa = () => {
   const navigate = useNavigate();
@@ -90,14 +90,12 @@ const BoshSahifa = () => {
     };
     GetXodim();
   }, []);
-  console.log(user);
   // vid uchun
   const [view, setView] = useState(false);
   //fiterdagi button bosilganda FilterFunction ishlaydi
   const Filter = (time) => {
     setNext({ ...next, quantity: 1, from: time.from, to: time.to });
     setBaza([]);
-    console.log(time);
   };
 
   useEffect(() => {
@@ -156,9 +154,9 @@ const BoshSahifa = () => {
 
       {/* Ishchilarning bajarilgan ishlari soni */}
       <div className="xodimlar">
-        <div className="xodim">
+        <div className="xodim row">
           {last.map((worker) => (
-            <div key={worker._id}>
+            <div className="col-2" key={worker._id}>
               <Xodimlar fish={worker.name} count={worker.workCount} />
             </div>
           ))}
@@ -172,7 +170,7 @@ const BoshSahifa = () => {
                 view ? (
                   <More
                     key={work._id}
-                    oy={month[work.fullFData.slice(5, 7) * 1 - 1]}
+                    oy={month[work.date.slice(5, 7) * 1 - 1]}
                     elem={work}
                   />
                 ) : (

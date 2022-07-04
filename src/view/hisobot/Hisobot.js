@@ -8,7 +8,6 @@ import Navbar from "../../components/navbar/Navbar";
 import Filter from "../../components/filter/Filter";
 import { useNavigate } from "react-router-dom";
 import "./Hisobot.css";
-import DataInput from "../../components/dataInput/DataInput";
 
 export default function Hisobot() {
   const navigate = useNavigate();

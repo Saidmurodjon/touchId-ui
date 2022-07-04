@@ -9,7 +9,6 @@ function Filter2(props) {
     from: date,
     to:date
   });
-console.log(time);
   useEffect(() => {
     localStorage.setItem("time", JSON.stringify(time));
   });

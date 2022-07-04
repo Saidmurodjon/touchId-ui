@@ -7,7 +7,7 @@ const More = (props) => {
         <div className="card m-2 p-4">
           <h5 className="w-75 text-center mx-auto text-secondary">
             Электрон ҳокимиятни ривожлантириш маркази ҳодими томонидан Фарғона
-            вилоят ҳокимлиги ижтимоий бўлими, {elem.cilientKabinet}-хонада
+            вилоят ҳокимлиги ижтимоий бўлими, {elem.cilientKabinet}да
             қуйидаги ишлар амалга оширилди
           </h5>
           <div className="upInfo d-flex pb-2 justify-content-between mt-3 border-bottom border-3 border-dark">
