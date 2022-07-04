@@ -29,7 +29,7 @@ const IshKategoriyaQoshish = () => {
     const res = await axios.post(`${config.SERVER_URL}ish`, ishQoshish, TOKEN);
     if (ishQoshish.name) {
       try {
-        if (res.status == 200) {
+        if (res.status == 201) {
           alert("Ma'lumot qo'shildi");
           setIshQoshish({
             name: "",

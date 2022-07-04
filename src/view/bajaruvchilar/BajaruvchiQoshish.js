@@ -37,7 +37,7 @@ const BajaruvchiQoshish = () => {
       bajaruvchi.tel
     ) {
       try {
-        if (res.status === 200) {
+        if (res.status === 201) {
           alert("Bajaruvchi malumotlari qo'shildi.");
           setBajaruvchi({
             ismi: "",

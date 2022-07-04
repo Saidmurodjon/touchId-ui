@@ -36,7 +36,7 @@ const TashkilotQoshish = () => {
     const BajUpdate = async () => {
       const res = await axios.put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi, TOKEN);
       try {
-        if (res.status === 200) {
+        if (res.status === 205) {
           alert(`Bajaruvchi malumotlari yangilandi`);
         }
       } catch (err) {

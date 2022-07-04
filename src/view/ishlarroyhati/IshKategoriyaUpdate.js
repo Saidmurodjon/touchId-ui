@@ -26,8 +26,8 @@ const IshKategoriyaUpdate = () => {
   const Change = async () => {
     const res = await axios.put(`${config.SERVER_URL}ish/${ish._id}`, post, TOKEN);
     try {
-      if (res.status === 200) {
-        res.data && alert("Yangilash");
+      if (res.status === 205) {
+        res.data && alert("Yangilandi ");
         navigate("/ishlar");
       }
     } catch (err) {
