@@ -77,7 +77,7 @@ const Qurilma = (props) => {
                     className="border-0 bg-white"
                     onClick={() => up(item)}
                   >
-                    <Link to={`/qurilmayangilash/${item._id}`}>
+                    <Link to={`/qurilma/${item._id}`}>
                       <i className="text-secondary bi bi-pencil-square p-2"></i>
                     </Link>
                   </button>

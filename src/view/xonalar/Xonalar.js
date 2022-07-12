@@ -78,7 +78,7 @@ const Xonalar = () => {
   // Xonani edit qilish funksiyasi
   function XonalarEdit(elem) {
     localStorage.setItem("xona", JSON.stringify(elem));
-    navigate(`/xona/${elem._id}`);
+    navigate(`/kabinet/${elem._id}`);
   }
 
   return (

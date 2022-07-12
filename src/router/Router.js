@@ -54,13 +54,13 @@ function Router() {
         <Route path="/lavozimqoshish" element={<LavozimQoshish />} />
         <Route path="/qurilmatoifa" element={<QurilmaToifa />} />
         <Route path="/qurilmakategoriya/:id" element={<AddDevice />} />
-        <Route path="/qurilmayangilash/:id" element={<UpdateDevice />} />
+        <Route path="/qurilma/:id" element={<UpdateDevice />} />
         <Route path="/qurilmaqoshish" element={<QurilmaQoshish />} />
         <Route path="/tashkilot" element={<Tashkilot />} />
         <Route path="/tashkilotqoshish" element={<TashkilotQoshish />} />
         <Route path="/kabinet" element={<Xona />} />
         <Route path="/kabinetqoshish" element={<XonaQoshish />} />
-        <Route path="/kabinetyangilash" element={<XonaUpdate />} />
+        <Route path="/kabinet/:id" element={<XonaUpdate />} />
         <Route path="/tashkilot/:id" element={<TashkilotUpdate />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
