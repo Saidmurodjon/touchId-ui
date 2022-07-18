@@ -4,16 +4,16 @@ import Button from "../../components/button/Button";
 import axios from "axios";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-import './Bajaruvchi.css'
+import "./Bajaruvchi.css";
 
 const TashkilotQoshish = () => {
-
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
-
   const baj = JSON.parse(localStorage.getItem("bajaruvchi"));
 
   const [bajaruvchi, setBajaruvchi] = useState({
@@ -31,22 +31,26 @@ const TashkilotQoshish = () => {
     setBajaruvchi({ ...bajaruvchi, [e.target.name]: e.target.value });
   };
 
-  // Yangilash funksiysi 
+  // Yangilash funksiysi
   function Update(elem) {
     const BajUpdate = async () => {
-      const res = await axios.put(`${config.SERVER_URL}user/${elem._id}`, bajaruvchi, TOKEN);
+      const res = await axios.put(
+        `${config.SERVER_URL}user/${elem._id}`,
+        bajaruvchi,
+        TOKEN
+      );
       try {
         if (res.status === 205) {
           alert(`Bajaruvchi malumotlari yangilandi`);
+          navigate("/bajaruvchi");
         }
       } catch (err) {
         if (err.response.status === 401) {
           navigate("/");
         }
       }
-    }
+    };
     BajUpdate();
-    navigate("/bajaruvchi");
   }
 
   // Jo'natish
@@ -64,20 +68,21 @@ const TashkilotQoshish = () => {
         <Navbar search="true" />
       </div>
       <div className="w-100  px-5 py-2 position-relative">
-        <h4 className="title-1 mt-2">
-          Бажарувчи қўшиш
-        </h4>
+        <h4 className="title-1 mt-2">Бажарувчи қўшиш</h4>
         <div className="page-bg1 mt-3">
           <div className="position-relative w-100 me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>
           </div>
-          <form action="" className="bajaruvchi-form ps-5 pt-4 pb-4 pe-5 w-100"
+          <form
+            action=""
+            className="bajaruvchi-form ps-5 pt-4 pb-4 pe-5 w-100"
             onSubmit={Submit}
           >
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Ташкилот номи:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="tash"
                   value={bajaruvchi.tash}
@@ -88,7 +93,8 @@ const TashkilotQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Лавозими:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="lavozim"
                   value={bajaruvchi.lavozim}
@@ -99,7 +105,8 @@ const TashkilotQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Ф.И.Ш:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="fish"
                   value={bajaruvchi.fish}
@@ -110,7 +117,8 @@ const TashkilotQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Қисқача исми:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="ismi"
                   value={bajaruvchi.ismi}
@@ -121,7 +129,8 @@ const TashkilotQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Телефон:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="phone"
                   name="tel"
                   value={bajaruvchi.tel}
@@ -132,7 +141,8 @@ const TashkilotQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Парол:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="parol"
                   value={bajaruvchi.parol}

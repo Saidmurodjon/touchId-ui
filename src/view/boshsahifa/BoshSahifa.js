@@ -12,9 +12,11 @@ import "./Bosh.css";
 const BoshSahifa = () => {
   const navigate = useNavigate();
   const date = new Date().toISOString().slice(0, 8);
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   const [baza, setBaza] = useState([]);

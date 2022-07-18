@@ -97,17 +97,6 @@ export default function Menyu() {
             </li>
             <li className=" py-1 link">
               <NavLink
-                to="/tashkilot"
-                className={({ isActive }) => (isActive ? "li" : "")}
-              >
-                <span>
-                  <i className="bi bi-building"></i>
-                </span>
-                <span className="ms-3 linkText">Ташкилотлар</span>
-              </NavLink>
-            </li>
-            <li className=" py-1 link">
-              <NavLink
                 to="/qurilmatoifa"
                 className={({ isActive }) => (isActive ? "li" : "")}
               >

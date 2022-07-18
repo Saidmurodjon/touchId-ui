@@ -8,9 +8,11 @@ import config from "../../config.json";
 
 const LavozimUpdate = () => {
   const navigate = useNavigate();
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   const lavozim = JSON.parse(localStorage.getItem("lavozim"));

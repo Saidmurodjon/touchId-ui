@@ -5,10 +5,11 @@ import config from "./../../config.json";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 const BajaruvchiQoshish = () => {
-
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   const [bajaruvchi, setBajaruvchi] = useState({
@@ -18,6 +19,7 @@ const BajaruvchiQoshish = () => {
     lavozim: "",
     tel: "",
     parol: "",
+    tashkilot_id: tashkilot_id,
   });
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const BajaruvchiQoshish = () => {
     setBajaruvchi({ ...bajaruvchi, [e.target.name]: e.target.value });
   };
 
-  //  bazaga ma'lumot qo'shish funksiyasi 
+  //  bazaga ma'lumot qo'shish funksiyasi
   const Send = async () => {
     const res = await axios.post(`${config.SERVER_URL}user`, bajaruvchi, TOKEN);
     if (
@@ -75,20 +77,21 @@ const BajaruvchiQoshish = () => {
       </div>
 
       <div className="w-100  px-5 py-2 position-relative">
-        <h4 className="title-1 mt-2">
-          Бажарувчи қўшиш
-        </h4>
+        <h4 className="title-1 mt-2">Бажарувчи қўшиш</h4>
         <div className="page-bg1 mt-3">
           <div className="position-relative w-100 me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>
           </div>
-          <form action="" className="bajaruvchi-form ps-5 pt-4 pb-4 pe-5 w-100"
+          <form
+            action=""
+            className="bajaruvchi-form ps-5 pt-4 pb-4 pe-5 w-100"
             onSubmit={Submit}
           >
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Ташкилот номи:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="tash"
                   value={bajaruvchi.tash}
@@ -99,7 +102,8 @@ const BajaruvchiQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Лавозими:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="lavozim"
                   value={bajaruvchi.lavozim}
@@ -110,7 +114,8 @@ const BajaruvchiQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Ф.И.Ш:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="fish"
                   value={bajaruvchi.fish}
@@ -121,7 +126,8 @@ const BajaruvchiQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Қисқача исми:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="ismi"
                   value={bajaruvchi.ismi}
@@ -132,7 +138,8 @@ const BajaruvchiQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Телефон:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="phone"
                   name="tel"
                   value={bajaruvchi.tel}
@@ -143,7 +150,8 @@ const BajaruvchiQoshish = () => {
             <div className="mb-3 row">
               <label className="col-sm-2 col-form-label">Парол:</label>
               <div className="col-sm-10">
-                <input className="form-control form-input-bajaruvchi"
+                <input
+                  className="form-control form-input-bajaruvchi"
                   type="text"
                   name="parol"
                   value={bajaruvchi.parol}

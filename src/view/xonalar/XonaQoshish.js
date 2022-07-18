@@ -8,14 +8,17 @@ import Navbar from "../../components/navbar/Navbar";
 const XonaQoshish = () => {
   const navigate = useNavigate();
   // Token
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
 
   const [xonaQoshish, setXonaQoshish] = useState({
     name: "",
+    tashkilot_id:tashkilot_id,
     date: new Date(),
   });
 

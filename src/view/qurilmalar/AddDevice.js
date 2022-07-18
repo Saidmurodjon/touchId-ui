@@ -8,9 +8,11 @@ import config from "../../config.json";
 const AddDevice = () => {
   const navigate = useNavigate();
   const id = useParams().id;
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   // Statelar

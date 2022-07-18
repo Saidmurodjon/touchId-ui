@@ -9,9 +9,11 @@ const UpdateDevice = () => {
   const navigate = useNavigate();
   const qurilma = JSON.parse(localStorage.getItem("qurilma"));
   const id = useParams().id;
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   // Statelar

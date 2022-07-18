@@ -6,9 +6,11 @@ import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
 const BuyurtmaYangilash = () => {
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   const buy = JSON.parse(localStorage.getItem("buyrtmachi"));

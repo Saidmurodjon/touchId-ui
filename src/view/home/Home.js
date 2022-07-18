@@ -5,6 +5,7 @@ import Aloqa from "./Aloqa";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
 import Login from "../login/Login";
+import MenyuAdmin from "../../components/menu/MenyuAdmin";
 
 function Home() {
   const location = useLocation();
@@ -56,7 +57,18 @@ function Home() {
                 ></i>
               </div>
               {/* menyu qismi */}
-              <Menyu />
+              {
+                (location.pathname ==
+                  "/admin" ||
+                  "/tashkilot" ||
+                  "/tashkilotqoshish" ||
+                  "/tashkilot/:id" ? (
+                    <MenyuAdmin />
+                  ) : (
+                    <Menyu />
+                  ))
+              }
+
               <div className="mt-4 aloqa">
                 <Aloqa />
               </div>

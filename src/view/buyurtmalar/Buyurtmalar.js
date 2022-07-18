@@ -7,9 +7,11 @@ import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
 import "./Buyurtmachi.css";
 export default function Buyurtmalar() {
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
 

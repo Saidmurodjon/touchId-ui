@@ -6,15 +6,16 @@ import Button from "../../components/button/Button";
 import Navbar from "../../components/navbar/Navbar";
 import "./IshlarRoyhati.css";
 const IshKategoriyaQoshish = () => {
-
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
-
   const [ishQoshish, setIshQoshish] = useState({
     name: "",
+    tashkilot_id:tashkilot_id,
     date: new Date(),
   });
 

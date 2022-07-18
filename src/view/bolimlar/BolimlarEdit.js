@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const BolimlarEdit = () => {
   const navigate = useNavigate();
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   const bolim = JSON.parse(localStorage.getItem("bolim"));

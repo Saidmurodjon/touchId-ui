@@ -5,12 +5,13 @@ import BList from "../../components/bajaruvchilar/BList";
 import Button from "../../components/button/Button";
 import config from "../../config.json";
 import Navbar from "../../components/navbar/Navbar";
-import './Bajaruvchi.css'
+import "./Bajaruvchi.css";
 function Bajaruvchilar() {
-
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
 
@@ -26,7 +27,7 @@ function Bajaruvchilar() {
   useEffect(() => {
     const Bajaruvchi = async () => {
       try {
-        const res = await axios.get(`${config.SERVER_URL}user`, TOKEN)
+        const res = await axios.get(`${config.SERVER_URL}user`, TOKEN);
         if (res.status === 200) {
           setBajaruvchilar(res.data);
         }
@@ -36,7 +37,7 @@ function Bajaruvchilar() {
         }
         console.log(err);
       }
-    }
+    };
     Bajaruvchi();
   }, [post]);
 
@@ -69,7 +70,10 @@ function Bajaruvchilar() {
   };
 
   const DeleteBajaruvchi = async (elem) => {
-    const res = await axios.delete(`${config.SERVER_URL}user/${elem._id}`, TOKEN)
+    const res = await axios.delete(
+      `${config.SERVER_URL}user/${elem._id}`,
+      TOKEN
+    );
     try {
       if (res.status === 200) {
         setPost(!post);
@@ -80,7 +84,7 @@ function Bajaruvchilar() {
       }
       console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -98,9 +102,7 @@ function Bajaruvchilar() {
                 ButtonStyle="oq-button button-end1"
               />
             </div>
-            <div className="col-md-6 d-flex justify-content-end align-items-center">
-
-            </div>
+            <div className="col-md-6 d-flex justify-content-end align-items-center"></div>
             <div className="bg-main p-4 m-2">
               <BList
                 bajaruvchilar={

@@ -10,9 +10,11 @@ import config from "../../config.json";
 
 const Tashkilotlar = () => {
   const navigate = useNavigate();
+  const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
+      "tashkilot_id": tashkilot_id,
     },
   };
   // Statelar
