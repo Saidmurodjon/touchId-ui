@@ -9,7 +9,7 @@ import MenyuAdmin from "../../components/menu/MenyuAdmin";
 
 function Home() {
   const location = useLocation();
-
+  const path = location.pathname;
   const [toggle, setToggle] = useState(true);
   // Menyuni ochib yopuvchi funksiya
   const toggleMenyu = () => {
@@ -33,10 +33,15 @@ function Home() {
       aloqa.style.display = "block";
     }
   };
-
+  let a = [
+    "/admin",
+    "/tashkilot",
+    "/tashkilotqoshish",
+    "/tashkilot/:id",
+  ].filter((e) => path.includes(e));
   return (
     <>
-      {location.pathname == "/" ? (
+      {path == "/" ? (
         <Login />
       ) : (
         <div className="container-fluid">
@@ -57,17 +62,8 @@ function Home() {
                 ></i>
               </div>
               {/* menyu qismi */}
-              {
-                (location.pathname ==
-                  "/admin" ||
-                  "/tashkilot" ||
-                  "/tashkilotqoshish" ||
-                  "/tashkilot/:id" ? (
-                    <MenyuAdmin />
-                  ) : (
-                    <Menyu />
-                  ))
-              }
+
+              {a.length > 0 ? <MenyuAdmin /> : <Menyu />}
 
               <div className="mt-4 aloqa">
                 <Aloqa />
