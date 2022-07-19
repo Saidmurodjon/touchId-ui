@@ -37,3 +37,71 @@
 .deviceName{
     width: 69%!important;
 }
+
+/* Qurilma qo'shish uchun */
+
+
+.AppDevice{
+    width: 95%;
+    margin: auto;
+}
+.devcontent{
+    border-radius: 16px;
+}
+
+.form-field{
+    width: 100%;
+}
+
+.form-field label, h2{
+    margin: 0;
+    font-size: 26px;
+    font-weight: 500;
+    color: black;
+}
+.items{
+    margin-left: 13.5vw;
+    padding-left: 1%!important;
+}
+
+.items input{
+    width: 13%!important;
+    padding: 7px;
+}
+
+.services input{
+    height: 25px;
+    width: 10%;
+    padding: 7px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+.items input{
+    height: 25px;
+    width: 10%;
+    padding: 7px;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.form-field  input:focus{
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.devcontent button{
+    background: #ECF0FF;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 2px;
+    padding: 0px 5px!important;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    color: rgb(0, 208, 255);
+    border: none;
+    margin: 0px 1px;
+}
+
+
