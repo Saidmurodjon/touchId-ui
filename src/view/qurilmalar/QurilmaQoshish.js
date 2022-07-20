@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/button/Button";
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const QurilmaQoshish = () => {
   };
   const [device, setDevice] = useState({
     name: "",
+    tashkilot_id: tashkilot_id,
     date: new Date(),
   });
 
@@ -25,17 +26,21 @@ const QurilmaQoshish = () => {
   // Qo'shish funksiyasi
   const Add = async () => {
     if (device.name) {
-      try{
-        const res = await axios.post(`${config.SERVER_URL}device`, device, TOKEN)
-        if(res.status===200){
+      try {
+        const res = await axios.post(
+          `${config.SERVER_URL}device`,
+          device,
+          TOKEN
+        );
+        if (res.status === 200) {
           alert("Kategoriya qo'shildi");
           setDevice({
             name: "",
             date: new Date(),
-          })
-          navigate(`/qurilmakategoriya/${res.data._id}`)
+          });
+          navigate(`/qurilmakategoriya/${res.data._id}`);
         }
-      }catch(err){
+      } catch (err) {
         console.log(err);
         if (err.response.status === 401) {
           navigate("/");
@@ -45,7 +50,7 @@ const QurilmaQoshish = () => {
       alert("Ma'lumot kiriting");
     }
   };
-  
+
   return (
     <div>
       <div className="sticky-top">

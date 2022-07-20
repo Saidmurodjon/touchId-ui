@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/button/Button";
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from "../../components/navbar/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
@@ -12,7 +12,7 @@ const AddDevice = () => {
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      "tashkilot_id": tashkilot_id,
+      tashkilot_id: tashkilot_id,
     },
   };
   // Statelar
@@ -54,13 +54,17 @@ const AddDevice = () => {
   // Qo'shish funksiyasi
   const AddAll = async () => {
     if (dev.name) {
-      try{
-        const res = await axios.post(`${config.SERVER_URL}device/elem`, dev, TOKEN)
-        if(res.status===200){
+      try {
+        const res = await axios.post(
+          `${config.SERVER_URL}device/elem`,
+          dev,
+          TOKEN
+        );
+        if (res.status === 200) {
           res.data && alert("Qo'shildi");
-          navigate('/qurilmatoifa')
+          navigate("/qurilmatoifa");
         }
-      }catch(err){
+      } catch (err) {
         console.log(err);
         if (err.response.status === 401) {
           navigate("/");
@@ -70,7 +74,7 @@ const AddDevice = () => {
       alert("Ma'lumot kiriting");
     }
   };
-  
+
   return (
     <div>
       <div className="sticky-top">

@@ -37,7 +37,7 @@ function Login() {
       }
     } catch (err) {
       console.log(err);
-      if (err.response.status === 402) {
+      if (err.response.status === 401) {
         setCheck(true);
       }
     }
