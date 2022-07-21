@@ -13,10 +13,11 @@ const BoshSahifa = () => {
   const navigate = useNavigate();
   const date = new Date().toISOString().slice(0, 8);
   const tashkilot_id = sessionStorage.getItem("tashkilot_id");
+  const time = localStorage.getItem("time-hisobot");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      "tashkilot_id": tashkilot_id,
+      tashkilot_id: tashkilot_id,
     },
   };
   const [baza, setBaza] = useState([]);
@@ -46,6 +47,12 @@ const BoshSahifa = () => {
     from: date + new Date().getDate(),
     to: date + (new Date().getDate() + 1),
   });
+  // Hisobotdagi ma'lumotlarni tekshirish uchun
+  useEffect(() => {
+    let t = JSON.parse(time);
+    setNext({ ...next, from: t.from, to: t.to });
+    console.log(t);
+  }, [time]);
   const Search = (input) => {
     const newService = baza.filter(
       (elem) =>
@@ -75,6 +82,7 @@ const BoshSahifa = () => {
     };
     Fun();
   }, [next]);
+
   useEffect(() => {
     // xodim uchun
     const GetXodim = async () => {

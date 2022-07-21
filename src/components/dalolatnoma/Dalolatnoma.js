@@ -10,7 +10,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      "tashkilot_id": tashkilot_id,
+      tashkilot_id: tashkilot_id,
     },
   };
   const navigate = useNavigate();
@@ -26,11 +26,11 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       const newArr = [];
       for (let i = 0; i < service.length; i++) {
         const newService = reports.filter((elem) =>
-          elem.category.toLowerCase().includes(service[i].name.toLowerCase())
+          elem.name.toLowerCase().includes(service[i].name.toLowerCase())
         );
         if (newService.length > 0) {
           newArr.push({
-            name: newService[0].category,
+            name: newService[0].name,
             quantity: newService.length,
           });
           t += newService.length;
@@ -76,7 +76,8 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                 <div className="row justify-content-center">
                   <div className="col-5 justify-content-center">
                     <h4 className="text-center">
-                    ЎЗБЕКИСТОН РЕСПУБЛИКАСИ {text.t1.toUpperCase()}"ЭЛЕКТРОН ХОКИМЯТНИ РОВОЖЛАНТИРИШ МАРКАЗИ"
+                      ЎЗБЕКИСТОН РЕСПУБЛИКАСИ {text.t1.toUpperCase()}"ЭЛЕКТРОН
+                      ХОКИМЯТНИ РОВОЖЛАНТИРИШ МАРКАЗИ"
                     </h4>
                   </div>
                   <div className="col-2 d-flex justify-content-center align-items-center">
@@ -107,9 +108,8 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                     <h4>
                       &nbsp;&nbsp;&nbsp;Биз куйида имзо чекувчилар: Бажарувчи{" "}
                       {text.t1} хузуридаги Электрон хокимятни ривожлантириш
-                      маркази номидан директори <b>{text.t4}</b>&nbsp;
-                      томондан. Бажарувчи 
-                      томинидан ушбу далолатномани {""}
+                      маркази номидан директори <b>{text.t4}</b>&nbsp; томондан.
+                      Бажарувчи томинидан ушбу далолатномани {""}
                       {text.t1} Электрон хокимятни ривожлантириш маркази
                       томонидан ку'рсатилган хизматларни тасдиқлаш учун туздик.
                     </h4>
@@ -117,8 +117,19 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                       &nbsp; &nbsp; &nbsp;
                       <span className="">
                         Жорий ойда марказ томонидан жами
-                        <p className="d-inline text-primary">
-                          {" "}
+                        <p
+                          onClick={() => {
+                            localStorage.setItem(
+                              "time-hisobot",
+                              JSON.stringify({
+                                from: "2022-07-01",
+                                to: "2022-07-22",
+                              })
+                            );
+                            navigate("/home");
+                          }}
+                          className="d-inline text-primary pointer"
+                        >
                           {reports.length > 0 ? (
                             total + " марта "
                           ) : (
@@ -165,7 +176,6 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                             {" "}
                             Электрон хокимятни ривожлантириш маркази директори
                           </span>
-                       
                         </h5>
                         <div className="d-flex justify-content-between">
                           <h5 className="border-direktor"></h5>
@@ -184,7 +194,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                           value={text.t1}
                           // bgColor={back}
                           // fgColor={fore}
-                          size = {120}
+                          size={120}
                         />
                       </div>
                     </div>

@@ -28,7 +28,7 @@ const More = (props) => {
           <div className="works mt-4 text-secondary">
             {elem.services.map((item, index) => (
               <h5 key={index}>
-                {index + 1} - {item.category}
+                {index + 1} - {item.name}
               </h5>
             ))}
           </div>
