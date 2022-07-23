@@ -6,20 +6,22 @@ import Navbar from "../../components/navbar/Navbar";
 import Filter2 from "../../components/filter2/Filter2";
 import axios from "axios";
 import config from "../../config.json";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Bosh.css";
 
 const BoshSahifa = () => {
   const navigate = useNavigate();
   const date = new Date().toISOString().slice(0, 8);
   const tashkilot_id = sessionStorage.getItem("tashkilot_id");
-  const time = localStorage.getItem("time-hisobot");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
       tashkilot_id: tashkilot_id,
     },
   };
+  const id = useParams().id;
+
+  // const t =( new Date(id.slice(13, 26))).toISOString().slice(0, 10);
   const [baza, setBaza] = useState([]);
   const [user, setUser] = useState([]);
   const [last, setLast] = useState([]);
@@ -48,11 +50,13 @@ const BoshSahifa = () => {
     to: date + (new Date().getDate() + 1),
   });
   // Hisobotdagi ma'lumotlarni tekshirish uchun
-  useEffect(() => {
-    let t = JSON.parse(time);
-    setNext({ ...next, from: t.from, to: t.to });
-    console.log(t);
-  }, [time]);
+  // useEffect(() => {
+  //   let t = JSON.parse(time);
+  //   if (t) {
+  //     setNext({ ...next, from: t.from, to: t.to });
+  //   }
+  // }, []);
+  // console.log(next);
   const Search = (input) => {
     const newService = baza.filter(
       (elem) =>
@@ -107,7 +111,15 @@ const BoshSahifa = () => {
     setNext({ ...next, quantity: 1, from: time.from, to: time.to });
     setBaza([]);
   };
-
+  useEffect(() => {
+    setNext({
+      ...next,
+      quantity: 1,
+      from: id.slice(0, 10),
+      to: id.slice(10, 20),
+    });
+    setBaza([]);
+  }, [id]);
   useEffect(() => {
     const Arr = [];
     user.map((elem) => {

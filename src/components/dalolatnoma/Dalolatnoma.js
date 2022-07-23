@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 import "./Dalolatnoma.css";
 const Dalolatnoma = React.forwardRef((props, ref) => {
+  // const time={
+  //   from:new Date(props.time.from).getTime().toString(),
+  //   to:new Date(props.time.to).getTime().toString(),
+  // }
+  // console.log(time);
   const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
@@ -13,6 +18,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       tashkilot_id: tashkilot_id,
     },
   };
+
   const navigate = useNavigate();
   const { text = [], reports = [] } = props;
   const [service, setService] = useState([]);
@@ -119,14 +125,10 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                         Жорий ойда марказ томонидан жами
                         <p
                           onClick={() => {
-                            localStorage.setItem(
-                              "time-hisobot",
-                              JSON.stringify({
-                                from: "2022-07-01",
-                                to: "2022-07-22",
-                              })
+                            // BoshSahifa(time)
+                            navigate(
+                              `/home/${props.time.from + props.time.to}`
                             );
-                            navigate("/home");
                           }}
                           className="d-inline text-primary pointer"
                         >
@@ -191,7 +193,9 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                         </h5>
                         <QRCode
                           title="The Best Team"
-                          value={text.t1}
+                          value={`${config.URL}home/${
+                            props.time.from + props.time.to
+                          }`}
                           // bgColor={back}
                           // fgColor={fore}
                           size={120}

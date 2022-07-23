@@ -3,11 +3,11 @@ import "./Filter2.css";
 
 function Filter2(props) {
   const { FilterFunction } = props;
-  const date = new Date().toISOString().slice(0, 10)
+  const date = new Date().toISOString().slice(0, 10);
 
   const [time, setTime] = useState({
     from: date,
-    to:date
+    to: date,
   });
   useEffect(() => {
     localStorage.setItem("time", JSON.stringify(time));
@@ -19,7 +19,7 @@ function Filter2(props) {
   return (
     <>
       <div className="d-flex">
-      <button
+        <button
           className="select-style ms-2"
           name="Filter"
           onClick={() => FilterFunction(time)}

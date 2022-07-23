@@ -39,6 +39,7 @@ function Router() {
         <Route path="/admin" element={<Tashkilot />} />
         {/* Tashkilot Admini uchun */}
         <Route path="/home" element={<BoshSahifa />} />
+        <Route path="/home/:id" element={<BoshSahifa />} />
         <Route path="/bajaruvchi" element={<Bajaruvchi />} />
         <Route path="/bajaruvchiqoshish" element={<BajaruvchiQoshish />} />
         <Route path="/bajaruvchi/:id" element={<BajaruvchiYangilash />} />

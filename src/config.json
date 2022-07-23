@@ -1,3 +1,4 @@
 {
-  "SERVER_URL": "https://government-backend.herokuapp.com/"
+  "SERVER_URL": "https://government-backend.herokuapp.com/",
+  "URL": "https://government-frontend.pages.dev/"
 }
