@@ -1,159 +1,240 @@
-import Button from "../../components/button/Button";
-import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
+import Button from "../../components/button/Button";
 import config from "../../config.json";
-import Navbar from '../../components/navbar/Navbar'
+import axios from "axios";
 
-const UpdateDevice = () => {
+import "./Qurilma.css";
+
+function UpdateDevice() {
   const navigate = useNavigate();
-  const qurilma = JSON.parse(localStorage.getItem("qurilma"));
   const id = useParams().id;
+  const qurilma = JSON.parse(localStorage.getItem("qurilma"));
   const tashkilot_id = sessionStorage.getItem("tashkilot_id");
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      "tashkilot_id": tashkilot_id,
+      tashkilot_id: tashkilot_id,
     },
   };
-  // Statelar
-  const [dev, setDev] = useState({
-    name: qurilma.name,
-    elem: qurilma.elem,
-    deviceId: qurilma.deviceId,
-    date: new Date(),
-  });
-  const [inputFields, setInputFields] = useState(qurilma.elem);
-
-  // Yangi maydon qo'shish
-  const addFields = () => {
-    let newfield = { name: "", made: "", char: "", steyt: "" };
-    setInputFields([...inputFields, newfield]);
-  };
-  // Maydonni o'chirish
-  const removeFields = (index) => {
-    let data = [...inputFields];
-    data.splice(index, 1);
-    setInputFields(data);
-  };
-// Yangi maydonlarni mavjudlarining davomidan qo'shib chiqarish
+  // itemlardan kelyotgan text uchun
+  const [info, setInfo] = useState({});
+  //   parametr uchun
+  const [serviceList, setServiceList] = useState([{ xususiyat: "" }]);
+  //itemlarni yig'ib beradigon massiv
+  // new state
   useEffect(() => {
-    setDev({ ...dev, elem: inputFields });
-  }, [inputFields]);
-
-  const changeHandler = (e) => {
-    setDev({ ...dev, [e.target.name]: e.target.value });
+    if (qurilma) {
+      var arr = [];
+      Object.keys(qurilma.elem.slice(-1)[0]).map(function (key) {
+        arr.push({ xususiyat: [key] });
+      });
+      setServiceList(arr.slice(1));
+    }
+  }, []);
+  const [parametr, setParametr] = useState(qurilma.elem);
+  const [data, setData] = useState({
+    name: qurilma.name,
+    elem: [],
+    deviceId: qurilma.deviceId,
+    date: qurilma.date,
+  });
+  useEffect(() => {
+    setData({ ...data, elem: parametr });
+  }, [parametr]);
+  const [show, setShow] = useState(false);
+  //   yangi parametr qo'shish
+  const handleServiceAdd = () => {
+    setServiceList([...serviceList, { xususiyat: "" }]);
+  };
+  //   parametrni o'chirish
+  const handleServiceRemove = (index) => {
+    const list = [...serviceList];
+    list.splice(index, index + 1);
+    setServiceList(list);
   };
 
-  const handleFormChange = (index, event) => {
-    let data = [...inputFields];
-    data[index][event.target.name] = event.target.value;
-    setInputFields(data);
+  //   parametrdan kelyotgan textni olish
+  const handleServiceChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...serviceList];
+    list[index][name] = value;
+    setServiceList(list);
   };
 
-  const UpdateAll = async () => {
-    try{
-      const res = await axios.put(`${config.SERVER_URL}device/elem/${id}`, dev,TOKEN)
-      if(res.status===200){
-        res.data && alert("Yangilandi");
-        navigate("/qurilmatoifa");
+  //   itemlardan kelyotgan text
+  const changeHandler1 = (e) => {
+    console.log(e.target.value);
+    setInfo({ ...info, [e.target.name]: e.target.value });
+  };
+
+  //   yangi item qo'shish
+  const addFields = () => {
+    let filterObj = { id: new Date().getTime() };
+
+    serviceList.forEach(function (item, index) {
+      for (let key in item) {
+        if (item.xususiyat) {
+          filterObj[item.xususiyat] = "";
+        } else {
+          return true;
+        }
       }
-    }catch(err){
+    });
+    if (Object.keys(filterObj).length > 1) {
+      setParametr([...parametr, filterObj]);
+    } else {
+      alert("sida bosh qiymat mavjud");
+      setShow(true);
+    }
+  };
+  function Click(e) {
+    const Id = parametr.findIndex((elem) => elem.id === info.id);
+    let newParametr = parametr.fill(info, Id, Id + 1);
+    setParametr(newParametr);
+
+    if (e.id !== info.id || Object.keys(info).length === 0) {
+      const elem = parametr.find((item) => item.id == e.id);
+
+      setInfo(elem);
+    }
+  }
+  function DelInputGroup(elem) {
+    const newArr = parametr.filter((item) => elem.id !== item.id);
+    setParametr(newArr);
+  }
+  async function Add() {
+    try {
+      if (Object.keys(info).length > 0) {
+        const Id = parametr.findIndex((elem) => elem.id === info.id);
+        let newParametr = parametr.fill(info, Id, Id + 1);
+        setParametr(newParametr);
+      }
+      if (!data.name) {
+        setShow(true);
+      }
+      if (data.name && data.elem) {
+        const res = await axios.put(
+          `${config.SERVER_URL}device/elem/${qurilma._id}`,
+          data,
+          TOKEN
+        );
+        if (res.status === 200) {
+          res.data && alert("Yangilandi");
+          navigate("/qurilmatoifa");
+        }
+      }
+    } catch (err) {
       console.log(err);
       if (err.response.status === 401) {
         navigate("/");
       }
     }
-  };
-  
+  }
   return (
     <div>
       <div className="sticky-top">
         <Navbar />
       </div>
-      <h1 className="ms-5">Курилма янгилаш</h1>
-      <div className="AddDevice bg-light mt-5 p-3">
-        <div className=" mt-3 bg-white p-3">
+      <h1>Курилма Ўзгартириш</h1>
+      <div className="AppDevice bg-light  mt-5 py-5 px-3">
+        <div className="devcontent bg-white py-5 px-5">
           <div className="d-flex pt-3">
-            <h2>Қурилма номи:</h2>
+            <h3 className="text-dark">Қурилма номи:</h3>
             <input
               name="name"
-              value={dev.name}
-              onChange={changeHandler}
               type="text"
+              value={data.name}
               className="form-control form-control-lg ms-2 ps-3 deviceName bg-light"
+              onChange={(e) => {
+                setData({ ...data, name: e.target.value });
+                setShow(false);
+              }}
             />
           </div>
-          <div className="d-flex mt-5">
-            <div>
-              <h2>Параметрлари:</h2>
-            </div>
-            <div>
-              <form>
-                {inputFields.map((input, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="d-flex align-items-center py-2 param border-bottom me-5"
-                    >
-                      <input
-                        className="qurilmainput form-control ms-2 ps-1 bg-light"
-                        name="name"
-                        value={input.name}
-                        placeholder="Номи"
-                        onChange={(event) => handleFormChange(index, event)}
-                      />
-                      <input
-                        className="qurilmainput form-control ms-2 ps-1 bg-light"
-                        name="made"
-                        value={input.made}
-                        placeholder="Ишлаб
-                                                чикарувчи"
-                        onChange={(event) => handleFormChange(index, event)}
-                      />
-                      <input
-                        className="qurilmainput form-control ms-2 ps-1 bg-light"
-                        name="char"
-                        value={input.char}
-                        placeholder="Кўрсаткичи"
-                        onChange={(event) => handleFormChange(index, event)}
-                      />
-                      <input
-                        className="qurilmainput form-control ms-2 ps-1 bg-light"
-                        name="steyt"
-                        value={input.steyt}
-                        placeholder="Ҳолати"
-                        onChange={(event) => handleFormChange(index, event)}
-                      />
-                    </div>
-                  );
-                })}
-              </form>
-              <div className="d-flex mt-2">
-                <Button
-                  ButtonStyle={"oq-button ms-2"}
-                  name="+"
-                  ButtonFunction={addFields}
+          <div className="text-center">
+            {show ? (
+              <p className="d-inline text-danger text-center">Nomlanmagan!</p>
+            ) : (
+              false
+            )}
+          </div>
+          <div className="form-field mt-3">
+            <label htmlFor="service" className="me-3 mb-3">
+              Параметрлари:
+            </label>
+            {/* Xususiyatlar */}
+            {serviceList.map((singleService, index) => (
+              <span key={index} className="services">
+                <input
+                  type="text"
+                  name="xususiyat"
+                  id="service"
+                  onChange={(e) => handleServiceChange(e, index)}
+                  value={singleService.xususiyat}
                 />
-                <Button
-                  ButtonStyle={"oq-button ms-2"}
-                  name="-"
-                  ButtonFunction={removeFields}
-                />
-              </div>
+                {serviceList.length > 1 && (
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleServiceRemove(index)}
+                  >
+                    -
+                  </button>
+                )}
+                {serviceList.length - 1 === index && serviceList.length < 8 && (
+                  <button className="add-btn" onClick={handleServiceAdd}>
+                    +
+                  </button>
+                )}
+              </span>
+            ))}
+            <div className="items">
+              {parametr.map((elem, index) => {
+                return (
+                  <div>
+                    <form key={elem.id}>
+                      {Object.keys(elem).map(function (key) {
+                        return (
+                          <>
+                            {[key] == "id" ? (
+                              index + 1
+                            ) : (
+                              <input
+                                key={elem[key]}
+                                className="m-1"
+                                type="text"
+                                name={[key]}
+                                defaultValue={elem[key]}
+                                onClick={() => Click(elem)}
+                                onChange={changeHandler1}
+                              />
+                            )}
+                          </>
+                        );
+                      })}
+                      <i
+                        className="bi bi-trash3 text-danger pointer d-inline mt-2"
+                        onClick={() => DelInputGroup(elem)}
+                      ></i>
+                    </form>
+                  </div>
+                );
+              })}
+              <button onClick={addFields}>+</button>
             </div>
           </div>
-          <div className="my-4 d-flex justify-content-center mb-5">
+          <div className="">
             <Button
-              ButtonStyle={"oq-button"}
-              name="Янгилаш"
-              ButtonFunction={UpdateAll}
+              name={"Ўзгартириш"}
+              ButtonStyle="oq-button"
+              ButtonFunction={Add}
             />
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default UpdateDevice;
