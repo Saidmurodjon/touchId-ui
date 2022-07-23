@@ -49,14 +49,7 @@ const BoshSahifa = () => {
     from: date + new Date().getDate(),
     to: date + (new Date().getDate() + 1),
   });
-  // Hisobotdagi ma'lumotlarni tekshirish uchun
-  // useEffect(() => {
-  //   let t = JSON.parse(time);
-  //   if (t) {
-  //     setNext({ ...next, from: t.from, to: t.to });
-  //   }
-  // }, []);
-  // console.log(next);
+
   const Search = (input) => {
     const newService = baza.filter(
       (elem) =>
@@ -111,13 +104,16 @@ const BoshSahifa = () => {
     setNext({ ...next, quantity: 1, from: time.from, to: time.to });
     setBaza([]);
   };
+  // Hisobotdagi ma'lumotlarni tekshirish uchun
   useEffect(() => {
-    setNext({
-      ...next,
-      quantity: 1,
-      from: id.slice(0, 10),
-      to: id.slice(10, 20),
-    });
+    if (id) {
+      setNext({
+        ...next,
+        quantity: 1,
+        from: id.slice(0, 10),
+        to: id.slice(10, 20),
+      });
+    }
     setBaza([]);
   }, [id]);
   useEffect(() => {
