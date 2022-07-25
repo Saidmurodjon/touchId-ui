@@ -1,0 +1,39 @@
+.contWay{
+    height: 100vh;
+    padding-top: 15%!important;
+}
+.nazForma{
+    width: 50%;
+    height: 30vh;
+    background-color: #e7e7e7;
+    border-radius: 25px;
+    margin: auto;
+    padding-top: 1%!important;
+}
+@media (max-width: 600px){
+    .contWay{
+        height: 100vh;
+        padding-top: 45%!important;
+
+    }
+    .nazForma{
+        width: 75%;
+        height: 20vh;
+        background-color: #e7e7e7;
+        margin: auto;
+    }
+    .nazElek{
+        font-size: 12px;
+    }
+    
+    .nazVaqt{
+        font-size: 12px;
+    }
+    .nazIsh{
+        font-size: 15px;
+    }
+    
+    .nazWho{
+        font-size: 12px;
+    }
+}
