@@ -9,8 +9,8 @@ const Dashbord = () => {
             <Navbar text="Дашборд" />
             <div className="w-100 px-4 py-2 position-relative">
                 <div className="d-flex mb-3">
-                    <Button name="Хисобга олинган" ButtonStyle="dashbord mx-5" />
-                    <Button name="Хисобга олинмаган" ButtonStyle="dashbord" />
+                    <Button name="Хисобга олинган" ButtonStyle="oq-button m-2" />
+                    <Button name="Хисобга олинмаган" ButtonStyle="oq-button m-2" />
                 </div>
                 <div className="dashbord-content w-100">
                     <div className="mx-auto card-w">

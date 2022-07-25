@@ -31,7 +31,10 @@ function BItem(props) {
                 <p className="d-inline">Кабинет: {item.kabinet}</p>
               </div>
               <div className="col-md-12 ps-3">
-                <p>Лавозими: {item.lavozim}</p>
+                <p className="d-inline">Лавозими: {item.lavozim}</p>
+              </div>
+              <div className="col-md-12 ps-3">
+                <p className="d-inline">Телефон : {item.tel}</p> 
               </div>
             </div>
           </div>

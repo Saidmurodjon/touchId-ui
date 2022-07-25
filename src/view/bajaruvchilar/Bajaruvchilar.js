@@ -95,7 +95,7 @@ function Bajaruvchilar() {
         <div className="page-width">
           <div className="row justify-content-center ">
             <div className="w-100 d-flex justify-content-between align-items-center my-3">
-              <h4>Бажарувчилар</h4>
+              <h1>Бажарувчилар</h1>
               <Button
                 name={"Бажарувчи қўшиш"}
                 ButtonFunction={Bqoshish}

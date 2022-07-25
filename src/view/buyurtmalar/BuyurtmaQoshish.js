@@ -97,7 +97,7 @@ const BuyurtmaQoshish = () => {
         <Navbar search={true} />
       </div>
       <div className="w-100  px-5 py-2 position-relative">
-        <h4 className="title-1 mt-2">Буюртмачи қўшиш</h4>
+        <h2 className="title-1 mt-2">Буюртмачи қўшиш</h2>
         <div className="page-bg mt-3">
           <div className="position-relative w-100 me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>

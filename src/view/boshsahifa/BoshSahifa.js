@@ -16,7 +16,7 @@ const BoshSahifa = () => {
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      tashkilot_id: tashkilot_id,
+      "tashkilot_id": tashkilot_id,
     },
   };
   const id = useParams().id;
@@ -25,6 +25,8 @@ const BoshSahifa = () => {
   const [baza, setBaza] = useState([]);
   const [user, setUser] = useState([]);
   const [last, setLast] = useState([]);
+  const [text, setText] = useState([]);
+
   // const [filter, setFilter] = useState(false);
   const [searchPage, setSearchPage] = useState([]);
 
@@ -129,7 +131,22 @@ const BoshSahifa = () => {
     });
     setLast(Arr);
   }, [baza]);
-
+// Hisobot ma'lumotlari
+useEffect(() => {
+  axios
+    .get(`${config.SERVER_URL}xisobot`, TOKEN)
+    .then(
+      (res) => {
+        setText(res.data);
+      },
+      (err) => {
+        if (err.response.status === 401) {
+          navigate("/");
+        }
+      }
+    )
+    .catch((error) => console.log(error.status));
+}, []);
   return (
     <div className="bajarilgan bg-white">
       <div className="sticky-top">
@@ -190,10 +207,11 @@ const BoshSahifa = () => {
                     key={work._id}
                     oy={month[work.date.slice(5, 7) * 1 - 1]}
                     elem={work}
+                    text={text}
                   />
                 ) : (
-                  <Item key={work._id} elem={work} />
-                )
+                  <Item key={work._id} elem={work} text={text}/>
+                ) 
               )
             : baza
             ? baza.map((work) =>
@@ -202,9 +220,10 @@ const BoshSahifa = () => {
                     key={work._id}
                     oy={month[work.date.slice(5, 7) * 1 - 1]}
                     elem={work}
+                    text={text}
                   />
                 ) : (
-                  <Item key={work._id} elem={work} />
+                  <Item key={work._id} elem={work} text={text}/>
                 )
               )
             : null}

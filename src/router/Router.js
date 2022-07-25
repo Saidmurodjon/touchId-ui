@@ -29,7 +29,7 @@ import TashkilotUpdate from "../view/tashkilotlar/TashkilotUpdate";
 import Login from "../view/login/Login";
 import NotFound from "../components/notFound/NotFound";
 import UpdateDevice from "../view/qurilmalar/UpdateDevice";
-
+import Dashboard from "../view/dashbord/Dashbord";
 function Router() {
   return (
     <>
@@ -66,6 +66,7 @@ function Router() {
         <Route path="/kabinetqoshish" element={<XonaQoshish />} />
         <Route path="/kabinet/:id" element={<XonaUpdate />} />
         <Route path="/tashkilot/:id" element={<TashkilotUpdate />} />
+        <Route path="/statistika" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

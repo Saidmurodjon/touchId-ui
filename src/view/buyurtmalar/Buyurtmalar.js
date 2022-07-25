@@ -91,7 +91,7 @@ export default function Buyurtmalar() {
       </div>
       <div className="w-100  px-5 py-2 position-relative">
         <div className="d-flex justify-content-between mt-2">
-          <h4 className="title">Буюртмачилар</h4>
+          <h2 className="title">Буюртмачилар</h2>
           <Button
             name={"Буюртмачи қўшиш"}
             ButtonFunction={Bqoshish}
