@@ -12,24 +12,23 @@ function Checker() {
     const [login, setLogin] = useState(false)
     const [baza, setBaza] = useState([])
     const [check, setCheck] = useState(false);
-
+    let curData = data.slice(0,10)
     let dataPP = data.slice(8,10), newData=dataPP*1+1
     let fData = data.slice(0,8)
     let lastData = fData+newData
 
 
     const [next, setNext] = useState({
-        from:data,
+        from:curData,
         to:lastData,
         quantity:1,
         step: 10
     });
     const [pass, setPass] = useState({
-        login: "",
         password: "",
     });
     const changeHandler = (e) => {
-        setPass({ ...pass, [e.target.name]: e.target.value });
+        setPass({ [e.target.name]: e.target.value });
         setCheck(false);
     };
 
@@ -39,7 +38,6 @@ function Checker() {
         const res = await axios.post(`${config.SERVER_URL}login`, pass);
         if (res.status === 200) {
             sessionStorage.setItem(`jwt-token`, res.data.jwt_token);
-            sessionStorage.setItem(`tashkilot_id`, res.data.message._id);
             localStorage.setItem("user", JSON.stringify(res.data.message));
             setLogin(true)
         }
@@ -51,14 +49,13 @@ function Checker() {
         }
     };
 
-    const tashkilot_id = sessionStorage.getItem("tashkilot_id");
+    const tashkilot_id = data.slice(11)
     const TOKEN = {
         headers: {
             "jwt-token": sessionStorage.getItem("jwt-token"),
             "tashkilot_id": tashkilot_id,
         },
     };
-    console.log(data);
 
     useEffect(() => {
         const Baza = async () => {
@@ -82,7 +79,6 @@ function Checker() {
         Baza();
     }, [next]);
 
-    console.log(baza);
 
     const month = [
         "Январь",
@@ -125,16 +121,10 @@ function Checker() {
                         className="align-items-center nazForma mx-auto bg-white"
                         onSubmit={Submit}
                     >
+                        
                         <input
                             className="mt-4 ms-5 form-control w-75 px-2 text-secondary"
-                            type="text"
-                            name="login"
-                            placeholder="Login"
-                            onChange={changeHandler}
-                        />
-                        <input
-                            className="mt-4 ms-5 form-control w-75 px-2 text-secondary"
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="Parol"
                             onChange={changeHandler}
