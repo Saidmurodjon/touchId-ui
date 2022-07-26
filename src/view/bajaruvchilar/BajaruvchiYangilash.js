@@ -68,7 +68,7 @@ const TashkilotQoshish = () => {
         <Navbar search="true" />
       </div>
       <div className="w-100  px-5 py-2 position-relative">
-        <h4 className="title-1 mt-2">Бажарувчи қўшиш</h4>
+        <h4 className="title-1 mt-2">Бажарувчи Ўзгартириш</h4>
         <div className="page-bg1 mt-3">
           <div className="position-relative w-100 me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>
@@ -153,7 +153,7 @@ const TashkilotQoshish = () => {
             <div className="d-flex justify-content-center">
               <Button
                 ButtonStyle={"oq-button"}
-                name="Yangilash"
+                name="Ўзгартириш"
                 ButtonFunction={Update}
                 elem={baj}
               />

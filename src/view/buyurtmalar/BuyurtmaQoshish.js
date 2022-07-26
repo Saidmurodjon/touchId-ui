@@ -194,7 +194,7 @@ const BuyurtmaQoshish = () => {
             </div>
             <div className="d-flex justify-content-center">
               <Button
-                name="Йангилаш"
+                name="Қўшиш"
                 ButtonFunction={Send}
                 ButtonStyle="oq-button"
               />

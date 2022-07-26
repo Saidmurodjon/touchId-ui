@@ -53,7 +53,7 @@ const BolimlarEdit = () => {
         <Navbar search='true' />
       </div>
       <div className="w-100 px-5 py-2 position-relative pe-5">
-        <h2 className="title-bolim">Бўлимлар қўшиш</h2>
+        <h2 className="title-bolim">Бўлимлар Ўзгартириш</h2>
         <div className=" bolimlar-royhati my-3 bg-bolim px-3 pt-5">
           <div className="position-relative me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>

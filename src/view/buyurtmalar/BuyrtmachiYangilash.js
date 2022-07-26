@@ -100,7 +100,7 @@ const BuyurtmaYangilash = () => {
       </div>
       <div className="w-100  px-5 py-2 position-relative">
         <h4 className="title-1 mt-2">
-          Буюртмачи қўшиш
+          Буюртмачи Ўзгартириш
         </h4>
         <div className="page-bg mt-3">
           <div className="position-relative w-100 me-0">
@@ -188,7 +188,7 @@ const BuyurtmaYangilash = () => {
             </div>
             <div className="d-flex justify-content-center">
               <Button
-                name="Йангилаш"
+                name="Ўзгартириш"
                 ButtonFunction={Send}
                 ButtonStyle="oq-button"
               />

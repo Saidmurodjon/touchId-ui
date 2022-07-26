@@ -53,7 +53,7 @@ const LavozimUpdate = () => {
         <Navbar search={true} />
       </div>
       <div className="w-100 px-5 py-2 position-relative">
-        <h2 className="title-lavozm">Лавозимлар қўшиш</h2>
+        <h2 className="title-lavozm">Лавозимлар Ўзгартириш</h2>
         <div className="my-3 bg-lavozim px-3 pt-5">
           <div className="position-relative me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>

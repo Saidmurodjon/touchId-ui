@@ -54,7 +54,7 @@ const IshKategoriyaUpdate = () => {
         <Navbar search='true' />
       </div>
       <div className="ishlar-royhati w-100 px-5 pt-2 position-relative">
-        <h2 className="title">Иш категориясини қўшиш</h2>
+        <h2 className="title">Иш категориясини Ўзгартириш</h2>
         <div className="page-wq my-3 bg-katagoriya px-3 pt-5">
           <div className="position-relative w-100 me-0">
             <i className="bi bi-x pointer" onClick={Close}></i>

@@ -125,7 +125,7 @@ const TashkilotQoshish = () => {
             <Button
               ButtonFunction={ChangeTash}
               ButtonStyle={"oq-button d-block mx-auto"}
-              name="Янгилаш"
+              name="Ўзгартириш"
             />
           </div>
         </form>
