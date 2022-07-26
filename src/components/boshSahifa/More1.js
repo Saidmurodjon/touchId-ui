@@ -1,20 +1,19 @@
 const More = (props) => {
-  const { elem = {}, oy } = props;
+  const { elem = {}, oy ,text=[]} = props;
   const date = new Date(elem.date)
   return (
     <>
       <div className="col-12 col-md-10 mx-auto">
         <div className="card m-2 p-4">
           <h5 className="w-75 text-center mx-auto text-secondary nazElek">
-            Электрон ҳокимиятни ривожлантириш маркази ҳодими томонидан Фарғона
-            вилоят ҳокимлиги ижтимоий бўлими, {elem.cilientKabinet} хонада
+            Электрон ҳокимиятни ривожлантириш маркази ҳодими томонидан {text?text[0].t1:"Empty"} ҳокимлиги ижтимоий бўлими, {elem.cilientKabinet} хонада
             қуйидаги ишлар амалга оширилди
           </h5>
           <div className="upInfo d-flex justify-content-between mt-3 border-bottom border-3 border-dark">
             <span className="text-secondary nazVaqt">
               Бажарилган вақт:{" "}
               <p className="alert alert-warning px-1">
-              {date.getFullYear()} йил {date.getDay()+1} {oy} соат{" "}
+              {date.getFullYear()} йил {date.getDate()+1} {oy} соат{" "}
               {date.toISOString().slice(11,16)}
               </p>
             </span>

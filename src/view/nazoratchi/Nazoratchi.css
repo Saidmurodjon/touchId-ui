@@ -10,6 +10,10 @@
     margin: auto;
     padding-top: 1%!important;
 }
+.search{
+    width: 50%;
+    float: left;
+}
 @media (max-width: 600px){
     .contWay{
         height: 100vh;
@@ -35,5 +39,9 @@
     
     .nazWho{
         font-size: 12px;
+    }
+    .search{
+        width: 90%;
+        
     }
 }

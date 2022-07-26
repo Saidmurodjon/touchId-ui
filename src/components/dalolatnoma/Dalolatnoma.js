@@ -15,7 +15,7 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
   const TOKEN = {
     headers: {
       "jwt-token": sessionStorage.getItem("jwt-token"),
-      tashkilot_id: tashkilot_id,
+      "tashkilot_id": tashkilot_id,
     },
   };
 
@@ -62,7 +62,9 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
       )
       .catch((error) => console.log(error));
   }, []);
-  // console.log(reports);
+  console.log(`${config.URL}nazoratchi/${
+    props.time.from + props.time.to
+  }${tashkilot_id}`);
   return (
     <>
       <div
@@ -193,9 +195,9 @@ const Dalolatnoma = React.forwardRef((props, ref) => {
                         </h5>
                         <QRCode
                           title="The Best Team"
-                          value={`${config.URL}home/${
+                          value={`${config.URL}nazoratchi/${
                             props.time.from + props.time.to
-                          }`}
+                          }${tashkilot_id}`}
                           // bgColor={back}
                           // fgColor={fore}
                           size={120}

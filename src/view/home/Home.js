@@ -13,7 +13,6 @@ function Home() {
   const data = useParams();
   const path = location.pathname;
   const [toggle, setToggle] = useState(true);
-  console.log(data);
   // Menyuni ochib yopuvchi funksiya
   const toggleMenyu = () => {
     setToggle(!toggle);

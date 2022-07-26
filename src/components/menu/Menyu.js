@@ -112,7 +112,7 @@ export default function Menyu() {
                 className={({ isActive }) => (isActive ? "li" : "")}
               >
                 <span>
-                <i class="bi bi-clipboard-check"></i>
+                <i className="bi bi-clipboard-check"></i>
                 </span>
                 <span className="ms-3 linkText">Статистика </span>
               </NavLink>
