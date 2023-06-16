@@ -43,11 +43,11 @@ function Home() {
   ].filter((e) => path.includes(e));
   return (
     <>
-    <Routes>
-      <Route path="nazoratchi/:data" element={<Nazoratchi />} />
-    </Routes>
+      <Routes>
+        <Route path="nazoratchi/:data" element={<Nazoratchi />} />
+      </Routes>
       {
-        path.startsWith('/nazoratchi/')? (
+        path.startsWith('/nazoratchi/') ? (
           ""
         ) : (
           path == "/" ? (
@@ -71,9 +71,9 @@ function Home() {
                     ></i>
                   </div>
                   {/* menyu qismi */}
-    
+
                   {a.length > 0 ? <MenyuAdmin /> : <Menyu />}
-    
+
                   <div className="mt-4 aloqa">
                     <Aloqa />
                   </div>
@@ -87,7 +87,7 @@ function Home() {
           )
         )
       }
-      
+
     </>
   );
 }
